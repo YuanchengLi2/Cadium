@@ -1,476 +1,863 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harten by Cadium - Verified Intelligence</title>
-    
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%236366F1'/%3E%3Cstop offset='100%25' stop-color='%2300C6FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='%230c0a18'/%3E%3Cpolygon fill='url(%23g)' points='50,15 80,45 50,85 20,45' /%3E%3Ccircle fill='white' cx='50' cy='50' r='5'/%3E%3C/svg%3E">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Harten — Smarter · Trustworthy · Flexible · Creative</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='30%25'%3E%3Cstop offset='0%25' stop-color='%2300d9ff'/%3E%3Cstop offset='100%25' stop-color='%237b2ff7'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='sans-serif' font-size='34' fill='%230a0a0f'%3EH%3C/text%3E%3C/svg%3E">
 
-    <style>
-        /* 1. Global Styles & Palette */
-        :root {
-            --color-primary: #6366F1; /* Indigo */
-            --color-secondary: #00C6FF; /* Vibrant Blue */
-            --color-tertiary: #A855F7; /* Purple */
-            
-            --color-text: #FFFFFF;
-            --color-text-muted: #BCC5D6;
-            
-            --border-radius: 12px;
-            
-            /* Glassmorphism Styles */
-            --glass-bg: rgba(255, 255, 255, 0.06);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0px 8px 30px -5px rgba(0, 0, 0, 0.6);
-            --glass-blur: 20px;
-            
-            --snap-ease: cubic-bezier(0.25, 1, 0.5, 1);
-        }
+<style>
+/* -------------------------
+   Base reset + Light Palette
+   ------------------------- */
+:root{
+  --bg: #f8f9fc;
+  --text-primary: #1a1a2e;
+  --text-muted: #5a647d;
+  --panel: rgba(255,255,255,0.7);
+  --accent1: #00d9ff;
+  --accent2: #7b2ff7;
+  --glass: rgba(0,0,0,0.01);
+  --radius: 18px;
+  --glass-border: rgba(0,0,0,0.08);
+  --shadow-md: 0 8px 30px rgba(90, 90, 120, 0.1);
+  --shadow-lg: 0 20px 60px rgba(90, 90, 120, 0.15);
+  --ease: cubic-bezier(.2,.9,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior: smooth;}
+html,body{height:100%}
+body{
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(200, 220, 255, 0.2), transparent),
+               radial-gradient(800px 400px at 90% 90%, rgba(220, 200, 255, 0.15), transparent),
+              var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  cursor:none; 
+}
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+/* -------------------------
+   Custom cursor
+   ------------------------- */
+#cursor{width:18px;height:18px;border-radius:50%;position:fixed;z-index:99999;pointer-events:none;border:2px solid var(--accent1);transform:translate(-50%,-50%);box-shadow:0 0 20px rgba(0,217,255,0.25);transition: transform .1s linear, background .15s linear, border-color .15s linear;}
+#cursor.hover-interact {transform: translate(-50%, -50%) scale(2.5);background: rgba(0,217,255,0.2);border-color: transparent;}
+#cursor-trail{width:8px;height:8px;border-radius:50%;position:fixed;z-index:99998;pointer-events:none;background:var(--accent1);opacity:.7;transform:translate(-50%,-50%);transition: opacity .12s linear;}
 
-        html { scroll-behavior: smooth; }
+/* -------------------------
+   Particles & Shapes
+   ------------------------- */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6}
+.particle{position:absolute;border-radius:50%;background:linear-gradient(180deg,var(--accent1),var(--accent2));filter:blur(6px);opacity:.32;mix-blend-mode:multiply;transition: transform 0.1s ease-out, opacity 0.1s ease-out;}
+.shape{position: absolute;filter: blur(80px);opacity:.18;z-index:0;mix-blend-mode:multiply;animation: float 20s infinite alternate ease-in-out;}
+@keyframes float {
+  from { transform: translateY(-20px) translateX(-10px) rotate(-10deg); }
+  to { transform: translateY(20px) translateX(10px) rotate(10deg); }
+}
 
-        body {
-            font-family: 'Manrope', sans-serif;
-            color: var(--color-text);
-            line-height: 1.6;
-            background-color: #0c0a18; 
-            overflow-x: hidden; 
-            position: relative; 
-        }
+/* -------------------------
+   Animated Gradients
+   ------------------------- */
+.animated-gradient-text {background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent1));background-size: 200% 200%;-webkit-background-clip: text;color: transparent;animation: pan-gradient 4s linear infinite;}
+.animated-gradient-bg {background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent1));background-size: 200% 200%;animation: pan-gradient 4s linear infinite;}
+@keyframes pan-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-        /* DYNAMIC STARFIELD/NOISE BACKGROUND */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -10; 
-            
-            /* Combined noise, mesh, and dynamic star effect */
-            background: 
-                radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1.5px),
-                radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.05) 1px, transparent 1.5px),
-                radial-gradient(circle at 40% 90%, rgba(255, 255, 255, 0.1) 1px, transparent 1.5px),
-                radial-gradient(circle at 60% 80%, var(--color-primary) 0%, transparent 40%),
-                radial-gradient(circle at 20% 40%, var(--color-secondary) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, var(--color-tertiary) 0%, transparent 40%),
-                #0c0a18; 
-            
-            background-size: 200px 200px, 400px 400px, 600px 600px, 150% 150%, 150% 150%, 150% 150%, auto;
-            filter: blur(0px) opacity(0.9);
-            animation: starfield-move 40s linear infinite;
-        }
-        
-        @keyframes starfield-move {
-            0% { background-position: 0% 0%, 50% 50%, 100% 100%, 0% 0%, 0% 0%, 0% 0%; }
-            100% { background-position: 100% 100%, 0% 0%, 50% 50%, 100% 100%, 100% 100%, 100% 100%; }
-        }
+/* -------------------------
+   "Frosted Glass" Header
+   ------------------------- */
+.header{
+  position:fixed;left:0; top:0; width: 100%;
+  padding: 18px 24px;
+  z-index:1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background .3s ease, backdrop-filter .3s ease, box-shadow .3s ease;
+}
+.header.header-scrolled {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.brand{font-weight:800;font-size:20px;letter-spacing:3px;}
+.header-sub{font-size:11px;color:var(--text-muted);margin-top:4px}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2; 
-        }
+/* -------------------------
+   "Spotlight" Card Effect
+   ------------------------- */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle 300px at var(--mouse-x, -300px) var(--mouse-y, -300px), rgba(255,255,255,0.2), transparent 80%);
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
 
-        section {
-            padding: 100px 0;
-            position: relative;
-        }
-        
-        /* 2. Typography & Chroma Text */
-        h1 {
-            font-size: 5rem; 
-            font-weight: 800;
-            letter-spacing: -3px;
-            line-height: 1.1;
-        }
-        
-        .chroma-text {
-            /* ... existing chroma styles ... */
-            animation: chroma-shine 3s ease infinite alternate;
-            background-size: 400% 100%;
-        }
+/* HERO */
+.hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:56px 20px 40px;position:relative;z-index:3;perspective: 1000px;}
+.hero-card{width:100%;max-width:1100px;background: var(--panel);border-radius:24px;padding:48px;border:1px solid var(--glass-border);box-shadow: var(--shadow-lg);backdrop-filter: blur(12px) saturate(1.2);transition: transform 0.1s linear;}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+@media (max-width:980px){ .hero-grid{grid-template-columns:1fr;}}
 
-        @keyframes chroma-shine {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
-        /* 3. Hero Section (FIXED VISIBILITY) */
-        #hero {
-            position: relative;
-            overflow: hidden; 
-            padding: 160px 0 100px 0;
-            min-height: 90vh; 
-            z-index: 5; /* Ensure it is above the general content and most background layers */
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+.hero-title{font-size:48px;line-height:1.02;font-weight:850;margin-bottom:14px;}
+.hero-sub{color:var(--text-muted);font-size:18px;margin-bottom:22px;max-width:720px;margin-left:auto;margin-right:auto}
+.tagline-rotator{font-weight:700;color:var(--accent2);margin-bottom:12px;font-size:16px; transition: opacity 0.2s linear;}
 
-        .ascii-overlay {
-            /* ... existing ascii styles ... */
-            z-index: 0; /* Keep it below content */
-        }
-        
-        /* 4. Glass Cards and Animations */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            border: var(--glass-border);
-            /* ... rest of card styles ... */
-            position: relative;
-            z-index: 5;
-            overflow: hidden; 
-        }
+/* chips */
+.chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.chip{background:var(--glass);padding:8px 12px;border-radius:999px;border:1px solid var(--glass-border);font-size:13px;color:var(--text-muted); transition: background .2s, border-color .2s; cursor: default;}
+.chip:hover { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.1); }
 
-        /* Floating Particles inside cards */
-        .glass-card::after {
-            /* ... existing particle styles ... */
-            animation: float-particles 15s infinite ease-in-out alternate;
-        }
+/* CTA */
+.cta-row{display:flex;gap:14px;justify-content:center;margin-top:18px}
+.btn-primary{padding:14px 28px;border-radius:999px;border:none;color:#06101a;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(0, 150, 200, 0.25);transition:transform .25s var(--ease),box-shadow .25s var(--ease);position: relative;overflow: hidden;}
+.btn-primary:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 50px rgba(0, 150, 200, 0.35);}
+.btn-primary::before {content: '';position: absolute;top: 0;left: -100%;width: 75%;height: 100%;background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);transform: skewX(-25deg);transition: left 0.4s ease-in-out;}
+.btn-primary:hover::before {left: 150%;}
+.btn-ghost{padding:12px 22px;border-radius:999px;border:1px solid var(--glass-border);background:transparent;color:var(--text-primary);cursor:pointer;transition: background .2s, border-color .2s;}
+.btn-ghost:hover {background: var(--glass);border-color: rgba(0,0,0,0.12);}
 
-        @keyframes float-particles {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(300px, 150px); }
-            100% { transform: translate(-100px, -200px); }
-        }
-        
-        /* 5. MODAL & Form (FORMATTED AND CENTERED) */
-        .modal-overlay {
-            display: none; 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            
-            /* CENTERING FIX */
-            display: flex; /* Always flex but hidden */
-            align-items: center;
-            justify-content: center;
-            
-            opacity: 0;
-            transition: opacity 0.3s ease; 
-        }
+/* right column: artifact preview + trust meter */
+.preview{display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:14px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-border);}
+.preview .mini-title{color:var(--text-muted);font-size:13px;margin-bottom:8px}
+.preview .artifact{width:100%;height:200px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text-muted);border:1px solid var(--glass-border); transition: all .3s var(--ease);}
+.preview .artifact.small{height:120px}
+.trust-meter{width:100%;height:44px;background:rgba(0,0,0,0.03);border-radius:999px;overflow:hidden;border:1px solid var(--glass-border)}
+.trust-fill{height:100%;width:0%;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-weight:800;color:#06101a; background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width 1.0s var(--ease);}
 
-        .modal-overlay.is-visible {
-            opacity: 1;
-            display: flex; /* Override initial display: none */
-        }
+/* features section */
+.section{padding:90px 18px;position:relative;z-index:2}
+.section h2{font-size:36px;margin-bottom:28px;text-align:center;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;max-width:1100px;margin:24px auto; perspective: 1000px;}
+.feature{background:var(--panel);padding:20px;border-radius:14px;border:1px solid var(--glass-border);box-shadow: var(--shadow-md);backdrop-filter: blur(10px) saturate(1.1);transition:transform .2s var(--ease),box-shadow .2s var(--ease);cursor:default;}
+.feature:hover{transform:translateY(-10px);box-shadow: var(--shadow-lg);}
+.feature h3{color:var(--accent2);margin-bottom:8px}
+.feature p{color:var(--text-muted);font-size:14px;line-height:1.5}
 
-        .modal-content {
-            background: #181c2f;
-            color: var(--color-text);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 600px; /* Slightly wider modal */
-            box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.8);
-            position: relative;
-            border: 2px solid var(--color-secondary);
-            max-height: 90vh; /* Prevent modal from exceeding screen height */
-            overflow-y: auto; /* Allow scrolling within modal if content is long */
-        }
-        
-        .embedded-form-wrapper {
-            width: 100%;
-            height: 450px; 
-            margin-top: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--color-primary);
-            background-color: #fff; /* White background for embedded form for better readability/contrast */
-        }
+/* Draggable Artifact Carousel */
+.artifact-carousel-wrap {max-width: 1100px;margin: 20px auto;text-align: center;}
+.artifact-row-container {overflow: hidden;cursor: grab;user-select: none;}
+.artifact-row {display: flex;gap: 12px;padding: 10px 0;position: relative;left: 0;}
+.artifact-card{width:160px;height:110px;border-radius:10px;background:var(--panel);backdrop-filter: blur(10px) saturate(1.1);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-muted);border:1px solid var(--glass-border);box-shadow: var(--shadow-md);transition:transform .2s var(--ease), box-shadow .2s var(--ease);flex-shrink: 0;}
+.artifact-card:hover{transform:translateY(-8px) scale(1.03);box-shadow: 0 18px 50px rgba(0, 217, 255, 0.15);}
 
-        .embedded-form-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* 6. SCROLL ANIMATIONS */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px) scale(0.99);
-            transition: opacity 0.5s var(--snap-ease), transform 0.5s var(--snap-ease);
-        }
-        
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        
-        /* Media Queries remain here... */
+/* steps */
+.steps{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:24px auto}
+.step{background:var(--panel);padding:18px;border-radius:12px;min-width:220px;border:1px solid var(--glass-border);text-align:center; box-shadow: var(--shadow-md); backdrop-filter: blur(10px) saturate(1.1);}
+.step .num{width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:12px; color: #06101a;}
 
-    </style>
+/* Demo Log UI */
+#demoResultWrapper {
+  margin-top:12px;
+  background:var(--glass);
+  border-radius:12px;
+  border:1px solid var(--glass-border);
+  min-height:220px;
+}
+#demoLog {
+  padding:16px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: 'Menlo', 'Consolas', monospace; 
+  font-size: 13px; 
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.demo-log-line { margin-bottom: 4px; }
+.log-prefix { font-weight: 700; }
+.log-query .log-prefix { color: var(--accent2); }
+.log-process .log-prefix { color: var(--text-muted); }
+.log-success .log-prefix { color: #00b894; }
+.log-summary {
+  padding: 16px;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(0, 217, 255, 0.03);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+.log-summary strong { color: var(--accent2); }
+
+/* waitlist form */
+.waitlist-wrap{display:flex;flex-direction:column;gap:10px;align-items:center;margin-top:18px}
+.form-control{width:100%;max-width:640px;display:flex;gap:10px}
+.form-control input[type=email]{flex:1;padding:14px 16px;border-radius:999px;border:1px solid var(--glass-border);background:var(--glass);color:var(--text-primary);outline:none;font-size:15px;transition: border-color .2s, background .2s;}
+.form-control input[type=email]:focus {border-color: var(--accent2);background: rgba(255,255,255,0.5);}
+.form-control button{padding:12px 20px;border-radius:999px;border:none;color:#06101a;font-weight:700;cursor:pointer}
+.form-note{font-size:13px;color:var(--text-muted);text-align:center;margin-top:6px}
+
+/* success */
+.success-badge{display:flex;gap:12px;flex-direction:column;align-items:center;justify-content:center}
+.check{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#041018;font-weight:800;box-shadow:0 10px 40px rgba(0, 150, 200, 0.3)}
+.success-badge [style*="color:var(--accent1)"] {background: -webkit-linear-gradient(135deg, var(--accent2), var(--accent1));-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+
+/* footer */
+.footer{padding:28px 18px;text-align:center;color:var(--text-muted);font-size:13px}
+
+/* small devices */
+@media (max-width:680px){
+  .hero-title{font-size:28px}
+  .hero-grid{grid-template-columns:1fr}
+  .preview{order:-1}
+  .artifact-card{width:120px;height:92px}
+  .trust-fill{font-size:12px}
+  .demo-grid { grid-template-columns: 1fr; } 
+  .header { padding: 12px 18px; }
+  .header-sub { display: none; }
+}
+
+/* reveal helpers */
+.reveal{opacity:0;transform:translateY(20px) scale(0.95); transition:opacity .6s var(--ease), transform .6s var(--ease)}
+.reveal.show{opacity:1;transform:translateY(0) scale(1)}
+.reveal-child {opacity: 0;transform: translateY(18px);transition: opacity .6s var(--ease), transform .6s var(--ease);}
+.reveal.show .reveal-child {opacity: 1;transform: translateY(0);}
+.reveal.show .reveal-child:nth-of-type(1) { transition-delay: 0.1s; }
+.reveal.show .reveal-child:nth-of-type(2) { transition-delay: 0.2s; }
+.reveal.show .reveal-child:nth-of-type(3) { transition-delay: 0.3s; }
+.reveal.show .reveal-child:nth-of-type(4) { transition-delay: 0.4s; }
+.reveal.show .reveal-child:nth-of-type(5) { transition-delay: 0.5s; }
+
+</style>
 </head>
 <body>
 
-    <main>
+<div id="particles" aria-hidden="true"></div>
+<div class="shape" style="width:420px;height:420px;left:-120px;top:20vh;background:linear-gradient(120deg, #00d9ff, #7b2ff7);border-radius:40%"></div>
+<div class="shape" style="width:380px;height:380px;right:-140px;top:60vh;background:linear-gradient(120deg, #00d9ff, #7b2ff7);border-radius:40%"></div>
 
-        <section id="hero" class="container">
-             <div class="ascii-overlay"></div>
-            
-            <div class="hero-content">
-                <a href="#" class="logo animate-on-scroll">Harten by Cadium</a>
-                
-                <h1 class="chroma-text animate-on-scroll" style="animation-delay: 0.1s;">
-                    AI You Can Finally Trust.
-                </h1>
-                
-                <p class="animate-on-scroll" style="animation-delay: 0.2s;">
-                    The platform for **unbreakable accuracy** and verified outcomes. We deliver the deliverables, not just chat.
-                </p>
-                
-                <nav class="hero-nav animate-on-scroll" style="animation-delay: 0.3s;">
-                    <a href="#use-cases">Use Cases</a>
-                    <a href="#features">Engine</a>
-                    <a href="#trust">Accuracy</a>
-                    <a href="#artifacts">Outputs</a>
-                </nav>
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
 
-                <button class="btn btn-primary animate-on-scroll" id="open-modal-btn" style="animation-delay: 0.4s;">
-                    Access Beta Program
-                </button>
-            </div>
-        </section>
+<header class="header" id="header" aria-hidden="true">
+  <div>
+    <div class="brand animated-gradient-text">HARTEN</div>
+    <div class="header-sub">Smarter · Trustworthy · Flexible · Creative</div>
+  </div>
+</header>
 
-        <section id="use-cases">
-            <div class="container">
-                <h2 class="animate-on-scroll">
-                    Built for Critical Work. <span class="highlight">Better Results.</span>
-                </h2>
-                <p class="section-intro text-center animate-on-scroll" style="transition-delay: 0.1s;">
-                    Harten moves beyond "good enough" for tasks where confidence is non-negotiable. It's simply smarter.
-                </p>
+<section class="hero">
+  <div class="hero-card container reveal spotlight-card interactive-tilt" id="heroCard">
+    <div class="hero-grid">
+      <div>
+        <div class="tagline-rotator reveal-child" id="rotator">Smarter</div>
+        <div class="hero-title reveal-child animated-gradient-text">AI you can actually rely on</div>
+        <div class="hero-sub reveal-child">Harten routes to the best models, verifies results, and packages them as reusable artifacts. Built for work that needs to be correct — fast.</div>
 
-                <div class="use-case-grid">
-                    
-                    <div class="use-case-card glass-card animate-on-scroll">
-                        <h3>Researchers & Academics</h3>
-                        <p>Conduct thorough research with automated cross-referencing and verification. Generate structured, cited reports.</p>
-                    </div>
-                    
-                    <div class="use-case-card glass-card animate-on-scroll" style="transition-delay: 0.1s;">
-                        <h3>Business Professionals</h3>
-                        <p>Make safer decisions. Generate presentations, financial summaries, and documentation with full source transparency.</p>
-                    </div>
+        <div class="chips reveal-child" aria-hidden="true" id="heroChipContainer">
+          <div class="chip" data-preview-text="Ensemble &rarr; <strong>Best-of-breed</strong>" data-preview-score="89">Supercharged answers</div>
+          <div class="chip" data-preview-text="Audit trail &rarr; <strong>Verified</strong>" data-preview-score="94">Audit trail & confidence</div>
+          <div class="chip" data-preview-text="Artifact &rarr; <strong>Diagram</strong>" data-preview-score="91">Flexible outputs: docs, slides, diagrams</div>
+          <div class="chip" data-preview-text="Workflow &rarr; <strong>Reusable</strong>" data-preview-score="88">Artifact-first workflow</div>
+        </div>
 
-                    <div class="use-case-card glass-card animate-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>Developers & Engineers</h3>
-                        <p>Generate clean, working code with documentation-tied explanations. Debug and analyze complex diagrams instantly.</p>
-                    </div>
+        <div class="cta-row reveal-child" style="margin-top:20px">
+          <button class="btn-primary animated-gradient-bg" id="tryDemoBtn">Try a Quick Demo</button>
+          <button class="btn-ghost" onclick="document.getElementById('waitlistInput').scrollIntoView()">Join Waitlist</button>
+        </div>
 
-                </div>
-            </div>
-        </section>
+        <div class="reveal-child" style="margin-top:16px;color:var(--text-muted);font-size:13px">No spam. We’ll only email launch info and early access invites.</div>
+      </div>
 
-        <section id="features">
-            <div class="container">
-                <h2 class="animate-on-scroll">
-                    The Harten Engine: <span class="highlight">Smarter, Faster, Better Context.</span>
-                </h2>
-                <p class="section-intro text-center animate-on-scroll" style="transition-delay: 0.1s;">
-                    A smarter architecture designed around professional utility, not just chat.
-                </p>
+      <div class="preview reveal-child" aria-hidden="true">
+        <div class="mini-title">Verified preview</div>
+        <div class="artifact small" id="artifactPreview">Smart summary → slide</div>
 
-                <div class="features-grid">
-                    
-                    <div class="feature-card glass-card animate-on-scroll">
-                        <h3>Smart Routing</h3>
-                        <p>Automatically routes queries to the optimal model (GPT-4, Claude 3, etc.) and synthesizes outputs for a single, comprehensive answer.</p>
-                    </div>
-                    
-                    <div class="feature-card glass-card animate-on-scroll" style="transition-delay: 0.1s;">
-                        <h3>Multi-Modal Input</h3>
-                        <p>Work seamlessly with text, images, videos, and documents. Upload complex files and discuss them instantly and in-depth.</p>
-                    </div>
+        <div style="width:100%">
+          <div class="mini-title" style="text-align:left;font-size:13px;margin-bottom:6px">Confidence</div>
+          <div class="trust-meter" aria-hidden="true">
+            <div class="trust-fill" id="heroTrust">0%</div>
+          </div>
+        </div>
 
-                    <div class="feature-card glass-card animate-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>Extended Memory</h3>
-                        <p>Remembers your goals and context across all projects and conversations, learning how you work over time.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div style="font-size:12px;color:var(--text-muted)">Generated by Harten — model ensemble • 3 sources</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <section id="trust">
-            <div class="container">                
-                <div class="trust-wrapper" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px;">
-                    <div class="trust-content animate-on-scroll">
-                        <h2 style="text-align: left; margin: 0 0 20px 0;">
-                            Unbreakable Accuracy.
-                        </h2>
-                        <p>When stakes are high, our **Transparency Layer** provides the verifiable proof you need to stand up to scrutiny.</p>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 12px;">✓ Claims checked against current, verified data.</li>
-                            <li style="margin-bottom: 12px;">✓ Trust scores and confidence indicators on every output.</li>
-                            <li style="margin-bottom: 12px;">✓ Full reasoning chain and all source citations visible.</li>
-                        </ul>
-                         <button class="btn btn-outline modal-btn" style="margin-top: 24px;">View Transparency Layer</button>
-                    </div>
-                    
-                    <div class="trust-visual glass-card animate-on-scroll" style="transition-delay: 0.2s;">
-                        <h4 style="color: var(--color-secondary);">Verified Confidence Score</h4>
-                        <div style="font-size: 3rem; color: var(--color-secondary); font-weight: 800;">95.4%</div>
-                        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--color-text-muted);">
-                            Trust Indicated: High confidence due to cross-validation across multiple knowledge bases.
-                        </p>
-                        <h4 style="margin-top: 20px;">Source Citations:</h4>
-                        <div class="source-chips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
-                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.85rem;">Academic.pdf</span>
-                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.85rem;">Source.com</span>
-                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.85rem;">Internal.db</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section class="section reveal" id="demoSection">
+  <h2 class="animated-gradient-text">Interactive Demo</h2>
 
-        <section id="artifacts">
-            <div class="container">
-                <div class="artifacts-wrapper" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;">
-                    <div class="artifacts-card glass-card animate-on-scroll" style="min-height: 400px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(0, 198, 255, 0.1)); border: 2px solid var(--color-primary); position: relative;">
-                        <div style="text-align: center; padding-top: 50px;">
-                            <h3 style="color: var(--color-secondary);">Dynamic Output Preview</h3>
-                            <div style="width: 80%; height: 200px; margin: 20px auto; background: rgba(255, 255, 255, 0.15); border-radius: 8px; border: 1px dashed var(--color-secondary);">
-                                <p style="font-size: 0.9rem; padding-top: 70px;">[Visual artifact rendering here]</p>
-                            </div>
-                        </div>
-                    </div>
+  <div class="demo-grid" style="max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:20px">
+    <div>
+      <div class="spotlight-card" style="background:var(--panel);padding:18px;border-radius:12px;border:1px solid var(--glass-border); box-shadow: var(--shadow-md); backdrop-filter: blur(10px) saturate(1.1);">
+        <div style="margin-bottom:10px;color:var(--text-muted)">Ask Harten a question (text only)</div>
+        <input id="demoInput" placeholder="e.g., What are the business risks of generative AI?" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);color:var(--text-primary);margin-bottom:10px">
+        <div style="display:flex;gap:8px">
+          <button class="btn-primary animated-gradient-bg" id="demoAsk">Analyze</button>
+          <button class="btn-ghost" id="demoClear">Clear</button>
+        </div>
+      </div>
 
-                    <div class="artifacts-content animate-on-scroll" style="transition-delay: 0.1s;">
-                        <h2 style="text-align: left; margin: 0 0 20px 0;">
-                            Smart Outputs. Deliverables Only.
-                        </h2>
-                        <p>
-                            Stop transferring data between tools. Harten creates the **finished artifact** you need right in the platform—your competitive edge.
-                        </p>
-                        <ul style="margin-top: 30px; list-style: none; padding: 0;">
-                            <li style="margin-bottom: 12px;">• Creates presentations & slides (PPTX)</li>
-                            <li style="margin-bottom: 12px;">• Generates visual organizers & diagrams</li>
-                            <li style="margin-bottom: 12px;">• Builds working code and applications</li>
-                        </ul>
-                         <button class="btn btn-primary modal-btn" style="margin-top: 24px;">See Outputs In Action</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div id="demoResultWrapper" class="spotlight-card">
+        <div id="demoLog">Type a question (try "what are the risks?" or "what is Harten?") and click Analyze.</div>
+        <div id="demoFinalSummary" class="log-summary" style="display:none;"></div>
+      </div>
+    </div>
 
-    </main>
+    <aside>
+      <div class="spotlight-card" style="background:var(--panel);padding:16px;border-radius:12px;border:1px solid var(--glass-border);display:flex;flex-direction:column;gap:12px; box-shadow: var(--shadow-md); backdrop-filter: blur(10px) saturate(1.1);">
+        <div style="font-weight:700; color: var(--text-primary);">Trust Meter</div>
+        <div class="trust-meter">
+          <div class="trust-fill" id="demoTrustFill">0%</div>
+        </div>
 
-    <footer class="footer" style="padding: 60px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-        <div class="container">
-            <p>© 2025 Cadium, Inc. All rights reserved. Building Harten.</p>
-        </div>
-    </footer>
+        <div style="font-size:13px;color:var(--text-muted)">Breakdown</div>
+        <div style="display:flex;gap:8px;flex-direction:column">
+          <div style="display:flex;justify-content:space-between"><div style="font-size:13px;color:var(--text-muted)">Model agreement</div><div id="break1" style="font-weight:700; color: var(--text-primary);">—</div></div>
+          <div style="display:flex;justify-content:space-between"><div style="font-size:13px;color:var(--text-muted)">Source verification</div><div id="break2" style="font-weight:700; color: var(--text-primary);">—</div></div>
+          <div style="display:flex;justify-content:space-between"><div style="font-size:13px;color:var(--text-muted)">Clarity</div><div id="break3" style="font-weight:700; color: var(--text-primary);">—</div></div>
+        </div>
 
-    <div id="form-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="close-modal-btn" class="close-button" aria-label="Close modal">&times;</button>
-            
-            <h2 style="font-size: 1.8rem; text-align: center; margin-bottom: 10px;">Access Beta Program</h2>
-            <p style="text-align: center; font-size: 1rem;">
-                Enter your details to secure your spot for the Harten Early Access.
-            </p>
-            
-            <div class="embedded-form-wrapper">
-                <iframe 
-                    src="https://docs.google.com/forms/d/e/1FAIpQLScduQVjphHQijkeP8oUWF9fGr5lu4HCt9jh3Yts1h5dO9tKJA/viewform?embedded=true" 
-                    frameborder="0" 
-                    marginheight="0" 
-                    marginwidth="0">
-                    Loading…
-                </iframe>
-            </div>
-        </div>
+        <div style="margin-top:6px;font-size:12px;color:var(--text-muted)">Harten simulates analysis by consulting multiple models, checking sources, then synthesizing a verified answer.</div>
+      </div>
+    </aside>
+  </div>
+
+</section>
+
+<section class="section reveal" id="featuresSection">
+  <h2 class="animated-gradient-text">Why Harten?</h2>
+  <div class="features-grid">
+    <div class="feature interactive-tilt spotlight-card">
+      <h3>Smarter answers</h3>
+      <p>Harten selects and synthesizes the best pieces from multiple models so you don’t have to guess which one to use.</p>
+    </div>
+    <div class="feature interactive-tilt spotlight-card">
+      <h3>Trust & verification</h3>
+      <p>Every result carries a confidence score, source list, and an audit trail so outputs are safe to use.</p>
+    </div>
+    <div class="feature interactive-tilt spotlight-card">
+      <h3>Flexible artifacts</h3>
+      <p>Text outputs are designed to become slides, diagrams, tables, or docs — artifacts are vessels for verified results.</p>
+    </div>
+    <div class="feature interactive-tilt spotlight-card">
+      <h3>Creative synthesis</h3>
+      <p>Combines creative and logical models to produce novel, useful insights and formats.</p>
+    </div>
+  </div>
+
+  <div class="artifact-carousel-wrap">
+    <div style="font-weight:700;margin-bottom:10px">Flexible artifact previews <span style="font-weight:400; color: var(--text-muted); font-size: 13px;">(drag to scroll)</span></div>
+    <div class="artifact-row-container" id="artifactContainer">
+      <div class="artifact-row" id="artifactRow">
+        <div class="artifact-card spotlight-card" title="Slide"><div style="font-weight:700; color: var(--text-primary);">Slide</div><div style="font-size:12px;color:var(--text-muted)">Outline + visuals</div></div>
+        <div class="artifact-card spotlight-card" title="Diagram"><div style="font-weight:700; color: var(--text-primary);">Diagram</div><div style="font-size:12px;color:var(--text-muted)">Structured flow</div></div>
+        <div class="artifact-card spotlight-card" title="Table"><div style="font-weight:700; color: var(--text-primary);">Table</div><div style="font-size:12px;color:var(--text-muted)">Data summary</div></div>
+        <div class="artifact-card spotlight-card" title="Code"><div style="font-weight:700; color: var(--text-primary);">Code Snippet</div><div style="font-size:12px;color:var(--text-muted)">Verified script</div></div>
+        <div class="artifact-card spotlight-card" title="Report"><div style="font-weight:700; color: var(--text-primary);">Report</div><div style="font-size:12px;color:var(--text-muted)">Executive summary</div></div>
+      </div>
     </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <h2 class="animated-gradient-text">How it works</h2>
+  <div class="steps">
+    <div class="step spotlight-card">
+      <div class="num animated-gradient-bg">1</div>
+      <div style="font-weight:700;margin-top:8px">Ask or create</div>
+      <div style="color:var(--text-muted);font-size:13px;margin-top:6px">Start with text — a question, doc, or a sketch.</div>
+    </div>
+    <div class="step spotlight-card">
+      <div class="num animated-gradient-bg">2</div>
+      <div style="font-weight:700;margin-top:8px">Route & verify</div>
+      <div style="color:var(--text-muted);font-size:13px;margin-top:6px">Harten composes models, checks facts, and scores confidence.</div>
+    </div>
+    <div class="step spotlight-card">
+      <div class="num animated-gradient-bg">3</div>
+      <div style="font-weight:700;margin-top:8px">Deliver artifacts</div>
+      <div style="color:var(--text-muted);font-size:13px;margin-top:6px">Get text, slides, diagrams — all with provenance and confidence.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="waitlistSection" aria-labelledby="waitlistTitle">
+  <h2 id="waitlistTitle" class="animated-gradient-text">Join the Waitlist</h2>
+  <div style="text-align:center;color:var(--text-muted);max-width:900px;margin:0 auto">Be first to try Harten. No spam — only launch invites and important updates.</div>
+
+  <div class="waitlist-wrap" style="margin-top:18px">
+    <form id="waitlistForm" class="form-control" accept-charset="utf-8">
+      <input aria-label="Email" id="waitlistInput" name="email" type="email" placeholder="Enter your best email" required>
+      <button type="submit" class="animated-gradient-bg">Join Waitlist</button>
+  </div>
+    <div class="form-note">We’ll email you early access details and short updates about Harten.</div>
+
+    <div id="waitResult" style="display:none;margin-top:12px;max-width:640px">
+      <div class="success-badge">
+        <div class="check animated-gradient-bg">✓</div>
+        <div style="font-weight:700;color:var(--accent1)">You're on the list — thank you!</div>
+        <div style="color:var(--text-muted);font-size:13px">Watch your inbox for early access instructions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  &copy; <span id="year"></span> Cadium · Harten — Building the future of trustworthy AI.
+</footer>
+
+<canvas id="confetti-canvas" style="position:fixed;left:0;top:0;pointer-events:none;z-index:99999"></canvas>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* -------------------------
+     helpers & initial UI
+     ------------------------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* -------------------------
+     "Frosted Glass" Header on Scroll
+     ------------------------- */
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      header.classList.add('header-scrolled');
+    } else {
+      header.classList.remove('header-scrolled');
+    }
+  });
+
+  /* -------------------------
+     Interactive Cursor Effect
+     ------------------------- */
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursor-trail');
+  let trailTimeout;
+
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    
+    clearTimeout(trailTimeout);
+    trailTimeout = setTimeout(()=> {
+      trail.style.left = e.clientX + 'px';
+      trail.style.top  = e.clientY + 'px';
+    }, 45);
+  });
+
+  function initCursorEffects() {
+    const interactiveElements = document.querySelectorAll(
+      'button, a, .feature, .artifact-card, input[type="email"], #artifactContainer, .chip'
+    );
+    
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover-interact'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover-interact'));
+    });
+  }
+  initCursorEffects();
+
+  /* -------------------------
+     3D Tilt Effect
+     ------------------------- */
+  function initTiltEffects() {
+    const tiltElements = document.querySelectorAll('.interactive-tilt');
+    tiltElements.forEach(el => {
+      const maxTilt = 8; 
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left; 
+        const y = e.clientY - rect.top;
+        const { width, height } = rect;
+        const rotateX = (y / height - 0.5) * -maxTilt * 2;
+        const rotateY = (x / width - 0.5) * maxTilt * 2;
+        el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+    });
+  }
+  initTiltEffects();
+  
+  /* -------------------------
+     "Spotlight" Card Effect
+     ------------------------- */
+  function initSpotlightCards() {
+    const cards = document.querySelectorAll('.spotlight-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--mouse-x', `-300px`);
+        card.style.setProperty('--mouse-y', `-300px`);
+      });
+    });
+  }
+  initSpotlightCards();
 
 
-    <script>
-        // MODAL FUNCTIONS
-        const modal = document.getElementById('form-modal');
-        const openModalBtns = document.querySelectorAll('.modal-btn, #open-modal-btn');
+  /* -------------------------
+     Interactive Particles
+     ------------------------- */
+  const particleContainer = document.getElementById('particles');
+  const particleElements = [];
+  const particleMouseRadius = 150;
+  const particleRepelStrength = 2;
 
-        const openModal = () => {
-            modal.style.display = 'flex';
-            // Use class to trigger the opacity transition for smooth opening/closing
-            setTimeout(() => { modal.classList.add('is-visible'); }, 10); 
-            document.body.style.overflow = 'hidden'; 
-        };
+  function makeParticles(n=25){
+    const w = window.innerWidth, h = window.innerHeight;
+    for(let i=0;i<n;i++){
+      const d = document.createElement('div');
+      d.className = 'particle';
+      const size = Math.random()*60 + 20;
+      const x = Math.random()*w;
+      const y = Math.random()*h;
+      d.style.width = size+'px';
+      d.style.height = size+'px';
+      d.style.left = x + 'px';
+      d.style.top  = y + 'px';
+      d.style.opacity = 0.1 + Math.random()*0.2;
+      particleContainer.appendChild(d);
+      particleElements.push({ el: d, x, y, size });
+    }
+  }
+  makeParticles(25);
 
-        const closeModal = () => {
-            modal.classList.remove('is-visible');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; 
-            }, 300); 
-        };
-
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // --- 1. MODAL LISTENERS ---
-            openModalBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openModal();
-                });
-            });
-
-            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
-
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('is-visible')) {
-                    closeModal();
-                }
-            });
+  document.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    for (const p of particleElements) {
+      const dx = clientX - (p.x + p.size / 2);
+      const dy = clientY - (p.y + p.size / 2);
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < particleMouseRadius) {
+        const force = (particleMouseRadius - dist) / particleMouseRadius;
+        const moveX = (dx / dist) * force * -particleRepelStrength * 20;
+        const moveY = (dy / dist) * force * -particleRepelStrength * 20;
+        p.el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        p.el.style.opacity = 0.3 + force * 0.4;
+      } else {
+        p.el.style.transform = 'translate(0, 0)';
+        p.el.style.opacity = 0.1 + (p.size / 80) * 0.2;
+      }
+    }
+  });
 
 
-            // --- 2. "Pop-Up" on Scroll Animation ---
-            const animatedElements = document.querySelectorAll('.animate-on-scroll:not(#hero .animate-on-scroll)');
-            
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); 
-                    }
-                });
-            }, {
-                threshold: 0.15 
-            });
+  /* reveal on scroll */
+  const reveals = document.querySelectorAll('.reveal');
+  function doReveal(){
+    reveals.forEach(el=>{
+      const r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight - 100) {
+        el.classList.add('show');
+      }
+    });
+  }
+  window.addEventListener('scroll', doReveal);
+  doReveal(); // Run on load to show initial content
 
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </SCript>
+  /* rotating tagline */
+  const rotator = document.getElementById('rotator');
+  const rotations = ["Smarter","Trustworthy","Flexible","Creative","Auditable","Collaborative"];
+  let rotIdx=0;
+  setInterval(()=>{
+    rotIdx = (rotIdx+1) % rotations.length;
+    rotator.style.opacity = 0;
+    setTimeout(()=>{ rotator.textContent = rotations[rotIdx]; rotator.style.opacity = 1; },200);
+  }, 2600);
 
+  /* Tick-Up Counter Animation */
+  function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const value = Math.floor(progress * (end - start) + start);
+      obj.textContent = value + '%';
+      if (progress < 1) window.requestAnimationFrame(step);
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  /* -------------------------
+     "Live" Hero Card
+     ------------------------- */
+  const heroChipContainer = document.getElementById('heroChipContainer');
+  const artifactPreview = document.getElementById('artifactPreview');
+  const heroTrust = document.getElementById('heroTrust');
+  const defaultPreviewText = artifactPreview.innerHTML;
+  const defaultPreviewScore = 92;
+
+  // Set initial hero trust meter state
+  // This needs to wait for the .reveal.show animation to finish
+  const heroCardObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      setTimeout(() => {
+        heroTrust.style.width = defaultPreviewScore + '%';
+        animateValue(heroTrust, 0, defaultPreviewScore, 1000);
+      }, 500); // Delay to sync with .reveal-child
+      heroCardObserver.unobserve(entries[0].target);
+    }
+  }, { threshold: 0.5 });
+  heroCardObserver.observe(document.getElementById('heroCard'));
+
+
+  heroChipContainer.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('mouseenter', () => {
+      const text = chip.dataset.previewText;
+      const score = parseInt(chip.dataset.previewScore, 10);
+      artifactPreview.innerHTML = text;
+      heroTrust.style.width = score + '%';
+      animateValue(heroTrust, 0, score, 500);
+    });
+  });
+  
+  heroChipContainer.addEventListener('mouseleave', () => {
+    artifactPreview.innerHTML = defaultPreviewText;
+    heroTrust.style.width = defaultPreviewScore + '%';
+    animateValue(heroTrust, 0, defaultPreviewScore, 500);
+  });
+
+
+  /* -------------------------
+     IMPROVED DEMO: "Live Log" Flow
+     ------------------------- */
+  const demoAskBtn = document.getElementById('demoAsk');
+  const demoInput = document.getElementById('demoInput');
+  const demoLog = document.getElementById('demoLog');
+  const demoFinalSummary = document.getElementById('demoFinalSummary');
+  const demoTrustFill = document.getElementById('demoTrustFill');
+  const break1 = document.getElementById('break1'), break2 = document.getElementById('break2'), break3 = document.getElementById('break3');
+  const tryDemoBtn = document.getElementById('tryDemoBtn');
+  let demoRunning = false;
+
+  const demoResponses = {
+    'risk': {
+      finalSummary: "<strong>Harten summary (Risk)</strong><br>The primary business risks of generative AI are <em>data leakage</em>, <em>model misuse</em>, and <em>regulatory uncertainty</em>. Harten verified this with multiple reputable sources and provided mitigations (policy, red-teaming, data minimization).",
+      score: 94, b1: 98, b2: 92, b3: 93
+    },
+    'what': {
+      finalSummary: "<strong>Harten summary (About)</strong><br>Harten is an intelligent routing and verification layer. It consults multiple AI models, cross-references sources, and packages the result into a verified, usable 'artifact' (like a doc or slide) with a clear confidence score.",
+      score: 97, b1: 99, b2: 96, b3: 97
+    },
+    'default': {
+      finalSummary: "<strong>Harten summary</strong><br>That's a great question! This is a simulated demo, but Harten would now analyze your query by consulting multiple models (e.g., GPT-4, Claude 3, and a specialized model), verifying the key facts against trusted sources, and synthesizing a single, high-confidence answer.",
+      score: 88, b1: 90, b2: 85, b3: 89
+    }
+  };
+  
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  
+  function resetDemoUI() {
+    demoTrustFill.style.width = '0%'; demoTrustFill.textContent = '0%';
+    break1.textContent = '—'; break2.textContent = '—'; break3.textContent = '—';
+    demoFinalSummary.style.display = 'none';
+  }
+
+  function resetDemo(){
+    demoLog.innerHTML = 'Type a question (try "what are the risks?" or "what is Harten?") and click Analyze.';
+    resetDemoUI();
+    demoInput.value = '';
+    demoRunning = false;
+  }
+
+  demoAskBtn.addEventListener('click', ()=> runDemo(false));
+  tryDemoBtn.addEventListener('click', ()=> {
+    document.getElementById('demoSection').scrollIntoView();
+    demoInput.value = "What are the business risks of generative AI?";
+    demoInput.focus();
+    runDemo(true);
+  });
+
+  document.getElementById('demoClear').addEventListener('click', ()=> resetDemo());
+
+  async function runDemo(isAutoRun) {
+    if (demoRunning && !isAutoRun) return;
+    demoRunning = true;
+    const q = demoInput.value.trim().toLowerCase();
+    if(!q){ demoLog.textContent = "Please enter a short question to see the demo."; demoRunning = false; return; }
+
+    let response = demoResponses.default;
+    if (q.includes('risk')) response = demoResponses.risk;
+    else if (q.includes('what') || q.includes('harten')) response = demoResponses.what;
+
+    demoLog.innerHTML = '';
+    resetDemoUI();
+    const addLog = (msg, type = 'log-process') => { 
+      demoLog.innerHTML += `<div class="demo-log-line ${type}"><span class="log-prefix">[${type.split('-')[1].toUpperCase()}]</span> ${msg}</div>`; 
+      demoLog.scrollTop = demoLog.scrollHeight;
+    };
+
+    addLog(`Query received: "${demoInput.value}"`, 'log-query');
+    await sleep(400);
+    demoTrustFill.style.width = '30%';
+    animateValue(demoTrustFill, 0, 30, 500);
+    addLog(`Routing to logical model (Claude 3)...`);
+    await sleep(600);
+    demoTrustFill.style.width = '70%';
+    animateValue(demoTrustFill, 30, 70, 500);
+    animateValue(break2, 0, response.b2, 500);
+    addLog(`Cross-referencing 3 sources...`);
+    await sleep(700);
+    demoTrustFill.style.width = '90%';
+    animateValue(demoTrustFill, 70, 90, 500);
+    animateValue(break1, 0, response.b1, 500);
+    addLog(`Synthesizing final artifact...`);
+    await sleep(400);
+    demoTrustFill.style.width = response.score + '%';
+    animateValue(demoTrustFill, 90, response.score, 500);
+    animateValue(break3, 0, response.b3, 500);
+    addLog(`Analysis complete.`, 'log-success');
+    
+    demoFinalSummary.innerHTML = response.finalSummary;
+    demoFinalSummary.style.display = 'block';
+    
+    demoRunning = false;
+  }
+
+  /* -------------------------
+     Draggable Carousel
+     ------------------------- */
+  const container = document.getElementById('artifactContainer');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    container.style.cursor = 'grabbing';
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  });
+  container.addEventListener('mouseleave', () => { isDown = false; container.style.cursor = 'grab'; });
+  container.addEventListener('mouseup', () => { isDown = false; container.style.cursor = 'grab'; });
+  container.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 2;
+    container.scrollLeft = scrollLeft - walk;
+  });
+  
+
+  /* -------------------------
+     WAITLIST: POST to Getform endpoint
+     ------------------------- */
+  const waitlistForm = document.getElementById('waitlistForm');
+  const waitResult = document.getElementById('waitResult');
+  const confettiCanvas = document.getElementById('confetti-canvas');
+
+  waitlistForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const email = document.getElementById('waitlistInput').value.trim();
+    if(!email) return;
+
+    const submitBtn = waitlistForm.querySelector('button[type="submit"]');
+    const orig = submitBtn.textContent;
+    submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+
+    try{
+      const res = await fetch('https://getform.io/f/anlnoeka', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(waitlistForm)
+      });
+
+      if(res.ok || res.status === 200 || res.status === 201){
+        waitlistForm.style.display = 'none';
+        document.querySelector('#waitlistSection .form-note').style.display = 'none';
+        waitResult.style.display = 'block';
+        runConfetti();
+      } else {
+        alert('Submission failed — please try again or email us directly at cadium.com@gmail.com');
+        submitBtn.disabled=false; submitBtn.textContent=orig;
+      }
+    }catch(err){
+      alert('Network error — please check your connection or email cadium.com@gmail.com');
+      submitBtn.disabled=false; submitBtn.textContent=orig;
+    }
+  });
+
+  /* -------------------------
+     tiny confetti implementation
+     ------------------------- */
+  function runConfetti(){
+    const ctx = confettiCanvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    confettiCanvas.width = window.innerWidth * dpr;
+    confettiCanvas.height = window.innerHeight * dpr;
+  D  confettiCanvas.style.width = window.innerWidth + 'px';
+    confettiCanvas.style.height = window.innerHeight + 'px';
+    ctx.scale(dpr,dpr);
+
+    const pieces = [];
+    const colors = ['#00d9ff','#7b2ff7','#00ffa6','#ffd166','#ff7ab6'];
+    for(let i=0;i<80;i++){
+      pieces.push({
+        x: Math.random()*window.innerWidth,
+        y: -Math.random()*200,
+        w: 6 + Math.random()*10,
+        h: 10 + Math.random()*16,
+        vx: (Math.random()-0.5)*6,
+        vy: 2 + Math.random()*4,
+        rot: Math.random()*360,
+        vr: (Math.random()-0.5)*12,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        ttl: 140 + Math.floor(Math.random()*60)
+      });
+    }
+
+    let frame = 0;
+    function draw(){
+      frame++;
+      ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      for(let i=0;i<pieces.length;i++){
+        const p = pieces[i];
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.vy += 0.04;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot * Math.PI/180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+        p.ttl--;
+      }
+      if(frame < 250){
+        requestAnimationFrame(draw);
+      } else {
+        ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      }
+    }
+    draw();
+  }
+
+  /* -------------------------
+     small accessibility / cleanup
+     ------------------------- */
+  window.addEventListener('resize', ()=> {
+    confettiCanvas.width = window.innerWidth * (window.devicePixelRatio || 1);
+  Next   confettiCanvas.height = window.innerHeight * (window.devicePixelRatio || 1);
+  });
+
+}); // End DOMContentLoaded
+</script>
 </body>
 </html>
