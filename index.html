@@ -1,232 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Harten — Clear · Trustworthy · Useful</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadium Harten</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#fbfcfe;
-  --text:#101023;
-  --muted:#5a647d;
-  --accent:#00b8ff;
-  --panel: #ffffff;
-  --glass-border: rgba(0,0,0,0.06);
-  --radius:12px;
-  --shadow: 0 8px 24px rgba(20,20,40,0.06);
-  --ease: cubic-bezier(.2,.9,.2,1);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  background: var(--bg);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  line-height:1.45;
-}
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Rubik', sans-serif; }
+  body { background:#f0f4ff; color:#333; overflow-x:hidden; scroll-behavior:smooth; }
 
-/* Header */
-.header{
-  position:sticky; top:0; left:0; right:0;
-  background: transparent;
-  padding:16px 20px;
-  display:flex; align-items:center; justify-content:space-between;
-  gap:12px;
-  z-index:50;
-}
-.brand{font-weight:800;letter-spacing:2px}
-.nav{font-size:14px;color:var(--muted)}
+  /* Header */
+  header { display:flex; justify-content: space-between; align-items:center; padding:2rem 5%; background:linear-gradient(90deg,#4facfe,#00f2fe); color:white; position:sticky; top:0; z-index:1000; }
+  header h1 { font-size:2rem; }
+  header nav a { margin-left:1.5rem; color:white; text-decoration:none; font-weight:500; transition:0.3s; }
+  header nav a:hover { opacity:0.8; }
 
-/* Container */
-.container{max-width:980px;margin:0 auto;padding:28px 20px}
+  /* Hero Section */
+  .hero { display:flex; flex-direction:column; align-items:center; text-align:center; padding:6rem 5% 4rem 5%; position:relative; overflow:hidden; min-height:100vh; }
+  .hero h2 { font-size:3rem; margin-bottom:1rem; animation: slideIn 1s ease-out; }
+  .hero p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation: fadeIn 2s ease-out; }
+  .cta { padding:1rem 2rem; font-size:1.2rem; background:#ff7f50; border:none; border-radius:50px; color:white; cursor:pointer; transition:0.3s; box-shadow: 0 5px 20px rgba(255,127,80,0.5); animation: pulse 2s infinite; }
+  .cta:hover { transform: scale(1.1) rotate(-2deg); background:#ff6347; }
 
-/* Hero - simplified */
-.hero{
-  display:flex;align-items:center;justify-content:center;
-  padding:44px 0 36px;
-}
-.hero-card{
-  width:100%; background:var(--panel); border-radius:14px; padding:32px;
-  box-shadow:var(--shadow); border:1px solid var(--glass-border);
-  display:grid; grid-template-columns: 1fr; gap:18px; text-align:left;
-}
-.hero-title{font-size:32px;font-weight:800;margin-bottom:6px}
-.hero-sub{color:var(--muted);font-size:15px}
+  /* Animated shapes */
+  .shape { position:absolute; border-radius:50%; opacity:0.15; }
+  .shape1 { width:120px; height:120px; background:#ff7f50; top:10%; left:5%; animation: float1 6s ease-in-out infinite; }
+  .shape2 { width:150px; height:150px; background:#4facfe; top:50%; left:80%; animation: float2 8s ease-in-out infinite; }
+  .shape3 { width:100px; height:100px; background:#00f2fe; top:80%; left:20%; animation: float3 5s ease-in-out infinite; }
 
-/* CTA */
-.cta-row{display:flex;gap:12px;margin-top:8px}
-.btn{padding:10px 16px;border-radius:999px;border:none;cursor:pointer;font-weight:700}
-.btn-primary{background:linear-gradient(90deg,var(--accent),#7b2ff7);color:white}
-.btn-ghost{background:transparent;border:1px solid var(--glass-border);color:var(--text)}
+  @keyframes float1 { 0%,100% { transform: translateY(0px) translateX(0); } 50% { transform: translateY(-40px) translateX(20px); } }
+  @keyframes float2 { 0%,100% { transform: translateY(0px) translateX(0); } 50% { transform: translateY(-30px) translateX(-30px); } }
+  @keyframes float3 { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-50px); } }
+  @keyframes slideIn { 0% { transform: translateY(-50px); opacity:0; } 100% { transform: translateY(0); opacity:1; } }
+  @keyframes fadeIn { 0% { opacity:0; } 100% { opacity:1; } }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-/* Sections simplified */
-.section{padding:48px 0}
-.h2{font-size:22px;margin-bottom:14px}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.feature{background:var(--panel);padding:14px;border-radius:10px;border:1px solid var(--glass-border);box-shadow:var(--shadow);color:var(--muted);font-size:14px}
+  /* Animated gradient background */
+  body::before { content:""; position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:linear-gradient(270deg,#4facfe,#00f2fe,#4facfe,#ff7f50); background-size:800% 800%; animation: gradientBG 20s ease infinite; }
+  @keyframes gradientBG { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-/* Demo - keep but minimal */
-.demo-wrap{display:grid;grid-template-columns:1fr 280px;gap:18px;align-items:start}
-.demo-card{background:var(--panel);padding:14px;border-radius:10px;border:1px solid var(--glass-border);box-shadow:var(--shadow)}
-#demoLog{max-height:220px;overflow:auto;font-family:monospace;font-size:13px;color:var(--muted);padding:10px;background:transparent}
+  /* Features */
+  .features { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:2rem; padding:4rem 5%; }
+  .feature-card { background:white; padding:2rem; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.1); text-align:center; transition: transform 0.4s, box-shadow 0.4s; cursor:pointer; position:relative; overflow:hidden; }
+  .feature-card:hover { transform: translateY(-10px) rotate(-1deg); box-shadow:0 15px 30px rgba(0,0,0,0.25); }
+  .feature-card::after { content:""; position:absolute; width:100%; height:100%; top:0; left:0; background:radial-gradient(circle, rgba(255,127,80,0.2) 0%, transparent 80%); transform: scale(0); transition: transform 0.5s; border-radius:20px; }
+  .feature-card:hover::after { transform: scale(1); }
+  .feature-card h3 { margin-bottom:1rem; font-size:1.4rem; color:#4facfe; }
+  .feature-card p { font-size:1rem; color:#555; }
 
-/* Waitlist */
-.waitlist{display:flex;gap:8px;align-items:center}
-input[type="email"]{flex:1;padding:10px;border-radius:999px;border:1px solid var(--glass-border);background:white}
+  /* Google Form Section */
+  .form-section { display:flex; justify-content:center; padding:4rem 5%; background:#e6f2ff; border-radius:20px; margin:4rem 5%; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s; }
+  iframe { border:none; border-radius:15px; width:100%; max-width:700px; height:600px; transition: transform 0.3s, box-shadow 0.3s; }
+  iframe:hover { transform: scale(1.02); box-shadow:0 15px 25px rgba(0,0,0,0.15); }
 
-/* Footer */
-.footer{padding:28px 20px;text-align:center;color:var(--muted);font-size:13px}
+  /* Footer */
+  footer { text-align:center; padding:2rem 5%; background:#222; color:white; margin-top:4rem; }
+  footer a { color:#ff7f50; text-decoration:none; font-weight:600; }
 
-/* Responsive */
-@media (max-width:880px){
-  .demo-wrap{grid-template-columns:1fr}
-  .hero-title{font-size:24px}
-}
+  /* Scroll animations */
+  .fade-in { opacity:0; transform: translateY(30px); transition: all 0.8s ease-out; }
+  .fade-in.visible { opacity:1; transform: translateY(0); }
+
+  /* Particle canvas */
+  #particles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
 </style>
 </head>
 <body>
 
-<header class="header container" role="banner">
-  <div class="brand">HARTEN</div>
-  <nav class="nav" aria-label="Main navigation">Smarter · Trustworthy · Flexible</nav>
+<!-- Particle canvas -->
+<canvas id="particles"></canvas>
+
+<header>
+  <h1>Cadium Harten</h1>
+  <nav>
+    <a href="#features">Benefits</a>
+    <a href="#form">Get Started</a>
+  </nav>
 </header>
 
-<main>
-  <section class="hero container" aria-labelledby="heroTitle">
-    <div class="hero-card" id="heroCard">
-      <div>
-        <div id="heroTitle" class="hero-title">AI that is clear and useful</div>
-        <div class="hero-sub">Harten routes to reliable models and packages verified outputs as practical artifacts — designed for work that needs confident results.</div>
-        <div class="cta-row">
-          <button class="btn btn-primary" id="tryDemoBtn">Try demo</button>
-          <button class="btn btn-ghost" id="joinBtn">Join waitlist</button>
-        </div>
-      </div>
+<!-- Hero Section -->
+<section class="hero">
+  <h2>Cadium Harten Makes Work Fun & Easy</h2>
+  <p>Boost productivity, simplify tasks, and enjoy tools designed for real people. Interactive, playful, and effective.</p>
+  <button class="cta" id="cta">Start Now</button>
 
-      <div style="margin-top:8px;color:var(--muted);font-size:13px">
-        A focused demo and short explanations — fewer distractions so you can understand what Harten does quickly.
-      </div>
-    </div>
-  </section>
+  <!-- Animated shapes -->
+  <div class="shape shape1"></div>
+  <div class="shape shape2"></div>
+  <div class="shape shape3"></div>
+</section>
 
-  <section class="section container" id="demoSection">
-    <div class="h2">Interactive demo (simplified)</div>
+<!-- Features -->
+<section class="features" id="features">
+  <div class="feature-card fade-in">
+    <h3>Boost Productivity</h3>
+    <p>Automate repetitive tasks and get more done in less time.</p>
+  </div>
+  <div class="feature-card fade-in">
+    <h3>Interactive Tools</h3>
+    <p>Engage with intuitive, playful interfaces designed for everyone.</p>
+  </div>
+  <div class="feature-card fade-in">
+    <h3>Accessible Anywhere</h3>
+    <p>Works seamlessly on desktop, tablet, and mobile devices.</p>
+  </div>
+  <div class="feature-card fade-in">
+    <h3>Simple & Fun</h3>
+    <p>Easy-to-use tools that make your work enjoyable.</p>
+  </div>
+</section>
 
-    <div class="demo-wrap">
-      <div class="demo-card">
-        <label for="demoInput" style="display:block;margin-bottom:8px;color:var(--muted)">Ask a short question</label>
-        <input id="demoInput" placeholder="E.g. What are the risks of generative AI?" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--glass-border);margin-bottom:10px">
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-primary" id="demoAsk">Analyze</button>
-          <button class="btn btn-ghost" id="demoClear">Clear</button>
-        </div>
+<!-- Embedded Google Form -->
+<section class="form-section" id="form">
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScduQVjphHQijkeP8oUWF9fGr5lu4HCt9jh3Yts1h5dO9tKJA/viewform?embedded=true">Loading…</iframe>
+</section>
 
-        <div id="demoResult" style="margin-top:12px">
-          <div id="demoLog">Type a question and click Analyze.</div>
-        </div>
-      </div>
-
-      <aside class="demo-card" aria-labelledby="trustTitle">
-        <div id="trustTitle" style="font-weight:700;margin-bottom:8px">What you'll get</div>
-        <div style="color:var(--muted);font-size:14px">
-          - A short verified summary<br>
-          - Confidence score (single number)<br>
-          - Suggested artifact type (slide, doc, or chart)
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <section class="section container" id="featuresSection">
-    <div class="h2">Why Harten?</div>
-    <div class="features">
-      <div class="feature"><strong>Reliable outputs</strong><div>We check and synthesize across models to reduce guesswork.</div></div>
-      <div class="feature"><strong>Reusable artifacts</strong><div>Ready-to-use slides, summaries, and diagrams.</div></div>
-      <div class="feature"><strong>Auditability</strong><div>Provenance and simple confidence scores for easier decisions.</div></div>
-      <div class="feature"><strong>Fast integration</strong><div>Designed to slot into existing workflows quickly.</div></div>
-    </div>
-  </section>
-
-  <section class="section container" id="waitlistSection" aria-labelledby="waitlistTitle">
-    <div id="waitlistTitle" class="h2">Join the waitlist</div>
-    <form id="waitlistForm" class="waitlist" style="max-width:640px">
-      <input aria-label="Email" id="waitlistInput" name="email" type="email" placeholder="your@email.com" required>
-      <button type="submit" class="btn btn-primary">Join</button>
-    </form>
-    <div style="margin-top:10px;color:var(--muted);font-size:13px">We only email launch updates and invites.</div>
-    <div id="waitResult" style="display:none;margin-top:12px;color:var(--accent)"><strong>Thanks — you're on the list.</strong></div>
-  </section>
-</main>
-
-<footer class="footer">
-  &copy; <span id="year"></span> Cadium · Harten
+<footer>
+  &copy; 2025 Cadium Harten. Made with ❤️. <a href="#form">Get Started Now</a>
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // small, defensive JS to keep core flows working and avoid clutter/animations
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e){
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 
-  // Demo logic: minimal, deterministic simulation
-  const demoAsk = document.getElementById('demoAsk');
-  const demoInput = document.getElementById('demoInput');
-  const demoLog = document.getElementById('demoLog');
-  const demoClear = document.getElementById('demoClear');
-  const tryDemoBtn = document.getElementById('tryDemoBtn');
-  const joinBtn = document.getElementById('joinBtn');
+  // CTA button animation
+  const ctaBtn = document.getElementById('cta');
+  ctaBtn.addEventListener('click', () => {
+    ctaBtn.innerText = "Let's Go!";
+    ctaBtn.style.transform = 'scale(1.2) rotate(-5deg)';
+    setTimeout(() => { ctaBtn.style.transform = 'scale(1)'; ctaBtn.innerText = "Start Now"; }, 500);
+    document.getElementById('form').scrollIntoView({behavior:'smooth'});
+  });
 
-  function writeLog(html){
-    demoLog.innerHTML = html;
+  // Scroll fade-in for feature cards
+  const faders = document.querySelectorAll('.fade-in');
+  const options = { threshold: 0.3 };
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, options);
+  faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+  // Particle animation
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particlesArray = [];
+  const colors = ['#ff7f50','#4facfe','#00f2fe','#ffffff'];
+
+  class Particle {
+    constructor(){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random()*4 + 1;
+      this.speedX = Math.random()*1 - 0.5;
+      this.speedY = Math.random()*1 - 0.5;
+      this.color = colors[Math.floor(Math.random()*colors.length)];
+    }
+    update(){ this.x += this.speedX; this.y += this.speedY; if(this.x>canvas.width)this.x=0; if(this.x<0)this.x=canvas.width; if(this.y>canvas.height)this.y=0; if(this.y<0)this.y=canvas.height; }
+    draw(){ ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
   }
 
-  demoAsk.addEventListener('click', () => {
-    const q = (demoInput.value || '').trim();
-    if (!q) { writeLog('Please type a short question.'); return; }
-    // Very short simulated flow
-    writeLog('<div style="font-weight:700">Analyzing…</div><div style="margin-top:8px;color:var(--muted)">Routing and verifying...</div>');
-    setTimeout(() => {
-      // simple classification to show different outputs
-      let out = 'Here is a concise, verified summary.';
-      let score = '88%';
-      let artifact = 'Slide';
-      if (q.toLowerCase().includes('risk')) { out = 'Business risks include data leaks, misuse, and regulation.'; score = '94%'; artifact = 'Report'; }
-      if (q.toLowerCase().includes('harten')) { out = 'Harten routes models, verifies facts, and packages results.'; score = '96%'; artifact = 'Summary'; }
-      demoLog.innerHTML = `<div style="font-weight:700">${out}</div>
-        <div style="margin-top:8px;color:var(--muted)">Confidence: <strong>${score}</strong></div>
-        <div style="margin-top:6px;color:var(--muted)">Suggested artifact: <strong>${artifact}</strong></div>`;
-    }, 700);
-  });
+  function initParticles(){
+    for(let i=0;i<150;i++){ particlesArray.push(new Particle()); }
+  }
 
-  demoClear.addEventListener('click', () => {
-    demoInput.value = '';
-    writeLog('Type a question and click Analyze.');
-  });
+  function animateParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particlesArray.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateParticles);
+  }
 
-  tryDemoBtn.addEventListener('click', () => {
-    document.getElementById('demoSection').scrollIntoView({behavior:'smooth'});
-    demoInput.value = 'What are the business risks of generative AI?';
-    demoAsk.click();
-  });
-
-  joinBtn && joinBtn.addEventListener('click', () => {
-    document.getElementById('waitlistInput').focus();
-    document.getElementById('waitlistInput').scrollIntoView({behavior:'smooth'});
-  });
-
-  // Waitlist: keep it client-only (no external dependency) to avoid network surprises.
-  const waitForm = document.getElementById('waitlistForm');
-  const waitResult = document.getElementById('waitResult');
-  waitForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('waitlistInput').value.trim();
-    if (!email) return alert('Please enter your email.');
-    // show immediate local success – keep production integration optional
-    waitForm.style.display = 'none';
-    waitResult.style.display = 'block';
-  });
-});
+  window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+  initParticles();
+  animateParticles();
 </script>
+
 </body>
 </html>
