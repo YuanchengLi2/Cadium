@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harten by Cadium - AI You Can Finally Trust</title>
+    <title>Harten by Cadium - Verified Intelligence</title>
     
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%236366F1'/%3E%3Cstop offset='100%25' stop-color='%2300C6FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M50,5 A45,45 0 0 1 95,50 A45,45 0 0 1 50,95 A45,45 0 0 1 5,50 A45,45 0 0 1 50,5 Z M50,15 A35,35 0 0 0 15,50 A35,35 0 0 0 50,85 A35,35 0 0 0 85,50 A35,35 0 0 0 50,15 Z'/%3E%3Ccircle fill='white' cx='50' cy='50' r='10'/%3E%3Ccircle fill='white' cx='30' cy='35' r='8'/%3E%3Ccircle fill='white' cx='70' cy='35' r='8'/%3E%3Ccircle fill='white' cx='30' cy='65' r='8'/%3Ccircle fill='white' cx='70' cy='65' r='8'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%236366F1'/%3E%3Cstop offset='100%25' stop-color='%2300C6FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='%230c0a18'/%3E%3Cpolygon fill='url(%23g)' points='50,15 80,45 50,85 20,45' /%3E%3Ccircle fill='white' cx='50' cy='50' r='5'/%3E%3C/svg%3E">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,29 +19,22 @@
             --color-tertiary: #A855F7; /* Purple */
             
             --color-text: #FFFFFF;
-            --color-text-muted: #E8E8E8;
-            --color-text-dark: #1F2937;
+            --color-text-muted: #BCC5D6; /* Lighter gray for better contrast */
             
-            --color-trust: #10B981; 
+            --border-radius: 12px;
             
-            --border-radius: 16px;
+            /* Glassmorphism Styles - Deeper for pop */
+            --glass-bg: rgba(255, 255, 255, 0.08); /* Reduced opacity for a darker look */
+            --glass-bg-hover: rgba(255, 255, 255, 0.15);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0px 8px 30px -5px rgba(0, 0, 0, 0.6);
+            --glass-blur: 20px;
             
-            /* Glassmorphism Styles - High Contrast */
-            --glass-bg: rgba(255, 255, 255, 0.15); 
-            --glass-bg-hover: rgba(255, 255, 255, 0.2);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.3);
-            --glass-shadow: 0px 10px 40px -5px rgba(0, 0, 0, 0.4);
-            --glass-blur: 25px;
-            
-            /* Snappy Transition - Bouncier feel */
-            --snap-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Snappy Transition - Smoother/Tighter feel */
+            --snap-ease: cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html { scroll-behavior: smooth; }
 
@@ -54,7 +47,7 @@
             position: relative; 
         }
         
-        /* THE ANIMATED BACKGROUND MESH */
+        /* Persistent Animated Background Mesh (Lowered Z-index) */
         body::before {
             content: '';
             position: fixed;
@@ -62,15 +55,14 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            z-index: -10; /* Lower z-index to avoid covering content */
+            z-index: -10; 
             
             background: radial-gradient(circle at 60% 80%, var(--color-primary) 0%, transparent 40%),
                         radial-gradient(circle at 20% 40%, var(--color-secondary) 0%, transparent 40%),
                         radial-gradient(circle at 80% 20%, var(--color-tertiary) 0%, transparent 40%),
                         #0c0a18; 
             background-size: 150% 150%;
-            filter: blur(80px) opacity(0.8);
-            
+            filter: blur(70px) opacity(0.7);
             animation: mesh-move 35s ease infinite alternate;
         }
         
@@ -79,74 +71,53 @@
             100% { background-position: 100% 100%; }
         }
 
-        /* The BUSY, SUBTLE NOISE OVERLAY */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -9;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-            opacity: 0.1;
-            pointer-events: none;
-            animation: noise-flicker 4s linear infinite alternate;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
             position: relative;
-            z-index: 2; /* Ensure content is always above background (Z-index fix) */
+            z-index: 2; 
         }
 
         section {
-            padding: 120px 0;
+            padding: 100px 0;
+            position: relative;
         }
         
         /* 2. Typography & Text Styling */
         h1 {
-            font-size: 4.5rem; 
+            font-size: 5rem; 
             font-weight: 800;
             letter-spacing: -3px;
             line-height: 1.1;
         }
         
-        /* CHROMA TEXT EFFECT & INTERACTIVE GLITCH */
+        /* Chroma Text (Headline Style) */
         .chroma-text {
             display: inline-block;
             background: linear-gradient(
                 90deg, 
                 var(--color-secondary) 0%, 
                 var(--color-text) 50%,
-                var(--color-tertiary) 100%
+                var(--color-primary) 100%
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
-            animation: chroma-shine 5s ease infinite;
+            animation: chroma-shine 4s ease infinite alternate;
             background-size: 400% 100%;
             transition: all 0.2s ease;
         }
         
-        .chroma-text:hover {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 
-                         2px 2px 0 var(--color-primary), 
-                         -2px -2px 0 var(--color-secondary);
-            transform: scale(1.01);
-        }
-
         @keyframes chroma-shine {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
 
         h2 {
-            font-size: 3.5rem; 
-            letter-spacing: -2px;
+            font-size: 3.2rem; 
+            letter-spacing: -1.5px;
             text-align: center;
             margin-bottom: 40px;
         }
@@ -156,126 +127,147 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-fill-color: transparent;
             font-weight: 800;
         }
 
-        /* 3. Hero Section (The WOW Factor) */
-        #hero {
-            padding: 180px 0 120px 0;
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+        p {
+            font-size: 1.125rem; 
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        .section-intro {
+            max-width: 750px;
+            margin: 0 auto 60px auto;
+            font-size: 1.35rem; 
+            line-height: 1.6;
+            font-weight: 300;
         }
         
-        /* THE BUSY HERO ORB */
-        .hero-orb {
+        /* 3. Reworked Hero Section & WOW Animations */
+        #hero {
+            padding: 160px 0 100px 0;
+            min-height: 90vh; 
+        }
+        
+        /* The Animated Data Mesh (Reworked WOW) */
+        .data-mesh-bg {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--color-primary) 0%, var(--color-tertiary) 50%, transparent 70%);
-            opacity: 0.15;
-            filter: blur(100px);
-            z-index: -1;
             top: 50%;
             left: 50%;
-            animation: orb-move 25s ease-in-out infinite alternate;
+            width: 800px;
+            height: 800px;
+            transform: translate(-50%, -50%);
+            z-index: 1; 
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .data-mesh-bg::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(99, 102, 241, 0.5) 1px, transparent 1px),
+                              radial-gradient(rgba(0, 198, 255, 0.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.15;
+            animation: mesh-scan 15s linear infinite;
+        }
+
+        @keyframes mesh-scan {
+            from { background-position: 0 0, 20px 20px; }
+            to { background-position: 40px 40px, 60px 60px; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .logo {
-            font-size: 1.75rem;
-            font-weight: 800;
+            font-size: 1.5rem;
+            font-weight: 700;
             text-decoration: none;
             color: var(--color-text);
-            padding: 5px 10px;
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.3); /* Ensure logo pops */
+            display: inline-block;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
-        /* HERO CONTENT WRAPPER - NEW 'WOW' EFFECT */
-        .hero-content {
-            padding: 40px;
-            position: relative;
-            z-index: 10;
-            border-radius: var(--border-radius);
-            margin-bottom: 40px;
-            /* Animated Border / Scanner Line */
-            border: 2px solid transparent; 
-            background-clip: padding-box;
-            background-origin: padding-box;
-            animation: pulse-glow 4s ease-in-out infinite alternate;
+        #hero p {
+            font-size: 1.4rem; 
+            max-width: 650px;
+            margin: 20px auto 40px auto;
         }
         
-        @keyframes pulse-glow {
-            0% { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-            100% { border-color: rgba(0, 198, 255, 0.4); box-shadow: 0 0 20px rgba(0, 198, 255, 0.5); }
-        }
-
-        #hero h1 { max-width: 1000px; margin: 20px auto; }
-        #hero p { max-width: 750px; margin: 0 auto 40px auto; font-size: 1.5rem; font-weight: 300; }
-        
-        /* HERO NAV LINKS STYLING FIX */
+        /* Hero Nav Styling */
         .hero-nav {
             display: flex;
+            justify-content: center;
             gap: 32px;
             margin-bottom: 50px;
         }
         
         .hero-nav a {
             text-decoration: none;
-            color: var(--color-secondary); /* Clear link color */
-            font-weight: 600;
-            font-size: 1rem;
-            position: relative;
-            padding: 8px 0;
-            transition: color 0.2s ease, text-shadow 0.2s ease;
+            color: var(--color-text-muted); 
+            font-weight: 500;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
         
         .hero-nav a:hover {
-            color: var(--color-primary);
-            text-shadow: 0 0 8px var(--color-primary);
+            color: var(--color-secondary);
+            transform: translateY(-2px);
+            text-shadow: 0 0 5px var(--color-secondary);
         }
 
-
-        /* 4. Button Styles & Interactivity */
+        /* 4. Button Styles & Interactivity (Refined) */
         .btn {
             display: inline-block;
-            padding: 18px 40px;
-            font-size: 1.1rem;
+            padding: 16px 36px;
+            font-size: 1.05rem;
             font-weight: 700;
-            text-decoration: none;
             border-radius: var(--border-radius);
             cursor: pointer;
-            transition: all 0.2s var(--snap-ease);
+            transition: all 0.25s var(--snap-ease);
             text-align: center;
             border: none;
             position: relative;
-            overflow: hidden;
             z-index: 10;
+            text-decoration: none; /* Make buttons functional links/triggers */
         }
 
         .btn-primary {
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
             color: #fff;
-            box-shadow: 0px 8px 30px rgba(99, 102, 241, 0.5);
+            box-shadow: 0px 8px 25px rgba(99, 102, 241, 0.4);
         }
         
         .btn-primary:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0px 15px 40px rgba(0, 198, 255, 0.6);
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0px 12px 30px rgba(0, 198, 255, 0.5);
             background: linear-gradient(90deg, var(--color-secondary), var(--color-tertiary));
         }
         
-        .btn:active {
-            transform: scale(0.98) translateY(1px);
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+        .btn-outline {
+            background: var(--glass-bg);
+            border: 2px solid var(--color-primary);
+            color: var(--color-text);
+            box-shadow: none;
         }
-
-        /* 5. Glassmorphism Card Style (High Contrast + GLOW) */
+        
+        .btn-outline:hover {
+            background: var(--glass-bg-hover);
+            transform: scale(1.04);
+            box-shadow: 0 0 20px var(--color-primary);
+        }
+        
+        /* 5. Glassmorphism Card Style (Deeper & Cleaner) */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(var(--glass-blur));
@@ -284,20 +276,23 @@
             border-radius: var(--border-radius);
             box-shadow: var(--glass-shadow);
             padding: 32px;
-            transform-style: preserve-3d;
-            transition: transform 0.3s var(--snap-ease), box-shadow 0.3s ease, background 0.3s ease;
+            transition: transform 0.3s var(--snap-ease), box-shadow 0.3s ease;
             position: relative;
             z-index: 5;
         }
         
-        /* CARD GLOW EFFECT */
         .glass-card:hover {
-            background: var(--glass-bg-hover);
-            transform: perspective(1000px) scale(1.02);
-            box-shadow: 0px 0px 30px rgba(99, 102, 241, 0.5), var(--glass-shadow);
+            transform: scale(1.01);
+            box-shadow: 0px 0px 40px rgba(99, 102, 241, 0.4), var(--glass-shadow);
+        }
+
+        .use-case-grid, .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
-        /* 6. MODAL & FORM FIX */
+        /* 6. MODAL & Form Fix (Simplified & Working) */
         .modal-overlay {
             display: none; 
             position: fixed;
@@ -305,41 +300,44 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000; /* Highest Z-index */
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            animation: fadeInModal 0.3s ease forwards;
+            transition: opacity 0.3s ease;
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.98); /* Near opaque white */
-            color: var(--color-text-dark);
-            padding: 32px;
+            background: #181c2f; /* Darker background for contrast */
+            color: var(--color-text);
+            padding: 40px;
             border-radius: var(--border-radius);
             width: 90%;
-            max-width: 600px;
-            box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.6);
+            max-width: 500px;
+            box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            border: 2px solid var(--color-secondary);
         }
-        
-        /* Modal button to fix iframe issue */
-        .modal-form-link {
-            display: block;
-            width: 100%;
-            text-decoration: none;
-            padding: 16px;
-            font-size: 1.2rem;
-            text-align: center;
-            margin-top: 20px;
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
         }
+        .close-button:hover { color: var(--color-primary); }
         
-        /* 7. SCROLL ANIMATIONS (Snappy) */
+        /* 7. SCROLL ANIMATIONS (Fixed Intersection Observer) */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: opacity 0.6s var(--snap-ease), transform 0.6s var(--snap-ease);
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.7s var(--snap-ease), transform 0.7s var(--snap-ease);
         }
         
         .animate-on-scroll.is-visible {
@@ -347,15 +345,14 @@
             transform: translateY(0) scale(1);
         }
         
-        /* Initial WOW Hero animation */
+        /* Hero Load-in */
         #hero .animate-on-scroll {
             opacity: 0;
-            animation: bounce-in 1s var(--snap-ease) forwards;
+            animation: fadeInScale 1s var(--snap-ease) forwards;
         }
 
-        @keyframes bounce-in {
-            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
-            60% { opacity: 1; transform: translateY(-5px) scale(1.02); }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
@@ -363,41 +360,20 @@
         #hero .animate-on-scroll:nth-child(2) { animation-delay: 0.2s; } 
         #hero .animate-on-scroll:nth-child(3) { animation-delay: 0.3s; } 
         #hero .animate-on-scroll:nth-child(4) { animation-delay: 0.4s; } 
-        #hero .animate-on-scroll:nth-child(5) { animation-delay: 0.5s; } 
-        
-        /* Source chips fix */
-        .source-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
 
-        .source-chip {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* 8. Responsive Design */
         @media (max-width: 1024px) {
             h1 { font-size: 3.5rem; letter-spacing: -2px; }
             h2 { font-size: 2.8rem; letter-spacing: -1.5px; }
-            .trust-wrapper, .artifacts-wrapper { grid-template-columns: 1fr; }
             #hero { padding: 120px 0 80px 0; min-height: 80vh; }
-            .hero-orb { width: 400px; height: 400px; }
-            .hero-content { padding: 20px; }
+            .data-mesh-bg { width: 500px; height: 500px; }
         }
         
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; line-height: 1.2; }
             h2 { font-size: 2rem; }
-            .hero-nav { gap: 15px; }
+            .hero-nav { gap: 15px; flex-wrap: wrap; }
+            .btn { width: 100%; }
         }
-
     </style>
 </head>
 <body>
@@ -405,29 +381,30 @@
     <main>
 
         <section id="hero" class="container">
-            <div class="hero-orb"></div>
+             <div class="data-mesh-bg"></div>
             
-            <a href="#" class="logo animate-on-scroll">Harten <span>by Cadium</span></a>
-            
-            <div class="hero-content animate-on-scroll" style="animation-delay: 0.1s;">
-                <h1 class="chroma-text">
+            <div class="hero-content">
+                <a href="#" class="logo animate-on-scroll">Harten by Cadium</a>
+                
+                <h1 class="chroma-text animate-on-scroll" style="animation-delay: 0.1s;">
                     Finally, AI You Can Trust <br>with Critical Work.
                 </h1>
-                <p>
+                
+                <p class="animate-on-scroll" style="animation-delay: 0.2s;">
                     Harten is the advanced intelligence platform built for unbreakable accuracy and verified outcomes. We deliver the deliverables, not just chat responses.
                 </p>
-            </div>
-            
-            <nav class="hero-nav animate-on-scroll" style="animation-delay: 0.4s;">
-                <a href="#use-cases">Use Cases</a>
-                <a href="#features">The Engine</a>
-                <a href="#trust">Accuracy</a>
-                <a href="#artifacts">Smart Outputs</a>
-            </nav>
+                
+                <nav class="hero-nav animate-on-scroll" style="animation-delay: 0.3s;">
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#features">The Engine</a>
+                    <a href="#trust">Accuracy</a>
+                    <a href="#artifacts">Smart Outputs</a>
+                </nav>
 
-            <button class="btn btn-primary btn-lg animate-on-scroll" id="open-modal-btn" style="animation-delay: 0.5s;">
-                Join the Early Access Program
-            </button>
+                <button class="btn btn-primary animate-on-scroll" id="open-modal-btn" style="animation-delay: 0.4s;">
+                    Join the Early Access Program
+                </button>
+            </div>
         </section>
 
         <section id="use-cases">
@@ -442,26 +419,17 @@
                 <div class="use-case-grid">
                     
                     <div class="use-case-card glass-card animate-on-scroll">
-                        <h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 10.75h-.25a.25.25 0 00-.25.25v.5c0 .138.112.25.25.25h.25a.25.25 0 00.25-.25v-.5a.25.25 0 00-.25-.25z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5a3.375 3.375 0 00-3.375 3.375v2.625m9 0v2.625a3.375 3.375 0 01-3.375 3.375h-1.5a3.375 3.375 0 01-3.375-3.375v-2.625m6.75 0H9.75M9.75 14.25v-2.625a3.375 3.375 0 00-3.375-3.375H4.875a3.375 3.375 0 00-3.375 3.375v2.625m0 0v2.625a3.375 3.375 0 003.375 3.375h1.5a3.375 3.375 0 003.375-3.375v-2.625" /></svg>
-                            Researchers & Academics
-                        </h3>
+                        <h3>Researchers & Academics</h3>
                         <p>Conduct thorough research with automated cross-referencing and fact verification. Generate citations and structured academic reports.</p>
                     </div>
                     
                     <div class="use-case-card glass-card animate-on-scroll" style="transition-delay: 0.1s;">
-                        <h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.07a2.25 2.25 0 01-2.25 2.25H5.625a2.25 2.25 0 01-2.25-2.25v-4.07m16.5 0v-3.875a2.25 2.25 0 00-2.25-2.25h-12a2.25 2.25 0 00-2.25 2.25v3.875m16.5 0A2.25 2.25 0 0118 16.5h-1.5a2.25 2.25 0 01-2.25-2.25V13.5A2.25 2.25 0 0116.5 11.25h1.5a2.25 2.25 0 012.25 2.25v.75" /></svg>
-                            Business Professionals
-                        </h3>
+                        <h3>Business Professionals</h3>
                         <p>Make better, safer decisions. Generate presentations, financial summaries, and technical documentation with full source transparency.</p>
                     </div>
 
                     <div class="use-case-card glass-card animate-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.003A9.337 9.337 0 0012 21.75a9.337 9.337 0 00-3.75-2.625M9 19.128v-.003c0-1.113.285-2.16.786-3.07M9 19.128v.003A9.337 9.337 0 0012 21.75a9.337 9.337 0 003.75-2.625m-7.5-6.493A4.125 4.125 0 0012 5.25a4.125 4.125 0 007.5 0m-7.5 0a4.125 4.125 0 01-7.5 0m7.5 0c0 1.113-.285 2.16-.786 3.07M12 5.25c0 1.113.285 2.16.786 3.07m0 0A4.125 4.125 0 0112 12.75a4.125 4.125 0 01-7.5 0m7.5 0c-1.113 0-2.16-.285-3.07-.786" /></svg>
-                            Developers & Engineers
-                        </h3>
+                        <h3>Developers & Engineers</h3>
                         <p>Generate clean, working code with explanations tied to documentation. Use the multi-modal toolset to debug and analyze diagrams or flowcharts.</p>
                     </div>
 
@@ -480,26 +448,17 @@
 
                 <div class="features-grid">
                     
-                    <div class="feature-card glass-card interactive-card animate-on-scroll">
-                        <div class="feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12l2.846.813a4.5 4.5 0 013.09 3.09L24 18.75l-.813-2.846a4.5 4.5 0 01-3.09-3.09L18.25 12zM18.25 12L15.404 11.187a4.5 4.5 0 01-3.09-3.09L9 5.25l2.846.813a4.5 4.5 0 013.09 3.09L18.25 12z" /></svg>
-                        </div>
+                    <div class="feature-card glass-card animate-on-scroll">
                         <h3>Smarter: Smart Routing</h3>
                         <p>Automatically routes your query to the best model (GPT-4, Claude 3, Gemini) and synthesizes the outputs for a singular, comprehensive answer.</p>
                     </div>
                     
-                    <div class="feature-card glass-card interactive-card animate-on-scroll" style="transition-delay: 0.1s;">
-                        <div class="feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L12 15.25l5.571-3m0 0L21.75 12l-4.179-2.25m0 4.5l-5.571 3-5.571-3" /></svg>
-                        </div>
+                    <div class="feature-card glass-card animate-on-scroll" style="transition-delay: 0.1s;">
                         <h3>Flexible: Multi-Modal Input</h3>
                         <p>Work with text, images, videos, documents, and voice seamlessly. Upload complex files and discuss them instantly and in-depth.</p>
                     </div>
 
-                    <div class="feature-card glass-card interactive-card animate-on-scroll" style="transition-delay: 0.2s;">
-                        <div class="feature-icon">
-                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
+                    <div class="feature-card glass-card animate-on-scroll" style="transition-delay: 0.2s;">
                         <h3>Better Memory: Extended Context</h3>
                         <p>Remembers your goals, preferences, and context across all conversations and project files. It learns how you work over time.</p>
                     </div>
@@ -515,25 +474,25 @@
                             Achieve Unbreakable Accuracy.
                         </h2>
                         <p>Better Accuracy: When stakes are high, you need the work—and the confidence—to stand up to scrutiny. Our Transparency Layer gives you the proof you need.</p>
-                        <ul class="trust-list">
-                            <li>Every claim is checked against verified, current data.</li>
-                            <li>See trust scores and confidence indicators on every output.</li>
-                            <li>View the full reasoning chain and all source citations.</li>
+                        <ul class="trust-list" style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 12px;">✓ Every claim is checked against verified, current data.</li>
+                            <li style="margin-bottom: 12px;">✓ See trust scores and confidence indicators on every output.</li>
+                            <li style="margin-bottom: 12px;">✓ View the full reasoning chain and all source citations.</li>
                         </ul>
-                         <button class="btn btn-outline modal-btn" id="open-modal-btn-2" style="margin-top: 16px;">See the Transparency Layer</button>
+                         <button class="btn btn-outline modal-btn" style="margin-top: 24px;">See the Transparency Layer</button>
                     </div>
                     
                     <div class="trust-visual glass-card animate-on-scroll" style="transition-delay: 0.2s;">
                         <h4>Harten Transparency Layer (Live View)</h4>
-                        <div class="score">95.4% <span>Verified Confidence Score</span></div>
-                        <p style="font-size: 0.9rem; margin-top: 10px; color: #D1D5DB;">
+                        <div class="score" style="font-size: 2rem; color: var(--color-secondary); font-weight: 700;">95.4% <span>Verified Confidence Score</span></div>
+                        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--color-text-muted);">
                             Trust Indicated: High confidence due to cross-validation across three proprietary and two external knowledge bases.
                         </p>
                         <h4>Source Citations:</h4>
-                        <div class="source-chips">
-                            <span class="source-chip">Academic.pdf</span>
-                            <span class="source-chip">Source.com</span>
-                             <span class="source-chip">Internal.db</span>
+                        <div class="source-chips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.85rem;">Academic.pdf</span>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.85rem;">Source.com</span>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 10px; border-radius: 5px; font-size: 0.85rem;">Internal.db</span>
                         </div>
                     </div>
                 </div>
@@ -542,25 +501,30 @@
 
         <section id="artifacts">
             <div class="container">
-                <div class="artifacts-wrapper">
-                    <div class="artifacts-content animate-on-scroll">
+                <div class="artifacts-wrapper" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;">
+                    <div class="artifacts-card glass-card animate-on-scroll" style="min-height: 400px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(0, 198, 255, 0.1)); border: 2px solid var(--color-primary); position: relative;">
+                        <div style="text-align: center; padding-top: 50px;">
+                            <h3 style="color: var(--color-secondary);">Dynamic Output Preview</h3>
+                            <div style="width: 80%; height: 200px; margin: 20px auto; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px dashed var(--color-secondary);">
+                                <p style="font-size: 0.9rem; padding-top: 70px;">[Visual artifact rendering here]</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="artifacts-content animate-on-scroll" style="transition-delay: 0.1s;">
                         <h2 style="text-align: left; margin: 0 0 20px 0;">
                             Smart Outputs: Get Deliverables, Not Just Chat.
                         </h2>
                         <p>
                             The Smart Outputs feature is your competitive edge. Stop wasting time transferring data between tools. Harten creates the finished artifact you actually need right inside the platform.
                         </p>
-                        <ul style="margin-top: 30px;">
-                            <li>Creates presentations & slides (PPTX)</li>
-                            <li>Generates visual organizers & diagrams</li>
-                            <li>Builds working code and applications</li>
-                            <li>Outputs in the format you actually need</li>
+                        <ul style="margin-top: 30px; list-style: none; padding: 0;">
+                            <li style="margin-bottom: 12px;">• Creates presentations & slides (PPTX)</li>
+                            <li style="margin-bottom: 12px;">• Generates visual organizers & diagrams</li>
+                            <li style="margin-bottom: 12px;">• Builds working code and applications</li>
+                            <li style="margin-bottom: 12px;">• Outputs in the format you actually need</li>
                         </ul>
                          <button class="btn btn-primary modal-btn" style="margin-top: 24px;">See Outputs In Action</button>
-                    </div>
-                    
-                    <div class="artifacts-card animate-on-scroll" style="transition-delay: 0.2s;">
-                        <div class="artifacts-preview"></div>
                     </div>
                 </div>
             </div>
@@ -568,7 +532,7 @@
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer" style="padding: 60px 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1);">
         <div class="container">
             <p>© 2025 Cadium, Inc. All rights reserved. Building Harten.</p>
         </div>
@@ -580,93 +544,56 @@
             
             <h2>Join the Exclusive Waitlist</h2>
             <p>
-                There was an issue loading the embedded form. Please use the button below to join the Harten Early Access Program in a new tab.
+                Secure your spot for the Harten Early Access Program. This link will take you directly to the signup form.
             </p>
             
             <a 
                 href="https://docs.google.com/forms/d/e/1FAIpQLScduQVjphHQijkeP8oUWF9fGr5lu4HCt9jh3Yts1h5dO9tKJA/viewform" 
                 target="_blank" 
-                class="btn btn-primary modal-form-link"
+                class="btn btn-primary"
+                style="width: 100%; margin-top: 30px; padding: 20px 0; font-size: 1.2rem;"
+                onclick="closeModal()"
             >
-                Continue to Waitlist Form
+                Go to Signup Form
             </a>
         </div>
     </div>
 
 
     <script>
+        // MODAL FUNCTIONS
+        const modal = document.getElementById('form-modal');
+        const openModalBtns = document.querySelectorAll('.modal-btn, #open-modal-btn');
+
+        const openModal = () => {
+            modal.style.display = 'flex';
+            modal.style.opacity = 1;
+            document.body.style.overflow = 'hidden'; // FIX: Prevents scrolling when modal is open
+        };
+
+        const closeModal = () => {
+            modal.style.opacity = 0;
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // FIX: Restores scrolling
+            }, 300); 
+        };
+
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. "Pop-Up" on Scroll Animation ---
-            // Excluding the Hero section from this scroll listener, as it uses the load-in animation
-            const animatedElements = document.querySelectorAll('.animate-on-scroll:not(#hero .animate-on-scroll)');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    // Increased threshold to trigger animations earlier, reducing "gray box" effect
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
-                    }
-                });
-            }, {
-                threshold: 0.2 
-            });
-
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-
-            // --- 2. "3D Tilt" Mouse-Move Animation ---
-            const interactiveCards = document.querySelectorAll('.interactive-card, .artifacts-card');
-            const maxTilt = 3; 
-
-            interactiveCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    if (window.innerWidth < 1024) return; 
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const width = card.offsetWidth;
-                    const height = card.offsetHeight;
-                    
-                    const rotateY = (x / width - 0.5) * 2 * maxTilt;
-                    const rotateX = (y / height - 0.5) * -2 * maxTilt;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    if (window.innerWidth < 1024) return;
-                    // Ensure the card returns to its initial non-tilted, non-scaled state
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-                });
-            });
-            
-            // --- 3. Google Form Modal Logic ---
-            const modal = document.getElementById('form-modal');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            
-            const openModalBtns = document.querySelectorAll('.modal-btn, #open-modal-btn, #open-modal-btn-2');
-
-            const openModal = () => {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; 
-            };
-
-            const closeModal = () => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; 
-            };
-
+            // --- 1. MODAL LISTENERS (Buttons work) ---
             openModalBtns.forEach(btn => {
-                btn.addEventListener('click', openModal);
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal();
+                });
             });
 
-            closeModalBtn.addEventListener('click', closeModal);
+            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
 
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    closeModal();
+                    closeModal(); // FIX: Overlay click closes modal
                 }
             });
             
@@ -676,6 +603,24 @@
                 }
             });
 
+
+            // --- 2. "Pop-Up" on Scroll Animation (Fixed scrolling popup) ---
+            const animatedElements = document.querySelectorAll('.animate-on-scroll:not(#hero .animate-on-scroll)');
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible (efficient)
+                    }
+                });
+            }, {
+                threshold: 0.15 
+            });
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
         });
     </SCript>
 
