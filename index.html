@@ -70,7 +70,7 @@ body{
 }
 
 /* -------------------------
-   NEW: "Frosted Glass" Header
+   "Frosted Glass" Header
    ------------------------- */
 .header{
   position:fixed;left:0; top:0; width: 100%;
@@ -90,7 +90,7 @@ body{
 .header-sub{font-size:11px;color:var(--text-muted);margin-top:4px}
 
 /* -------------------------
-   NEW: "Spotlight" Card Effect
+   "Spotlight" Card Effect
    ------------------------- */
 .spotlight-card {
   position: relative;
@@ -142,7 +142,7 @@ body{
 .preview .artifact{width:100%;height:200px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text-muted);border:1px solid var(--glass-border); transition: all .3s var(--ease);}
 .preview .artifact.small{height:120px}
 .trust-meter{width:100%;height:44px;background:rgba(0,0,0,0.03);border-radius:999px;overflow:hidden;border:1px solid var(--glass-border)}
-.trust-fill{height:100%;width:0%;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-weight:800;color:#06101a; background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width 1.0s var(--ease);} /* Faster, synced transition */
+.trust-fill{height:100%;width:0%;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-weight:800;color:#06101a; background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width 1.0s var(--ease);}
 
 /* features section */
 .section{padding:90px 18px;position:relative;z-index:2}
@@ -165,9 +165,7 @@ body{
 .step{background:var(--panel);padding:18px;border-radius:12px;min-width:220px;border:1px solid var(--glass-border);text-align:center; box-shadow: var(--shadow-md); backdrop-filter: blur(10px) saturate(1.1);}
 .step .num{width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:12px; color: #06101a;}
 
-/* -------------------------
-   NEW: Demo Log UI
-   ------------------------- */
+/* Demo Log UI */
 #demoResultWrapper {
   margin-top:12px;
   background:var(--glass);
@@ -188,7 +186,7 @@ body{
 .log-prefix { font-weight: 700; }
 .log-query .log-prefix { color: var(--accent2); }
 .log-process .log-prefix { color: var(--text-muted); }
-.log-success .log-prefix { color: #00b894; } /* Green */
+.log-success .log-prefix { color: #00b894; }
 .log-summary {
   padding: 16px;
   border-top: 1px solid var(--glass-border);
@@ -225,7 +223,7 @@ body{
   .trust-fill{font-size:12px}
   .demo-grid { grid-template-columns: 1fr; } 
   .header { padding: 12px 18px; }
-  .header-sub { display: none; } /* Hide sub on mobile header */
+  .header-sub { display: none; }
 }
 
 /* reveal helpers */
@@ -265,7 +263,7 @@ body{
         <div class="hero-title reveal-child animated-gradient-text">AI you can actually rely on</div>
         <div class="hero-sub reveal-child">Harten routes to the best models, verifies results, and packages them as reusable artifacts. Built for work that needs to be correct — fast.</div>
 
-                <div class="chips reveal-child" aria-hidden="true" id="heroChipContainer">
+        <div class="chips reveal-child" aria-hidden="true" id="heroChipContainer">
           <div class="chip" data-preview-text="Ensemble &rarr; <strong>Best-of-breed</strong>" data-preview-score="89">Supercharged answers</div>
           <div class="chip" data-preview-text="Audit trail &rarr; <strong>Verified</strong>" data-preview-score="94">Audit trail & confidence</div>
           <div class="chip" data-preview-text="Artifact &rarr; <strong>Diagram</strong>" data-preview-score="91">Flexible outputs: docs, slides, diagrams</div>
@@ -311,7 +309,7 @@ body{
         </div>
       </div>
 
-            <div id="demoResultWrapper" class="spotlight-card">
+      <div id="demoResultWrapper" class="spotlight-card">
         <div id="demoLog">Type a question (try "what are the risks?" or "what is Harten?") and click Analyze.</div>
         <div id="demoFinalSummary" class="log-summary" style="display:none;"></div>
       </div>
@@ -430,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('year').textContent = new Date().getFullYear();
 
   /* -------------------------
-     NEW: "Frosted Glass" Header on Scroll
+     "Frosted Glass" Header on Scroll
      ------------------------- */
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
@@ -495,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTiltEffects();
   
   /* -------------------------
-     NEW: "Spotlight" Card Effect
+     "Spotlight" Card Effect
      ------------------------- */
   function initSpotlightCards() {
     const cards = document.querySelectorAll('.spotlight-card');
@@ -574,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   window.addEventListener('scroll', doReveal);
-  doReveal();
+  doReveal(); // Run on load to show initial content
 
   /* rotating tagline */
   const rotator = document.getElementById('rotator');
@@ -600,19 +598,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -------------------------
-     NEW: "Live" Hero Card
+     "Live" Hero Card
      ------------------------- */
   const heroChipContainer = document.getElementById('heroChipContainer');
   const artifactPreview = document.getElementById('artifactPreview');
   const heroTrust = document.getElementById('heroTrust');
   const defaultPreviewText = artifactPreview.innerHTML;
-  const defaultPreviewScore = 92; // Default score
+  const defaultPreviewScore = 92;
 
   // Set initial hero trust meter state
-  setTimeout(() => {
-    heroTrust.style.width = defaultPreviewScore + '%';
-    animateValue(heroTrust, 0, defaultPreviewScore, 1000);
-  }, 1200);
+  // This needs to wait for the .reveal.show animation to finish
+  const heroCardObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      setTimeout(() => {
+        heroTrust.style.width = defaultPreviewScore + '%';
+        animateValue(heroTrust, 0, defaultPreviewScore, 1000);
+      }, 500); // Delay to sync with .reveal-child
+      heroCardObserver.unobserve(entries[0].target);
+    }
+  }, { threshold: 0.5 });
+  heroCardObserver.observe(document.getElementById('heroCard'));
+
 
   heroChipContainer.querySelectorAll('.chip').forEach(chip => {
     chip.addEventListener('mouseenter', () => {
@@ -697,7 +703,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resetDemoUI();
     const addLog = (msg, type = 'log-process') => { 
       demoLog.innerHTML += `<div class="demo-log-line ${type}"><span class="log-prefix">[${type.split('-')[1].toUpperCase()}]</span> ${msg}</div>`; 
-      demoLog.scrollTop = demoLog.scrollHeight; // Auto-scroll
+      demoLog.scrollTop = demoLog.scrollHeight;
     };
 
     addLog(`Query received: "${demoInput.value}"`, 'log-query');
@@ -708,20 +714,19 @@ document.addEventListener('DOMContentLoaded', () => {
     await sleep(600);
     demoTrustFill.style.width = '70%';
     animateValue(demoTrustFill, 30, 70, 500);
-    animateValue(break2, 0, response.b2, 500); // Source verification
+    animateValue(break2, 0, response.b2, 500);
     addLog(`Cross-referencing 3 sources...`);
     await sleep(700);
     demoTrustFill.style.width = '90%';
     animateValue(demoTrustFill, 70, 90, 500);
-    animateValue(break1, 0, response.b1, 500); // Model agreement
+    animateValue(break1, 0, response.b1, 500);
     addLog(`Synthesizing final artifact...`);
     await sleep(400);
     demoTrustFill.style.width = response.score + '%';
     animateValue(demoTrustFill, 90, response.score, 500);
-    animateValue(break3, 0, response.b3, 500); // Clarity
+    animateValue(break3, 0, response.b3, 500);
     addLog(`Analysis complete.`, 'log-success');
     
-    // Show final summary
     demoFinalSummary.innerHTML = response.finalSummary;
     demoFinalSummary.style.display = 'block';
     
@@ -766,7 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!email) return;
 
     const submitBtn = waitlistForm.querySelector('button[type="submit"]');
-  i    const orig = submitBtn.textContent;
+    const orig = submitBtn.textContent;
     submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
 
     try{
@@ -777,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if(res.ok || res.status === 200 || res.status === 201){
-  Click       waitlistForm.style.display = 'none';
+        waitlistForm.style.display = 'none';
         document.querySelector('#waitlistSection .form-note').style.display = 'none';
         waitResult.style.display = 'block';
         runConfetti();
@@ -799,13 +804,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const dpr = window.devicePixelRatio || 1;
     confettiCanvas.width = window.innerWidth * dpr;
     confettiCanvas.height = window.innerHeight * dpr;
-    confettiCanvas.style.width = window.innerWidth + 'px';
+  D  confettiCanvas.style.width = window.innerWidth + 'px';
     confettiCanvas.style.height = window.innerHeight + 'px';
     ctx.scale(dpr,dpr);
 
     const pieces = [];
     const colors = ['#00d9ff','#7b2ff7','#00ffa6','#ffd166','#ff7ab6'];
-  Next   for(let i=0;i<80;i++){
+    for(let i=0;i<80;i++){
       pieces.push({
         x: Math.random()*window.innerWidth,
         y: -Math.random()*200,
@@ -839,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(draw);
       } else {
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-  s   }
+      }
     }
     draw();
   }
@@ -849,7 +854,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ------------------------- */
   window.addEventListener('resize', ()=> {
     confettiCanvas.width = window.innerWidth * (window.devicePixelRatio || 1);
-    confettiCanvas.height = window.innerHeight * (window.devicePixelRatio || 1);
+  Next   confettiCanvas.height = window.innerHeight * (window.devicePixelRatio || 1);
   });
 
 }); // End DOMContentLoaded
