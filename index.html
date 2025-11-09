@@ -23,14 +23,13 @@
             
             --border-radius: 12px;
             
-            /* Glassmorphism Styles - Deeper for pop */
-            --glass-bg: rgba(255, 255, 255, 0.06); /* Even darker */
+            /* Glassmorphism Styles */
+            --glass-bg: rgba(255, 255, 255, 0.06);
             --glass-bg-hover: rgba(255, 255, 255, 0.12);
             --glass-border: 1px solid rgba(255, 255, 255, 0.2);
             --glass-shadow: 0px 8px 30px -5px rgba(0, 0, 0, 0.6);
             --glass-blur: 20px;
             
-            /* Snappy Transition */
             --snap-ease: cubic-bezier(0.25, 1, 0.5, 1);
         }
 
@@ -41,34 +40,44 @@
         body {
             font-family: 'Manrope', sans-serif;
             color: var(--color-text);
-            line-height: 1.6; /* Tighter line height for conciseness */
+            line-height: 1.6;
             background-color: #0c0a18; 
             overflow-x: hidden; 
             position: relative; 
         }
 
-        /* Persistent Animated Background Mesh */
+        /* DYNAMIC STARFIELD/NOISE BACKGROUND */
         body::before {
             content: '';
             position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -10; 
             
-            background: radial-gradient(circle at 60% 80%, var(--color-primary) 0%, transparent 40%),
-                        radial-gradient(circle at 20% 40%, var(--color-secondary) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 20%, var(--color-tertiary) 0%, transparent 40%),
-                        #0c0a18; 
-            background-size: 150% 150%;
-            filter: blur(70px) opacity(0.7);
-            animation: mesh-move 35s ease infinite alternate;
+            /* Combined noise, mesh, and dynamic star effect */
+            background: 
+                /* Subtle starfield/noise effect */
+                radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1.5px),
+                radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.05) 1px, transparent 1.5px),
+                radial-gradient(circle at 40% 90%, rgba(255, 255, 255, 0.1) 1px, transparent 1.5px),
+                /* Large color orbs */
+                radial-gradient(circle at 60% 80%, var(--color-primary) 0%, transparent 40%),
+                radial-gradient(circle at 20% 40%, var(--color-secondary) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, var(--color-tertiary) 0%, transparent 40%),
+                #0c0a18; 
+            
+            background-size: 200px 200px, 400px 400px, 600px 600px, 150% 150%, 150% 150%, 150% 150%, auto;
+            filter: blur(0px) opacity(0.9);
+            
+            /* Animate all background layers simultaneously */
+            animation: starfield-move 40s linear infinite;
         }
         
-        @keyframes mesh-move {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
+        @keyframes starfield-move {
+            0% { background-position: 0% 0%, 50% 50%, 100% 100%, 0% 0%, 0% 0%, 0% 0%; }
+            100% { background-position: 100% 100%, 0% 0%, 50% 50%, 100% 100%, 100% 100%, 100% 100%; }
         }
 
         .container {
@@ -93,8 +102,19 @@
         }
 
         .chroma-text {
-            /* Existing chroma styles */
-            animation: chroma-shine 3s ease infinite alternate; /* Faster shine */
+            display: inline-block;
+            background: linear-gradient(
+                90deg, 
+                var(--color-secondary) 0%, 
+                var(--color-text) 50%,
+                var(--color-primary) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: chroma-shine 3s ease infinite alternate;
+            background-size: 400% 100%;
         }
         
         @keyframes chroma-shine {
@@ -103,29 +123,28 @@
         }
 
         h2 {
-            font-size: 3rem; /* Slightly smaller for conciseness */
+            font-size: 3rem;
             letter-spacing: -1.5px;
+            text-align: center;
+            margin-bottom: 40px;
         }
         
-        p {
-            font-size: 1.1rem; /* Slightly smaller */
-            color: var(--color-text-muted);
-            margin-bottom: 20px;
-        }
-
-        .section-intro {
-            max-width: 700px;
-            font-size: 1.25rem; 
-            font-weight: 300;
+        h2 .highlight {
+            background: linear-gradient(45deg, var(--color-secondary), var(--color-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
         
-        /* 3. Hero Section - Extreme Busy/Elaborate Animations */
+        /* 3. Hero Section */
         #hero {
             position: relative;
-            overflow: hidden; /* Contains the ASCII animation */
+            overflow: hidden; 
+            padding: 160px 0 100px 0;
+            min-height: 90vh; 
         }
         
-        /* ASCII/Matrix Style Overlay (Extreme Busy) */
         .ascii-overlay {
             content: '';
             position: absolute;
@@ -134,7 +153,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.03; /* Very subtle */
+            opacity: 0.03;
             overflow: hidden;
             pointer-events: none;
             background: repeating-linear-gradient(
@@ -151,18 +170,34 @@
             to { background-position-y: 100%; }
         }
 
-        /* Animated Data Mesh (Foreground) */
-        .data-mesh-bg {
-            z-index: 1; 
-            opacity: 0.2; /* Dims for better contrast */
-        }
-
-        /* 4. Glass Cards with Internal Elements (Elaborate) */
-        .glass-card {
+        .hero-content {
             position: relative;
-            overflow: hidden;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
         
+        /* 4. Glass Cards with Internal Elements */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: var(--glass-border);
+            border-radius: var(--border-radius);
+            box-shadow: var(--glass-shadow);
+            padding: 32px;
+            transition: transform 0.3s var(--snap-ease), box-shadow 0.3s ease;
+            position: relative;
+            z-index: 5;
+            overflow: hidden; /* Necessary for particles */
+        }
+        
+        .glass-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0px 0px 40px rgba(99, 102, 241, 0.4), var(--glass-shadow);
+        }
+
         /* Floating Particles inside cards */
         .glass-card::after {
             content: '';
@@ -183,30 +218,75 @@
             100% { transform: translate(-100px, -200px); }
         }
 
-        /* 5. Button Styling & Elaborate Animation */
-        .btn-primary {
-            /* Existing styles */
-            animation: breathe-glow 3s ease infinite alternate; /* New: Always breathing */
-        }
-
-        .btn-primary:hover {
-            /* Existing hover styles */
-            animation: none; /* Turn off subtle breath on intense hover */
+        .use-case-grid, .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
+        /* 5. Button & Animation */
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.25s var(--snap-ease);
+            text-align: center;
+            border: none;
+            position: relative;
+            z-index: 10;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            color: #fff;
+            animation: breathe-glow 3s ease infinite alternate;
+        }
+
         @keyframes breathe-glow {
             from { box-shadow: 0px 8px 25px rgba(99, 102, 241, 0.4); }
             to { box-shadow: 0px 10px 30px rgba(0, 198, 255, 0.6); }
         }
+        
+        /* 6. MODAL & Form (Popup Fix) */
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease; /* Ensure it fades in/out cleanly */
+        }
+        
+        .modal-overlay.is-visible {
+            opacity: 1;
+        }
 
-        /* 6. Embedded Modal Form (Fix) */
         .modal-content {
             background: #181c2f;
+            color: var(--color-text);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            border: 2px solid var(--color-secondary);
         }
         
         .embedded-form-wrapper {
             width: 100%;
-            height: 450px; /* Defined height for the form */
+            height: 450px; 
             margin-top: 20px;
             border-radius: 8px;
             overflow: hidden;
@@ -219,13 +299,32 @@
             border: none;
         }
         
-        /* 7. SCROLL ANIMATIONS (Snappier/Elaborate) */
+        /* 7. SCROLL ANIMATIONS (Fixed Intersection Observer) */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(20px) scale(0.99); /* Less aggressive scale */
-            transition: opacity 0.5s var(--snap-ease), transform 0.5s var(--snap-ease); /* Faster transition */
+            transform: translateY(20px) scale(0.99);
+            transition: opacity 0.5s var(--snap-ease), transform 0.5s var(--snap-ease);
         }
         
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Responsive styles remain here... */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3.5rem; letter-spacing: -2px; }
+            h2 { font-size: 2.8rem; letter-spacing: -1.5px; }
+            #hero { padding: 120px 0 80px 0; min-height: 80vh; }
+            .trust-wrapper, .artifacts-wrapper { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; line-height: 1.2; }
+            h2 { font-size: 2rem; }
+            .btn { width: 100%; }
+        }
+
     </style>
 </head>
 <body>
@@ -233,7 +332,7 @@
     <main>
 
         <section id="hero" class="container">
-             <div class="ascii-overlay"></div> <div class="data-mesh-bg"></div>
+             <div class="ascii-overlay"></div>
             
             <div class="hero-content">
                 <a href="#" class="logo animate-on-scroll">Harten by Cadium</a>
@@ -418,12 +517,13 @@
 
         const openModal = () => {
             modal.style.display = 'flex';
-            modal.style.opacity = 1;
+            // Use class to trigger the opacity transition for smooth opening/closing
+            setTimeout(() => { modal.classList.add('is-visible'); }, 10); 
             document.body.style.overflow = 'hidden'; 
         };
 
         const closeModal = () => {
-            modal.style.opacity = 0;
+            modal.classList.remove('is-visible');
             setTimeout(() => {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto'; 
@@ -432,7 +532,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. MODAL LISTENERS ---
+            // --- 1. MODAL LISTENERS (Popup Fixed) ---
             openModalBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
