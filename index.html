@@ -29,9 +29,12 @@
             /* Glassmorphism Styles - Increased contrast for readability */
             --glass-bg: rgba(255, 255, 255, 0.15); 
             --glass-bg-hover: rgba(255, 255, 255, 0.2);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.3); /* Stronger border */
-            --glass-shadow: 0px 10px 40px -5px rgba(0, 0, 0, 0.4); /* Stronger shadow */
-            --glass-blur: 25px; /* More blur */
+            --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+            --glass-shadow: 0px 10px 40px -5px rgba(0, 0, 0, 0.4);
+            --glass-blur: 25px;
+            
+            /* Snappy Transition */
+            --snap-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         * {
@@ -51,13 +54,12 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             
-            /* Fallback and Base Color */
             background-color: #0c0a18; 
             overflow-x: hidden; 
-            position: relative; /* Needed for the busy overlay */
+            position: relative; 
         }
         
-        /* THE ANIMATED, BUSY BACKGROUND MESH */
+        /* THE ANIMATED BACKGROUND MESH */
         body::before {
             content: '';
             position: fixed;
@@ -70,7 +72,7 @@
             background: radial-gradient(circle at 60% 80%, var(--color-primary) 0%, transparent 40%),
                         radial-gradient(circle at 20% 40%, var(--color-secondary) 0%, transparent 40%),
                         radial-gradient(circle at 80% 20%, var(--color-tertiary) 0%, transparent 40%),
-                        #0c0a18; /* Dark base */
+                        #0c0a18; 
             background-size: 150% 150%;
             filter: blur(80px) opacity(0.8);
             
@@ -91,7 +93,6 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Simple grain texture */
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
             opacity: 0.1;
             pointer-events: none;
@@ -116,7 +117,7 @@
             padding: 120px 0;
         }
         
-        /* 2. Typography & "Chroma Text" */
+        /* 2. Typography & Text Styling */
         h1, h2, h3, h4 {
             font-weight: 700;
             line-height: 1.3;
@@ -125,14 +126,15 @@
         }
 
         h1 {
-            font-size: 4.5rem; /* 72px */
+            font-size: 4.5rem; 
             font-weight: 800;
             letter-spacing: -3px;
             line-height: 1.1;
         }
         
-        /* CHROMA TEXT EFFECT */
+        /* CHROMA TEXT EFFECT & INTERACTIVE GLITCH */
         .chroma-text {
+            display: inline-block;
             background: linear-gradient(
                 90deg, 
                 var(--color-secondary) 0%, 
@@ -144,16 +146,24 @@
             background-clip: text;
             text-fill-color: transparent;
             animation: chroma-shine 5s ease infinite;
-            background-size: 400% 100%; /* Wider movement */
+            background-size: 400% 100%;
+            transition: all 0.2s ease;
         }
         
+        .chroma-text:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 
+                         2px 2px 0 var(--color-primary), 
+                         -2px -2px 0 var(--color-secondary);
+            transform: scale(1.01);
+        }
+
         @keyframes chroma-shine {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
 
         h2 {
-            font-size: 3.5rem; /* 56px */
+            font-size: 3.5rem; 
             letter-spacing: -2px;
             text-align: center;
             margin-bottom: 40px;
@@ -169,12 +179,12 @@
         }
 
         h3 {
-            font-size: 1.75rem; /* 28px */
+            font-size: 1.75rem; 
             margin-bottom: 1rem;
         }
 
         p {
-            font-size: 1.125rem; /* 18px */
+            font-size: 1.125rem; 
             color: var(--color-text-muted);
             margin-bottom: 24px;
         }
@@ -186,20 +196,41 @@
         .section-intro {
             max-width: 750px;
             margin: 0 auto 80px auto;
-            font-size: 1.35rem; /* 22px */
+            font-size: 1.35rem; 
             line-height: 1.6;
             font-weight: 300;
         }
         
-        /* 3. Hero Section (No Header) */
+        /* 3. Hero Section (The WOW Factor) */
         #hero {
-            padding: 150px 0 100px 0;
+            padding: 180px 0 120px 0; /* More top padding */
             text-align: center;
-            min-height: 90vh;
+            min-height: 100vh; /* Full viewport height */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+        
+        /* THE BUSY HERO ORB */
+        .hero-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--color-primary) 0%, var(--color-tertiary) 50%, transparent 70%);
+            opacity: 0.15;
+            filter: blur(100px);
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            animation: orb-move 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes orb-move {
+            0% { transform: translate(-40%, -40%) rotate(0deg); }
+            50% { transform: translate(-60%, -60%) rotate(180deg); }
+            100% { transform: translate(-40%, -40%) rotate(360deg); }
         }
 
         .logo {
@@ -211,49 +242,20 @@
             display: inline-block;
         }
 
-        .logo span {
-            font-weight: 500;
-            color: var(--color-text-muted);
-        }
-
-        #hero h1 {
-            max-width: 1000px;
-            margin: 20px auto;
-        }
-
         #hero p {
             max-width: 750px;
             margin: 0 auto 40px auto;
-            font-size: 1.5rem; /* 24px */
+            font-size: 1.5rem; 
             line-height: 1.7;
             font-weight: 300;
         }
         
-        .hero-nav {
-            display: flex;
-            gap: 32px;
-            margin-bottom: 50px;
-        }
-        
-        .hero-nav a {
-            text-decoration: none;
-            color: var(--color-text-muted);
-            font-weight: 600;
-            font-size: 1rem;
-            position: relative;
-            padding: 8px 0;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-        
         .hero-nav a:hover {
             color: var(--color-primary);
-        }
-        
-        .hero-nav a:hover::after {
-            width: 100%;
+            text-shadow: 0 0 5px var(--color-primary);
         }
 
-        /* 4. Button Styles */
+        /* 4. Button Styles & Interactivity */
         .btn {
             display: inline-block;
             padding: 18px 40px;
@@ -262,7 +264,7 @@
             text-decoration: none;
             border-radius: var(--border-radius);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.2s var(--snap-ease);
             text-align: center;
             border: none;
             position: relative;
@@ -279,11 +281,29 @@
         .btn-primary:hover {
             transform: scale(1.05) translateY(-3px);
             box-shadow: 0px 15px 40px rgba(0, 198, 255, 0.6);
-            /* Gradient shift effect on hover */
             background: linear-gradient(90deg, var(--color-secondary), var(--color-tertiary));
         }
         
-        /* 5. Glassmorphism Card Style (High Contrast) */
+        .btn:active {
+            transform: scale(0.98) translateY(1px);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-outline {
+            background: var(--glass-bg);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--color-text);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--glass-bg-hover);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 20px var(--color-primary);
+            transform: scale(1.05);
+        }
+
+        /* 5. Glassmorphism Card Style (High Contrast + GLOW) */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(var(--glass-blur));
@@ -293,90 +313,45 @@
             box-shadow: var(--glass-shadow);
             padding: 32px;
             transform-style: preserve-3d;
-            transition: transform 0.1s linear, box-shadow 0.3s ease, background 0.3s ease;
+            transition: transform 0.2s var(--snap-ease), box-shadow 0.3s ease, background 0.3s ease;
             position: relative;
             z-index: 5;
         }
         
+        /* CARD GLOW EFFECT */
         .glass-card:hover {
             background: var(--glass-bg-hover);
-            box-shadow: 0px 15px 50px -10px rgba(0, 0, 0, 0.5);
+            transform: perspective(1000px) scale(1.02);
+            box-shadow: 0px 0px 30px rgba(99, 102, 241, 0.5), var(--glass-shadow);
         }
 
-        /* 6. Section Card Grids */
+        /* 6. Use Cases Section */
         
-        /* Problem/Solution Section */
-        .problem-grid {
+        .use-case-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .problem-card h3 {
+        .use-case-card {
+            /* Inherits glass-card */
+            transition-delay: 0s !important; /* Ensure instant animation on scroll */
+        }
+        
+        .use-case-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .problem-card.solution h3 {
-            color: var(--color-trust);
-        }
-        
-        .problem-card ul { list-style: none; padding-left: 0; }
-        
-        .problem-card ul li {
-            font-size: 1.1rem;
-            color: var(--color-text-muted);
-            margin-bottom: 16px;
-            position: relative;
-            padding-left: 35px;
-            font-weight: 400;
-        }
-        
-        .problem-card ul li::before {
-            content: '❌';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 1.1rem;
-        }
-        
-        .problem-card.solution ul li::before {
-            content: '✓';
-            color: var(--color-trust);
-            font-weight: 700;
-        }
-
-        /* Features Section (Core Benefits) */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
+            color: var(--color-secondary);
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%; /* Circle for modern look */
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0, 198, 255, 0.1));
-            border: var(--glass-border);
-            margin-bottom: 24px;
+            gap: 12px;
         }
-
-        .feature-icon svg {
-            width: 36px;
-            height: 36px;
+        
+        .use-case-card h3 svg {
+            width: 30px;
+            height: 30px;
             stroke: var(--color-secondary);
         }
 
-        .feature-card p {
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-        
         /* Trust Section */
         .trust-wrapper {
             display: grid;
@@ -385,39 +360,26 @@
             gap: 80px;
         }
         
-        .trust-visual {
-            padding: 40px;
+        .trust-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 18px;
+            font-weight: 400;
         }
 
-        .trust-visual h4 {
-            font-size: 1.25rem;
-            color: var(--color-secondary);
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        
-        .trust-visual .score {
-            font-size: 3rem;
-            font-weight: 800;
+        .trust-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 2px;
             color: var(--color-trust);
-            line-height: 1;
-        }
-        
-        .trust-visual .score span {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--color-text-muted);
-            display: block;
-            margin-top: 5px;
+            font-size: 1.2rem;
+            font-weight: 800;
         }
 
-        .progress-bar {
-            margin: 24px 0 32px;
-        }
-
-        /* ARTIFACTS SECTION (New) */
+        /* ARTIFACTS SECTION */
         #artifacts {
-            background: rgba(0, 0, 0, 0.2); /* Slightly darker background for focus */
+            background: rgba(0, 0, 0, 0.3); 
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -429,87 +391,38 @@
         }
         
         .artifacts-card {
-            min-height: 400px;
+            min-height: 450px;
             padding: 40px;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(0, 198, 255, 0.1));
             border: 2px solid var(--color-primary);
-            box-shadow: 0 0 50px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.5);
             position: relative;
             overflow: hidden;
+            border-radius: var(--border-radius);
+            animation: pulse-border 5s ease-in-out infinite alternate;
         }
-
-        .artifacts-card::before {
-            content: 'OUTPUT ARTIFACT';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--color-text-muted);
-            padding: 5px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.3);
+        
+        @keyframes pulse-border {
+            from { border-color: var(--color-primary); box-shadow: 0 0 60px rgba(99, 102, 241, 0.5); }
+            to { border-color: var(--color-secondary); box-shadow: 0 0 60px rgba(0, 198, 255, 0.5); }
         }
 
         .artifacts-card ul {
-            list-style: none;
-            padding-left: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr; /* Stack artifacts list */
         }
-
-        .artifacts-card ul li {
-            font-size: 1rem;
-            color: var(--color-text);
-            font-weight: 600;
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 10px;
-        }
-
-        .artifacts-card ul li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--color-secondary);
-            font-size: 1.5rem;
-            line-height: 0.8;
-        }
-
-        .artifacts-preview {
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Cdefs%3E%3ClinearGradient id="g" x1="0" x2="0" y1="0" y2="1"%3E%3Cstop offset="0%25" stop-color="%236366F1"/%3E%3Cstop offset="100%25" stop-color="%23A855F7"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="400" height="300" fill="%231F2937" rx="10"/%3E%3Crect x="20" y="20" width="360" height="20" fill="%234B5563" rx="4"/%3E%3Crect x="20" y="60" width="100" height="10" fill="url(%23g)" rx="2"/%3E%3Crect x="20" y="80" width="360" height="10" fill="%234B5563" rx="2"/%3E%3Crect x="20" y="100" width="300" height="10" fill="%234B5563" rx="2"/%3E%3Crect x="20" y="120" width="360" height="10" fill="%234B5563" rx="2"/%3E%3Crect x="20" y="140" width="250" height="10" fill="%234B5563" rx="2"/%3E%3Crect x="20" y="180" width="150" height="10" fill="url(%23g)" rx="2"/%3E%3Crect x="20" y="200" width="360" height="10" fill="%234B5563" rx="2"/%3E%3Crect x="20" y="220" width="320" height="10" fill="%234B5563" rx="2"/%3E%3C/svg%3E') no-repeat center center;
-            background-size: contain;
-            animation: artifact-zoom 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes artifact-zoom {
-            from { transform: scale(0.98); }
-            to { transform: scale(1.02); }
-        }
-
+        
         /* 7. Footer */
         .footer {
             padding: 60px 0;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
         }
-        
-        .footer p {
-            font-size: 1rem;
-            color: var(--color-text-muted);
-            margin: 0;
-            font-weight: 500;
-        }
 
-        /* 8. SCROLL ANIMATIONS */
+        /* 8. SCROLL ANIMATIONS (Faster, Bouncier) */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translateY(50px) scale(0.95);
+            transition: opacity 0.8s var(--snap-ease), transform 0.8s var(--snap-ease);
         }
         
         .animate-on-scroll.is-visible {
@@ -517,112 +430,43 @@
             transform: translateY(0) scale(1);
         }
         
-        /* Staggered delays for better effect */
-        .features-grid .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
-        .features-grid .animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
-        .features-grid .animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
-        .features-grid .animate-on-scroll:nth-child(5) { transition-delay: 0.4s; }
-        .features-grid .animate-on-scroll:nth-child(6) { transition-delay: 0.5s; }
-
-        /* 9. FORM MODAL (Disguised) */
-        .modal-overlay {
-            display: none; 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            align-items: center;
-            justify-content: center;
+        /* Staggered delays for WOW HERO */
+        #hero .animate-on-scroll {
             opacity: 0;
-            animation: fadeInModal 0.3s ease forwards;
-        }
-        
-        @keyframes fadeInModal {
-            to { opacity: 1; }
+            animation: bounce-in 1s var(--snap-ease) forwards;
         }
 
+        @keyframes bounce-in {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            60% { opacity: 1; transform: translateY(-5px) scale(1.02); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        #hero .animate-on-scroll:nth-child(1) { animation-delay: 0.1s; } /* Logo */
+        #hero .animate-on-scroll:nth-child(2) { animation-delay: 0.2s; } /* H1 */
+        #hero .animate-on-scroll:nth-child(3) { animation-delay: 0.3s; } /* P */
+        #hero .animate-on-scroll:nth-child(4) { animation-delay: 0.4s; } /* Nav */
+        #hero .animate-on-scroll:nth-child(5) { animation-delay: 0.5s; } /* Button */
+
+
+        /* 9. MODAL & RESPONSIVE */
         .modal-content {
-            background: rgba(255, 255, 255, 0.95); /* Light, high-contrast background */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            color: var(--color-text-dark);
-            padding: 32px;
-            position: relative;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.95);
-            animation: popInModal 0.3s ease 0.1s forwards;
-            box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.6);
         }
         
-        @keyframes popInModal {
-            to { transform: scale(1); }
-        }
-        
-        .modal-content h2 {
-            text-align: left;
-            color: var(--color-text-dark);
-            margin-bottom: 8px;
-            font-size: 2.5rem;
-        }
-        
-        .modal-content p {
-             color: #4B5563;
-             margin-bottom: 24px;
-             font-size: 1.1rem;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: #9CA3AF;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        
-        .close-button:hover {
-            color: var(--color-text-dark);
-        }
-        
-        .google-form {
-            width: 100%;
-            height: 520px;
-            border: 1px solid #D1D5DB;
-            border-radius: 8px;
-        }
-
-
-        /* 10. Responsive Design */
         @media (max-width: 1024px) {
             h1 { font-size: 3.5rem; letter-spacing: -2px; }
             h2 { font-size: 2.8rem; letter-spacing: -1.5px; }
-            .problem-grid, .trust-wrapper, .artifacts-wrapper { grid-template-columns: 1fr; }
-            .trust-visual { margin-bottom: 40px; }
-            section { padding: 80px 0; }
-            #hero { padding: 120px 0 80px 0; }
+            .trust-wrapper, .artifacts-wrapper { grid-template-columns: 1fr; }
+            .use-case-grid { gap: 20px; }
+            #hero { padding: 120px 0 80px 0; min-height: 80vh; }
+            .hero-orb { width: 400px; height: 400px; }
         }
         
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
+            h1 { font-size: 2.5rem; line-height: 1.2; }
             h2 { font-size: 2rem; }
-            .section-intro { font-size: 1.1rem; margin-bottom: 50px; }
-            .artifacts-card ul { grid-template-columns: 1fr; }
-            .google-form { height: 400px; }
-            .btn { padding: 14px 28px; font-size: 1rem; }
+            .artifacts-card { min-height: 350px; }
         }
 
     </style>
@@ -632,71 +476,118 @@
     <main>
 
         <section id="hero" class="container">
+            <div class="hero-orb"></div>
+            
             <a href="#" class="logo animate-on-scroll">Harten <span>by Cadium</span></a>
             
-            <h1 class="animate-on-scroll chroma-text" style="transition-delay: 0.1s;">
-                **Finally, AI You Can Trust** <br>with Critical Work.
+            <h1 class="animate-on-scroll chroma-text">
+                Finally, AI You Can Trust <br>with Critical Work.
             </h1>
-            <p class="animate-on-scroll" style="transition-delay: 0.2s;">
-                Harten is the advanced intelligence platform built for **unbreakable accuracy** and **verified outcomes**. We deliver deliverables, not just chat responses.
+            <p class="animate-on-scroll">
+                Harten is the advanced intelligence platform built for unbreakable accuracy and verified outcomes. We deliver the deliverables, not just chat responses.
             </p>
             
-            <nav class="hero-nav animate-on-scroll" style="transition-delay: 0.3s;">
-                <a href="#features">Platform</a>
+            <nav class="hero-nav animate-on-scroll">
+                <a href="#use-cases">Use Cases</a>
+                <a href="#features">The Engine</a>
                 <a href="#trust">Accuracy</a>
-                <a href="#artifacts">Outputs</a>
-                <a href="#problem">Why Harten?</a>
+                <a href="#artifacts">Smart Outputs</a>
             </nav>
 
-            <button class="btn btn-primary btn-lg animate-on-scroll" id="open-modal-btn" style="transition-delay: 0.4s;">
-                **Join the Early Access Program**
+            <button class="btn btn-primary btn-lg animate-on-scroll" id="open-modal-btn">
+                Join the Early Access Program
             </button>
         </section>
 
-        <section id="problem">
+        <section id="use-cases">
             <div class="container">
                 <h2 class="animate-on-scroll">
-                    The Current AI Model is <span class="highlight">Fundamentally Flawed.</span>
+                    Built for Work That Matters. <span class="highlight">It Just Works Better.</span>
                 </h2>
-                <p class="section-intro text-center animate-on-scroll" style="transition-delay: 0.1s;">
-                    You can't build a reliable business or academic future on a system that is designed to guess. We solved the core problems of **hallucination and shallow context.**
+                <p class="section-intro text-center animate-on-scroll">
+                    Harten moves beyond "good enough" for tasks where accuracy and confidence are non-negotiable. It is simply smarter, more flexible, and better for professional and academic success.
                 </p>
 
-                <div class="problem-grid">
-                    <div class="problem-card glass-card animate-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>The Confidence Trap</h3>
-                        <ul>
-                            <li>**Hallucinates**—Sounds certain but is factually incorrect.</li>
-                            <li>You waste time **verifying every output** before using it.</li>
-                            <li>Limited to simple text chat responses.</li>
-                            <li>No way to see the **reasoning or source data.**</li>
-                        </ul>
+                <div class="use-case-grid">
+                    
+                    <div class="use-case-card glass-card animate-on-scroll">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 10.75h-.25a.25.25 0 00-.25.25v.5c0 .138.112.25.25.25h.25a.25.25 0 00.25-.25v-.5a.25.25 0 00-.25-.25z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5a3.375 3.375 0 00-3.375 3.375v2.625m9 0v2.625a3.375 3.375 0 01-3.375 3.375h-1.5a3.375 3.375 0 01-3.375-3.375v-2.625m6.75 0H9.75M9.75 14.25v-2.625a3.375 3.375 0 00-3.375-3.375H4.875a3.375 3.375 0 00-3.375 3.375v2.625m0 0v2.625a3.375 3.375 0 003.375 3.375h1.5a3.375 3.375 0 003.375-3.375v-2.625" /></svg>
+                            **Researchers & Academics**
+                        </h3>
+                        <p>Conduct thorough research with automated cross-referencing and fact verification. Generate citations and structured academic reports.</p>
                     </div>
-                    <div class="problem-card solution glass-card animate-on-scroll" style="transition-delay: 0.3s;">
-                        <h3>The **Harten** Difference</h3>
-                        <ul>
-                            <li>**Unbreakable Accuracy** with transparent trust scores.</li>
-                            <li>Automatically creates the **deliverable** you need.</li>
-                            <li>**Better Memory** and extended context retention.</li>
-                            <li>Full visibility into sources, models, and **reasoning.**</li>
-                        </ul>
+                    
+                    <div class="use-case-card glass-card animate-on-scroll" style="transition-delay: 0.1s;">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.07a2.25 2.25 0 01-2.25 2.25H5.625a2.25 2.25 0 01-2.25-2.25v-4.07m16.5 0v-3.875a2.25 2.25 0 00-2.25-2.25h-12a2.25 2.25 0 00-2.25 2.25v3.875m16.5 0A2.25 2.25 0 0118 16.5h-1.5a2.25 2.25 0 01-2.25-2.25V13.5A2.25 2.25 0 0116.5 11.25h1.5a2.25 2.25 0 012.25 2.25v.75" /></svg>
+                            **Business Professionals**
+                        </h3>
+                        <p>Make better, safer decisions. Generate presentations, financial summaries, and technical documentation with full source transparency.</p>
+                    </div>
+
+                    <div class="use-case-card glass-card animate-on-scroll" style="transition-delay: 0.2s;">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.003A9.337 9.337 0 0012 21.75a9.337 9.337 0 00-3.75-2.625M9 19.128v-.003c0-1.113.285-2.16.786-3.07M9 19.128v.003A9.337 9.337 0 0012 21.75a9.337 9.337 0 003.75-2.625m-7.5-6.493A4.125 4.125 0 0012 5.25a4.125 4.125 0 007.5 0m-7.5 0a4.125 4.125 0 01-7.5 0m7.5 0c0 1.113-.285 2.16-.786 3.07M12 5.25c0 1.113.285 2.16.786 3.07m0 0A4.125 4.125 0 0112 12.75a4.125 4.125 0 01-7.5 0m7.5 0c-1.113 0-2.16-.285-3.07-.786" /></svg>
+                            **Developers & Engineers**
+                        </h3>
+                        <p>Generate clean, working code with explanations tied to documentation. Use the multi-modal toolset to debug and analyze diagrams or flowcharts.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="animate-on-scroll">
+                    The Harten Engine: <span class="highlight">Smarter, Faster, Better Memory.</span>
+                </h2>
+                <p class="section-intro text-center animate-on-scroll" style="transition-delay: 0.1s;">
+                    We didn't just build a better interface; we built a fundamentally smarter AI architecture designed around professional utility.
+                </p>
+
+                <div class="features-grid">
+                    
+                    <div class="feature-card glass-card interactive-card animate-on-scroll">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12l2.846.813a4.5 4.5 0 013.09 3.09L24 18.75l-.813-2.846a4.5 4.5 0 01-3.09-3.09L18.25 12zM18.25 12L15.404 11.187a4.5 4.5 0 01-3.09-3.09L9 5.25l2.846.813a4.5 4.5 0 013.09 3.09L18.25 12z" /></svg>
+                        </div>
+                        <h3>Smarter: Smart Routing</h3>
+                        <p>Automatically routes your query to the best model (GPT-4, Claude 3, Gemini) and synthesizes the outputs for a singular, comprehensive answer.</p>
+                    </div>
+                    
+                    <div class="feature-card glass-card interactive-card animate-on-scroll" style="transition-delay: 0.1s;">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L12 15.25l5.571-3m0 0L21.75 12l-4.179-2.25m0 4.5l-5.571 3-5.571-3" /></svg>
+                        </div>
+                        <h3>Flexible: Multi-Modal Input</h3>
+                        <p>Work with text, images, videos, documents, and voice seamlessly. Upload complex files and discuss them instantly and in-depth.</p>
+                    </div>
+
+                    <div class="feature-card glass-card interactive-card animate-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="feature-icon">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3>Better Memory: Extended Context</h3>
+                        <p>Remembers your goals, preferences, and context across all conversations and project files. It learns how you work over time.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <section id="trust">
             <div class="container">                
                 <div class="trust-wrapper">
                     <div class="trust-content animate-on-scroll">
                         <h2 style="text-align: left; margin: 0 0 20px 0;">
-                            Achieve **Unbreakable Accuracy.**
+                            Achieve Unbreakable Accuracy.
                         </h2>
-                        <p>**Better Accuracy:** When stakes are high, you need the work—and the confidence—to stand up to scrutiny. Our Transparency Layer gives you the proof.</p>
+                        <p>Better Accuracy: When stakes are high, you need the work—and the confidence—to stand up to scrutiny. Our Transparency Layer gives you the proof you need.</p>
                         <ul class="trust-list">
-                            <li>Every claim is checked against **verified, current data.**</li>
-                            <li>See **trust scores** and confidence indicators on every output.</li>
-                            <li>View the **full reasoning chain** and all source citations.</li>
+                            <li>Every claim is checked against verified, current data.</li>
+                            <li>See trust scores and confidence indicators on every output.</li>
+                            <li>View the full reasoning chain and all source citations.</li>
                         </ul>
                          <button class="btn btn-outline modal-btn" id="open-modal-btn-2" style="margin-top: 16px;">See the Transparency Layer</button>
                     </div>
@@ -704,16 +595,14 @@
                     <div class="trust-visual glass-card animate-on-scroll" style="transition-delay: 0.2s;">
                         <h4>Harten Transparency Layer (Live View)</h4>
                         <div class="score">95.4% <span>Verified Confidence Score</span></div>
-                        <div class="progress-bar">
-                             </div>
                         <p style="font-size: 0.9rem; margin-top: 10px; color: #D1D5DB;">
-                            **Trust Indicated:** High confidence due to cross-validation across three proprietary and two external knowledge bases.
+                            Trust Indicated: High confidence due to cross-validation across three proprietary and two external knowledge bases.
                         </p>
                         <h4>Source Citations:</h4>
                         <div class="source-chips">
-                            <div class="source-chip">Academic.pdf</div>
-                            <div class="source-chip">Source.com</div>
-                             <div class="source-chip">Internal.db</div>
+                            <span class="source-chip">Academic.pdf</span>
+                            <span class="source-chip">Source.com</span>
+                             <span class="source-chip">Internal.db</span>
                         </div>
                     </div>
                 </div>
@@ -725,10 +614,10 @@
                 <div class="artifacts-wrapper">
                     <div class="artifacts-content animate-on-scroll">
                         <h2 style="text-align: left; margin: 0 0 20px 0;">
-                            **Smart Outputs:** Get Deliverables, Not Just Chat.
+                            Smart Outputs: Get Deliverables, Not Just Chat.
                         </h2>
                         <p>
-                            **Smart Outputs** is the feature that changes everything. Stop copying and pasting into external tools. Harten creates the finished **artifact** you actually need right inside the platform.
+                            The Smart Outputs feature is your competitive edge. Stop wasting time transferring data between tools. Harten creates the finished artifact you actually need right inside the platform.
                         </p>
                         <ul style="margin-top: 30px;">
                             <li>Creates presentations & slides (PPTX)</li>
@@ -741,45 +630,6 @@
                     
                     <div class="artifacts-card animate-on-scroll" style="transition-delay: 0.2s;">
                         <div class="artifacts-preview"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="features">
-            <div class="container">
-                <h2 class="animate-on-scroll">
-                    The Engine: **Smarter, Faster, More Flexible.**
-                </h2>
-                <p class="section-intro text-center animate-on-scroll" style="transition-delay: 0.1s;">
-                    Harten combines the best of all AI into a cohesive, high-performance workspace designed around your success.
-                </p>
-
-                <div class="features-grid">
-                    
-                    <div class="feature-card glass-card interactive-card animate-on-scroll">
-                        <div class="feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12l2.846.813a4.5 4.5 0 013.09 3.09L24 18.75l-.813-2.846a4.5 4.5 0 01-3.09-3.09L18.25 12zM18.25 12L15.404 11.187a4.5 4.5 0 01-3.09-3.09L9 5.25l2.846.813a4.5 4.5 0 013.09 3.09L18.25 12z" /></svg>
-                        </div>
-                        <h3>**Smarter:** Smart Routing</h3>
-                        <p>Automatically routes your query to the best model (GPT-4, Claude 3, Gemini) and synthesizes the outputs for a singular, comprehensive answer.</p>
-                    </div>
-                    
-                    <div class="feature-card glass-card interactive-card animate-on-scroll">
-                        <div class="feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L12 15.25l5.571-3m0 0L21.75 12l-4.179-2.25m0 4.5l-5.571 3-5.571-3" /></svg>
-                        </div>
-                        <h3>**Flexible:** Multi-Modal Input</h3>
-                        <p>Work with text, images, videos, documents, and voice seamlessly. Upload complex files and discuss them instantly.</p>
-                    </div>
-
-                    <div class="feature-card glass-card interactive-card animate-on-scroll">
-                        <div class="feature-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <h3>**Better Memory:** Extended Context</h3>
-                        <p>Remembers your goals, preferences, and context across all conversations and project files. It learns how you work over time.</p>
                     </div>
                 </div>
             </div>
@@ -819,7 +669,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             
             // --- 1. "Pop-Up" on Scroll Animation ---
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const animatedElements = document.querySelectorAll('.animate-on-scroll:not(#hero .animate-on-scroll)');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -835,8 +685,8 @@
             });
 
             // --- 2. "3D Tilt" Mouse-Move Animation ---
-            const interactiveCards = document.querySelectorAll('.interactive-card');
-            const maxTilt = 5; 
+            const interactiveCards = document.querySelectorAll('.interactive-card, .artifacts-card');
+            const maxTilt = 3; // Reduced for subtle glow focus
 
             interactiveCards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
