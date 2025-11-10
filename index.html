@@ -1514,10 +1514,6 @@
       font-weight: 700;
     }
 
-    .cadium-col {
-      background: rgba(99, 102, 241, 0.05);
-    }
-
     /* Live Comparisons */
     .live-comparisons {
       max-width: 1400px;
@@ -2437,7 +2433,9 @@
      <div class="hero-badge"><span class="pulse-dot"></span> <span>Pre-Launch • The Future of AI</span>
      </div>
      <h1 id="hero-headline-container"><span class="word gradient-text">The</span> <span class="word gradient-text">Smarter,</span> <span class="word gradient-text">Faster,</span> <span class="word gradient-text">More</span> <span class="word accent-text">Adaptable AI</span></h1>
-     <p class="hero-subheadline" id="hero-subheadline">The all-in-one AI chat that's more flexible, more intelligent, and more reliable for every task. Cadium is faster, smarter, and adapts to you. Stop switching, start achieving.</p><div class="signup-container">
+     <p class="hero-subheadline" id="hero-subheadline">The all-in-one AI chat that's more flexible, more intelligent, and more reliable for every task. Cadium is faster, smarter, and adapts to you. Stop switching, start achieving.</p>
+     <p style="margin-top: 1.2rem; font-size: 1.15rem; color:#a5b4fc; line-height:1.65;">Cadium's self-optimising memory learns how <strong>you</strong> think, rewrites its own context window on the fly and dynamically re-prioritises knowledge so every answer is lighter, faster and hyper-personalised. <br><em>Same brain, infinite personalities, zero latency.</em></p>
+     <div class="signup-container">
       <form class="signup-form" id="signup-form">
        <div class="email-input-wrapper"><label for="email-input" class="email-label">Enter your email</label> <input type="email" id="email-input" class="email-input" placeholder=" " required>
        </div><button type="submit" class="submit-btn" id="submit-btn"> <span class="submit-btn-text" id="cta-button-text">Join the Waitlist</span> </button>
@@ -2457,6 +2455,7 @@
       </div>
       <div class="hero-stat-comparison">
        An AI that keeps up
+       <small style="display:block; margin-top:6px; font-size:0.75rem; color:#94a3b8;">Adaptive routing swaps models mid-thought to protect your flow-state.</small>
       </div>
      </div>
      <div class="hero-stat" onclick="showStatDetail('accuracy')"><span class="hero-stat-icon">🎯</span>
@@ -2468,6 +2467,7 @@
       </div>
       <div class="hero-stat-comparison">
        Industry: 72%
+       <small style="display:block; margin-top:6px; font-size:0.75rem; color:#94a3b8;">Real-time cross-checking + confidence scoring = fewer hallucinations.</small>
       </div>
      </div>
      <div class="hero-stat" onclick="showStatDetail('context')"><span class="hero-stat-icon">♾️</span>
@@ -2479,6 +2479,7 @@
       </div>
       <div class="hero-stat-comparison">
        Flexible & Unlimited
+       <small style="display:block; margin-top:6px; font-size:0.75rem; color:#94a3b8;">Elastic context compression grows or shrinks to fit the task, never you.</small>
       </div>
      </div>
      <div class="hero-stat" onclick="showStatDetail('models')"><span class="hero-stat-icon">🧠</span>
@@ -2490,6 +2491,7 @@
       </div>
       <div class="hero-stat-comparison">
        The Best of All AI
+       <small style="display:block; margin-top:6px; font-size:0.75rem; color:#94a3b8;">Auto-ensemble picks the smartest blend for your exact prompt.</small>
       </div>
      </div>
     </div>
@@ -2532,6 +2534,13 @@
       <div class="hover-example"><strong>How Cadium Fixes This:</strong> Cadium is flexible and adaptable by nature, learning your needs to provide tailored, context-aware answers that are actually useful.
       </div>
      </div>
+     <div class="pain-point"><span class="pain-icon">🧠🔄</span>
+      <h3>Static brains, frozen in time</h3>
+      <p>Other AIs can't rewrite their own memory; once context is set it's set. You hit a wall and start over.</p>
+      <div class="hover-example">
+       <strong>How Cadium Fixes This:</strong> Live memory-streams reorder, compress and expand on demand—Cadium literally rewires its own recall so nothing is ever lost and speed never drops.
+      </div>
+     </div>
     </div>
    </section><section class="solution-section">
     <h2 class="section-title solution" id="solution-headline">The Smarter, More Flexible Solution</h2>
@@ -2555,7 +2564,7 @@
       </div>
       <div class="feature-text">
        <h3>Smarter Than Any Single AI</h3>
-       <p>Don't settle for one AI's blind spots. Cadium flexibly combines Claude's reasoning, GPT's knowledge, and Gemini's creativity. Our smart orchestration layer synthesizes their strengths into one superior, more intelligent, and more adaptable answer than any single model could provide.</p>
+       <p>Don't settle for one AI's blind spots. Cadium flexibly combines Claude's reasoning, GPT's knowledge, and Gemini's creativity. Our smart orchestration layer synthesizes their strengths into one superior, more intelligent, and more adaptable answer than any single model could provide. <strong>Bonus:</strong> The orchestrator learns which blend worked best for your tone and auto-tunes future mixes—so answers get smarter <em>and</em> more personalised every time you ask.</p>
       </div>
      </div><div class="feature">
       <div class="feature-visual">
@@ -2572,7 +2581,7 @@
       </div>
       <div class="feature-text">
        <h3>Smarter, Transparent AI</h3>
-       <p>A smarter AI isn't just correct—it's transparent. Cadium is the only platform that shows its work. Every answer includes confidence scores and verifiable citations, so you always know *why* you can trust it. It's the reliable, adaptable partner you need for work that matters.</p>
+       <p>A smarter AI isn't just correct—it's transparent. Cadium is the only platform that shows its work. Every answer includes confidence scores and verifiable citations, so you always know *why* you can trust it. <strong>Plus</strong> the confidence model itself adapts to your feedback, tightening thresholds on topics you flag and relaxing them on domains you approve.</p>
       </div>
      </div><div class="feature">
       <div class="feature-visual">
@@ -2595,13 +2604,50 @@
       </div>
       <div class="feature-text">
        <h3>Flexible Outputs for Real Work</h3>
-       <p>Stop translating text into action. Cadium is smarter and more flexible, giving you the real, usable outputs you need. Get actual presentations, working code, and interactive diagrams—not just descriptions. It's an AI that adapts to your workflow, not the other way around.</p>
+       <p>Stop translating text into action. Cadium is smarter and more flexible, giving you the real, usable outputs you need. Get actual presentations, working code, and interactive diagrams—not just descriptions. <strong>Even better:</strong> Output templates self-evolve; Cadium remembers which slide-layout or code-style you edited last time and pre-loads it next time, cutting prep to zero.</p>
       </div>
      </div>
     </div>
-   </section><section class="final-cta">
+   </section>
+   <section class="demo-showcase">
+    <div class="demo-card" onclick="showOutputExample('memory')">
+     <span class="demo-icon">🧬</span>
+     <h3>Infinite Adaptive Memory</h3>
+     <p>Watch Cadium compress, branch and expand its own context in real time—no token limit, no slowdown.</p>
+     <div class="demo-visual">
+      <div class="demo-comparison">
+       <div class="demo-comparison-item">
+        <span class="demo-comparison-label">Static AI token window</span>
+        <span class="demo-comparison-value bad">128 k</span>
+       </div>
+       <div class="demo-comparison-item">
+        <span class="demo-comparison-label">Cadium elastic memory</span>
+        <span class="demo-comparison-value good">∞ + meta-layer</span>
+       </div>
+      </div>
+      <small style="color:#94a3b8;">Meta-layer rewrites itself as you type.</small>
+     </div>
+    </div>
+   </section>
+   <section class="interactive-stats-grid">
+    <div class="stat-card" onclick="showStatDetail('memory')">
+     <span class="stat-icon">🧠</span>
+     <div class="stat-value">∞</div>
+     <div class="stat-label">Adaptive Memory</div>
+     <div class="stat-comparison">Self-compresses & regrows</div>
+    </div>
+    <div class="stat-card" onclick="showStatDetail('personalisation')">
+     <span class="stat-icon">👤</span>
+     <div class="stat-value">24</div>
+     <div class="stat-label">Personal Dimensions</div>
+     <div class="stat-comparison">Tone, jargon, format, mood…</div>
+    </div>
+   </section>
+   <section class="final-cta">
     <h2>Experience a Smarter, More Adaptable AI</h2>
-    <p>Join thousands waiting for the flexible, all-in-one AI chat that's faster, smarter, and ready for any task. Stop settling for rigid, slow, and unreliable AI.</p><button class="nav-cta" style="font-size: 1.1rem; padding: 18px 45px;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"> Join the Waitlist Now </button>
+    <p>Join thousands waiting for the flexible, all-in-one AI chat that's faster, smarter, and ready for any task. Stop settling for rigid, slow, and unreliable AI.</p>
+    <p style="margin-top:1rem; font-size:1.05rem; color:#a5b4fc;">Your personal instance keeps learning even while you sleep—wake up to an AI that's already adapted to yesterday's workflow.</p>
+    <button class="nav-cta" style="font-size: 1.1rem; padding: 18px 45px;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"> Join the Waitlist Now </button>
    </section>
   </main>
   <script>
@@ -2639,7 +2685,9 @@
         speed: '⚡ Cadium processes queries 3.8x faster than ChatGPT by intelligently routing to the fastest model for each task.',
         accuracy: '🎯 94% accuracy achieved through multi-model verification. Cadium is smarter, more accurate, and more reliable than any single AI.',
         context: '♾️ Unlimited, adaptable context means you never lose your conversation history. Cadium adapts to your workflow, no matter how long.',
-        models: '🧠 Cadium combines Claude, GPT-4, Gemini, and more, giving you the flexible, combined intelligence of all models in one answer.'
+        models: '🧠 Cadium combines Claude, GPT-4, Gemini, and more, giving you the flexible, combined intelligence of all models in one answer.',
+        memory: '🧠 Cadium's elastic context compresses old info, branches sub-memories and regrows them on demand—true adaptive recall, no token ceiling.',
+        personalisation: '👤 24 live dimensions (tone, jargon, layout-style, risk tolerance, humour level…) update every interaction so answers feel personally authored by you.'
       };
       
       const existingToast = document.querySelector('.stat-toast');
@@ -2701,7 +2749,8 @@
       const messages = {
         presentation: '📊 Cadium creates actual slide decks with charts, images, and animations—not just text descriptions.',
         code: '💻 Get working, executable code that you can run immediately. No debugging needed.',
-        diagram: '🎨 Interactive diagrams and visualizations that you can edit and export instantly.'
+        diagram: '🎨 Interactive diagrams and visualizations that you can edit and export instantly.',
+        memory: '🧬 Memory-streams rewrite themselves in real time—compress, fork, expand—no limit, no slowdown, zero data loss.'
       };
       
       const existingToast = document.querySelector('.output-toast');
