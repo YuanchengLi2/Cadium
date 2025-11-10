@@ -17,6 +17,7 @@
       --pink: #ec4899;
       --teal: #10b981;
       --red: #ef4444;
+      --orange: #f97316;
     }
     * {
       box-sizing: border-box;
@@ -200,9 +201,6 @@
     .hero h1 .word:nth-child(4) {
       animation-delay: 0.8s;
     }
-    .hero h1 .word:nth-child(5) {
-      animation-delay: 0.9s;
-    }
     @keyframes wordReveal {
       from {
         opacity: 0;
@@ -373,28 +371,6 @@
         opacity: 1;
       }
     }
-    .error-message {
-      background: rgba(239, 68, 68, 0.1);
-      border: 2px solid #ef4444;
-      color: #fca5a5;
-      padding: 20px 30px;
-      border-radius: 20px;
-      font-weight: 600;
-      text-align: center;
-      animation: shake 0.5s ease-out;
-      margin-top: 20px;
-    }
-    .waitlist-count {
-      text-align: center;
-      color: #64748b;
-      font-size: 0.95rem;
-      margin-top: 20px;
-      animation: fadeIn 0.5s ease-out;
-    }
-    .waitlist-count strong {
-      color: var(--accent);
-      font-size: 1.2rem;
-    }
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 3.5rem;
@@ -411,6 +387,24 @@
     }
     .section-title.solution {
       background: linear-gradient(135deg, var(--accent) 0%, var(--glow) 50%, var(--pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-title.performance {
+      background: linear-gradient(135deg, var(--teal) 0%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-title.how-it-works {
+      background: linear-gradient(135deg, var(--orange) 0%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-title.use-cases {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -491,6 +485,300 @@
       max-height: 200px;
       margin-top: 15px;
     }
+    .problem-section {
+      padding: 120px 20px;
+    }
+    
+    /* Performance Section */
+    .performance-section {
+      padding: 120px 20px;
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.02) 0%, rgba(16, 185, 129, 0.05) 100%);
+    }
+    .performance-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .performance-visual {
+      background: rgba(30, 30, 46, 0.4);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      border-radius: 30px;
+      padding: 50px;
+      min-height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .performance-visual:hover {
+      border-color: var(--teal);
+      box-shadow: 0 30px 80px rgba(16, 185, 129, 0.4);
+      transform: scale(1.02);
+    }
+    .performance-demo {
+      width: 100%;
+    }
+    .thread-meter {
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .thread-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+    .thread-stat-label {
+      color: #94a3b8;
+    }
+    .thread-stat-value {
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 1.3rem;
+      animation: numberPulse 2s ease-in-out infinite;
+    }
+    @keyframes numberPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    .speed-bars {
+      display: grid;
+      gap: 20px;
+    }
+    .speed-bar-item {
+      background: rgba(16, 185, 129, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .speed-bar-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+    .speed-bar-track {
+      height: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .speed-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal) 0%, #34d399 100%);
+      border-radius: 10px;
+      animation: barGrow 2s ease-out forwards;
+    }
+    @keyframes barGrow {
+      from {
+        width: 0;
+      }
+    }
+    .speed-bar-item:nth-child(1) .speed-bar-fill {
+      animation-delay: 0.2s;
+    }
+    .speed-bar-item:nth-child(2) .speed-bar-fill {
+      animation-delay: 0.4s;
+    }
+    .speed-bar-item:nth-child(3) .speed-bar-fill {
+      animation-delay: 0.6s;
+    }
+    .performance-text h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    .performance-text p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    /* How It Works Section */
+    .how-it-works-section {
+      padding: 120px 20px;
+      background: linear-gradient(180deg, rgba(249, 115, 22, 0.02) 0%, rgba(249, 115, 22, 0.05) 100%);
+    }
+    .how-steps {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 40px;
+    }
+    .how-step {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 40px;
+      align-items: start;
+      background: rgba(30, 30, 46, 0.4);
+      border: 2px solid rgba(249, 115, 22, 0.3);
+      border-radius: 25px;
+      padding: 40px;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .how-step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .how-step:hover::before {
+      opacity: 1;
+    }
+    .how-step:hover {
+      transform: translateX(10px);
+      border-color: var(--orange);
+      box-shadow: 0 20px 60px rgba(249, 115, 22, 0.3);
+    }
+    .step-number {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--orange) 0%, #fbbf24 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .how-step:hover .step-number {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .step-content h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #fb923c;
+    }
+    .step-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    /* Use Cases Section */
+    .use-cases-section {
+      padding: 120px 20px;
+      background: linear-gradient(180deg, rgba(236, 72, 153, 0.02) 0%, rgba(139, 92, 246, 0.05) 100%);
+    }
+    .use-cases-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+    .use-case-card {
+      background: rgba(30, 30, 46, 0.4);
+      border: 2px solid rgba(236, 72, 153, 0.3);
+      border-radius: 25px;
+      padding: 40px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .use-case-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .use-case-card:hover::before {
+      opacity: 1;
+    }
+    .use-case-card:hover {
+      transform: translateY(-15px) scale(1.03);
+      border-color: var(--pink);
+      box-shadow: 0 25px 60px rgba(236, 72, 153, 0.4);
+    }
+    .use-case-icon {
+      font-size: 4rem;
+      margin-bottom: 25px;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    .use-case-card:hover .use-case-icon {
+      transform: scale(1.2) rotate(-5deg);
+    }
+    .use-case-card h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .use-case-card p {
+      color: #94a3b8;
+      line-height: 1.7;
+      margin: 0 0 20px 0;
+      font-size: 1.05rem;
+    }
+    .use-case-examples {
+      padding: 20px;
+      background: rgba(236, 72, 153, 0.05);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      color: #f9a8d4;
+      border-left: 3px solid var(--pink);
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+    .use-case-card:hover .use-case-examples {
+      opacity: 1;
+      max-height: 300px;
+      margin-top: 15px;
+    }
+    .use-case-examples ul {
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+    }
+    .use-case-examples li {
+      margin: 8px 0;
+    }
+
     .solution-section {
       padding: 120px 20px;
       background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.03) 100%);
@@ -546,6 +834,254 @@
       color: #94a3b8;
       margin: 0;
     }
+
+    /* AI Network Styles */
+    .ai-network {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .ai-node {
+      background: rgba(99, 102, 241, 0.1);
+      border: 2px solid rgba(99, 102, 241, 0.3);
+      border-radius: 15px;
+      padding: 20px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      animation: nodeFloat 3s ease-in-out infinite;
+    }
+    .ai-node:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .ai-node:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    .ai-node:nth-child(3) {
+      animation-delay: 1s;
+    }
+    .ai-node:nth-child(4) {
+      animation-delay: 1.5s;
+    }
+    @keyframes nodeFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    .ai-node:hover {
+      transform: scale(1.1) !important;
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    }
+    .ai-node-label {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #a5b4fc;
+      animation: textGlow 2s ease-in-out infinite;
+    }
+    @keyframes textGlow {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+      }
+      50% {
+        text-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+      }
+    }
+    .ai-node-description {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    .ai-node.synthesis {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+      border-color: var(--glow);
+    }
+    .data-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: particleMove 4s ease-in-out infinite;
+    }
+    @keyframes particleMove {
+      0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Trust Demo Styles */
+    .trust-demo {
+      width: 100%;
+    }
+    .answer-box {
+      background: rgba(99, 102, 241, 0.05);
+      border: 2px solid rgba(99, 102, 241, 0.2);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #cbd5e1;
+      animation: boxPulse 3s ease-in-out infinite;
+    }
+    @keyframes boxPulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+      }
+    }
+    .citation {
+      color: var(--accent);
+      font-weight: 600;
+      position: relative;
+      animation: citationHighlight 2s ease-in-out infinite;
+    }
+    @keyframes citationHighlight {
+      0%, 100% {
+        text-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+      }
+      50% {
+        text-shadow: 0 0 15px rgba(99, 102, 241, 0.8);
+      }
+    }
+    .confidence-meter {
+      background: rgba(99, 102, 241, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .confidence-label {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #a5b4fc;
+      font-size: 1rem;
+    }
+    .confidence-bar {
+      height: 12px;
+      background: rgba(99, 102, 241, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .confidence-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--glow) 100%);
+      border-radius: 10px;
+      animation: fillPulse 2s ease-in-out infinite;
+    }
+    @keyframes fillPulse {
+      0%, 100% {
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Output Demo Styles */
+    .output-demo {
+      width: 100%;
+      text-align: center;
+    }
+    .output-question {
+      font-size: 1.2rem;
+      color: #a5b4fc;
+      margin-bottom: 35px;
+      padding: 20px;
+      background: rgba(99, 102, 241, 0.05);
+      border-radius: 12px;
+      font-style: italic;
+      animation: questionPulse 3s ease-in-out infinite;
+    }
+    @keyframes questionPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+    }
+    .output-types {
+      display: grid;
+      gap: 20px;
+    }
+    .output-type {
+      background: rgba(99, 102, 241, 0.05);
+      border: 2px solid rgba(99, 102, 241, 0.2);
+      border-radius: 15px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      animation: typeAppear 0.5s ease-out backwards;
+    }
+    .output-type:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    .output-type:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    .output-type:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    @keyframes typeAppear {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .output-type:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+    }
+    .output-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 12px;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+    @keyframes iconBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+    .output-type h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin: 0;
+      animation: textShimmer 3s ease-in-out infinite;
+    }
+    @keyframes textShimmer {
+      0%, 100% {
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
     .final-cta {
       padding: 120px 20px;
       text-align: center;
@@ -596,6 +1132,16 @@
       .feature:nth-child(even) {
         direction: ltr;
       }
+      .performance-content {
+        grid-template-columns: 1fr;
+      }
+      .how-step {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .step-number {
+        margin: 0 auto;
+      }
     }
     @media (max-width: 768px) {
       .hero h1 {
@@ -604,10 +1150,11 @@
       .section-title {
         font-size: 2.5rem;
       }
+      .use-cases-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
 </head>
 <body>
   <div class="animated-bg">
@@ -649,7 +1196,7 @@
         <div class="pain-point">
           <span class="pain-icon">🧠❌</span>
           <h3>Surface-level intelligence</h3>
-          <p>They respond — they don’t reason. No depth, no perspective, no true understanding.</p>
+          <p>They respond — they don't reason. No depth, no perspective, no true understanding.</p>
           <div class="hover-example">
             <strong>How Cadium Fixes This:</strong> Adaptive cognition breaks problems into logical sequences, evaluates multiple angles, and synthesises insights that align with your goals.
           </div>
@@ -657,7 +1204,7 @@
         <div class="pain-point">
           <span class="pain-icon">🔒❌</span>
           <h3>Truth is optional</h3>
-          <p>Black-box answers, zero verification, no citations — guess-work you can’t audit.</p>
+          <p>Black-box answers, zero verification, no citations — guess-work you can't audit.</p>
           <div class="hover-example">
             <strong>How Cadium Fixes This:</strong> Multi-model consensus, traceable logic paths, and on-screen confidence pulses — truth you can see.
           </div>
@@ -697,6 +1244,190 @@
       </div>
     </section>
 
+    <!-- Performance Section -->
+    <section class="performance-section">
+      <h2 class="section-title performance">Never Freezes, Never Slows</h2>
+      <div class="performance-content">
+        <div class="performance-visual">
+          <div class="performance-demo">
+            <div class="thread-meter">
+              <div class="thread-stat">
+                <span class="thread-stat-label">Messages in Thread:</span>
+                <span class="thread-stat-value">10,000+</span>
+              </div>
+              <div class="thread-stat">
+                <span class="thread-stat-label">Response Time:</span>
+                <span class="thread-stat-value">< 2s</span>
+              </div>
+              <div class="thread-stat">
+                <span class="thread-stat-label">Memory Load:</span>
+                <span class="thread-stat-value">Optimized</span>
+              </div>
+            </div>
+            <div class="speed-bars">
+              <div class="speed-bar-item">
+                <div class="speed-bar-label">
+                  <span>Initial Load</span>
+                  <span>0.8s</span>
+                </div>
+                <div class="speed-bar-track">
+                  <div class="speed-bar-fill" style="width: 95%;"></div>
+                </div>
+              </div>
+              <div class="speed-bar-item">
+                <div class="speed-bar-label">
+                  <span>Long Thread Performance</span>
+                  <span>1.2s</span>
+                </div>
+                <div class="speed-bar-track">
+                  <div class="speed-bar-fill" style="width: 98%;"></div>
+                </div>
+              </div>
+              <div class="speed-bar-item">
+                <div class="speed-bar-label">
+                  <span>Context Retrieval</span>
+                  <span>0.5s</span>
+                </div>
+                <div class="speed-bar-track">
+                  <div class="speed-bar-fill" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="performance-text">
+          <h3>Built for Infinite Conversations</h3>
+          <p><strong>No token limits. No slowdowns.</strong><br>Other AI chats freeze when threads get long. Cadium uses intelligent memory compression and adaptive context windows to maintain instant responsiveness — whether it's your 10th message or your 10,000th. Long-form thinking without performance penalties.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+      <h2 class="section-title how-it-works">How It Works</h2>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Multi-Model Orchestration</h3>
+            <p>Every query is processed by multiple AI models in parallel — Claude for reasoning, GPT-4 for knowledge, Gemini for creativity. Cadium synthesizes their outputs into a single, optimized answer that leverages each model's strengths.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Living Memory Architecture</h3>
+            <p>Your conversations aren't just logged — they're understood. Cadium builds a contextual memory graph that connects past chats, preferences, and patterns. This living memory informs every new response with deep, personalized context.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Real-Time Verification Layer</h3>
+            <p>Before any answer reaches you, it passes through a verification pipeline: cross-model consensus checks, factual validation, citation tracing, and confidence scoring. Only verified, trustworthy responses make it through.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Adaptive Response Engine</h3>
+            <p>Cadium doesn't just generate text — it adapts output to your needs. Whether you need code, visualizations, structured data, or creative content, it automatically selects the best format and adjusts its communication style to match yours.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases-section">
+      <h2 class="section-title use-cases">Built for Every Challenge</h2>
+      <div class="use-cases-grid">
+        <div class="use-case-card">
+          <span class="use-case-icon">💼</span>
+          <h3>Business Strategy</h3>
+          <p>From market analysis to competitive intelligence, Cadium helps you make data-driven decisions with verified insights and multi-angle reasoning.</p>
+          <div class="use-case-examples">
+            <strong>Perfect for:</strong>
+            <ul>
+              <li>Strategic planning & forecasting</li>
+              <li>Competitive analysis</li>
+              <li>Business model validation</li>
+              <li>Market research synthesis</li>
+            </ul>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">💻</span>
+          <h3>Software Development</h3>
+          <p>Code that works, debugs that solve, architecture that scales. Cadium understands your codebase and adapts to your development workflow.</p>
+          <div class="use-case-examples">
+            <strong>Perfect for:</strong>
+            <ul>
+              <li>Full-stack development</li>
+              <li>Code review & debugging</li>
+              <li>System architecture design</li>
+              <li>Technical documentation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">🎓</span>
+          <h3>Research & Learning</h3>
+          <p>Deep dives into complex topics with cited sources, multi-perspective analysis, and adaptive explanations that match your knowledge level.</p>
+          <div class="use-case-examples">
+            <strong>Perfect for:</strong>
+            <ul>
+              <li>Academic research</li>
+              <li>Literature reviews</li>
+              <li>Concept exploration</li>
+              <li>Study plan creation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">✍️</span>
+          <h3>Creative Writing</h3>
+          <p>From screenplays to marketing copy, Cadium maintains your voice, remembers your style guide, and helps you iterate without starting over.</p>
+          <div class="use-case-examples">
+            <strong>Perfect for:</strong>
+            <ul>
+              <li>Content creation</li>
+              <li>Brand storytelling</li>
+              <li>Script & screenplay writing</li>
+              <li>Marketing campaigns</li>
+            </ul>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">📊</span>
+          <h3>Data Analysis</h3>
+          <p>Turn raw data into actionable insights. Cadium processes complex datasets, identifies patterns, and presents findings in clear visualizations.</p>
+          <div class="use-case-examples">
+            <strong>Perfect for:</strong>
+            <ul>
+              <li>Statistical analysis</li>
+              <li>Trend identification</li>
+              <li>Data visualization</li>
+              <li>Report generation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">🎯</span>
+          <h3>Project Management</h3>
+          <p>Keep complex projects on track with intelligent task breakdown, risk analysis, and progress tracking that learns your team's workflow.</p>
+          <div class="use-case-examples">
+            <strong>Perfect for:</strong>
+            <ul>
+              <li>Sprint planning</li>
+              <li>Resource allocation</li>
+              <li>Risk assessment</li>
+              <li>Timeline optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="solution-section">
       <h2 class="section-title solution">The 9 Principles of Cadium</h2>
       <div class="features-grid">
@@ -716,7 +1447,7 @@
           </div>
           <div class="feature-text">
             <h3>1. More Intelligent</h3>
-            <p><strong>Thinks beyond the prompt.</strong><br>Cadium doesn’t just respond — it reasons. It breaks complex problems into logical sequences, evaluates multiple perspectives, and synthesises insights that align with your goals. This isn’t surface-level intelligence — it’s adaptive cognition built for depth and precision.</p>
+            <p><strong>Thinks beyond the prompt.</strong><br>Cadium doesn't just respond — it reasons. It breaks complex problems into logical sequences, evaluates multiple perspectives, and synthesises insights that align with your goals. This isn't surface-level intelligence — it's adaptive cognition built for depth and precision.</p>
           </div>
         </div>
         <div class="feature">
@@ -735,7 +1466,7 @@
           </div>
           <div class="feature-text">
             <h3>2. More Trustworthy</h3>
-            <p><strong>Truth isn’t optional.</strong><br>Cadium verifies every answer through multi-model reasoning and factual consensus. Each response carries internal checks, citations, and traceable logic paths. It doesn’t guess — it proves. Built for reliability in moments where trust matters most.</p>
+            <p><strong>Truth isn't optional.</strong><br>Cadium verifies every answer through multi-model reasoning and factual consensus. Each response carries internal checks, citations, and traceable logic paths. It doesn't guess — it proves. Built for reliability in moments where trust matters most.</p>
           </div>
         </div>
         <div class="feature">
@@ -770,7 +1501,7 @@
           </div>
           <div class="feature-text">
             <h3>4. More Context</h3>
-            <p><strong>Understands the story behind the question.</strong><br>Cadium doesn’t forget your purpose between prompts. It builds a living memory of context — past conversations, project goals, emotional tone — to understand not just what you said, but why you said it. Every interaction deepens the shared understanding.</p>
+            <p><strong>Understands the story behind the question.</strong><br>Cadium doesn't forget your purpose between prompts. It builds a living memory of context — past conversations, project goals, emotional tone — to understand not just what you said, but why you said it. Every interaction deepens the shared understanding.</p>
           </div>
         </div>
         <div class="feature">
@@ -786,7 +1517,7 @@
           </div>
           <div class="feature-text">
             <h3>5. More Memory</h3>
-            <p><strong>Never starts from zero.</strong><br>Cadium remembers your preferences, your work, and your patterns. It learns from correction, anticipates repetition, and grows familiar with your world. It’s not storing data — it’s building understanding.</p>
+            <p><strong>Never starts from zero.</strong><br>Cadium remembers your preferences, your work, and your patterns. It learns from correction, anticipates repetition, and grows familiar with your world. It's not storing data — it's building understanding.</p>
           </div>
         </div>
         <div class="feature">
@@ -805,7 +1536,7 @@
           </div>
           <div class="feature-text">
             <h3>6. More Accurate</h3>
-            <p><strong>Precision, verified.</strong><br>Cadium’s reasoning engine cross-analyzes multiple logic layers and real-time validation checks. Each result is not only correct — it’s consistent, explainable, and precise. Because accuracy isn’t a luxury — it’s the baseline.</p>
+            <p><strong>Precision, verified.</strong><br>Cadium's reasoning engine cross-analyzes multiple logic layers and real-time validation checks. Each result is not only correct — it's consistent, explainable, and precise. Because accuracy isn't a luxury — it's the baseline.</p>
           </div>
         </div>
         <div class="feature">
@@ -821,7 +1552,7 @@
           </div>
           <div class="feature-text">
             <h3>7. More Empathetic</h3>
-            <p><strong>Feels your intention — not just your syntax.</strong><br>Cadium reads the emotion and tone behind language. It senses urgency, sensitivity, or creativity and adjusts its communication accordingly. This isn’t emotional simulation — it’s emotional attunement, the bridge between logic and feeling.</p>
+            <p><strong>Feels your intention — not just your syntax.</strong><br>Cadium reads the emotion and tone behind language. It senses urgency, sensitivity, or creativity and adjusts its communication accordingly. This isn't emotional simulation — it's emotional attunement, the bridge between logic and feeling.</p>
           </div>
         </div>
         <div class="feature">
@@ -838,7 +1569,7 @@
           </div>
           <div class="feature-text">
             <h3>8. More Transparent</h3>
-            <p><strong>Intelligence you can see through.</strong><br>Cadium explains its process openly — why it chose a path, what data it relied on, and where uncertainty remains. It treats clarity as part of intelligence. Because true trust isn’t built on mystery — it’s built on transparency.</p>
+            <p><strong>Intelligence you can see through.</strong><br>Cadium explains its process openly — why it chose a path, what data it relied on, and where uncertainty remains. It treats clarity as part of intelligence. Because true trust isn't built on mystery — it's built on transparency.</p>
           </div>
         </div>
         <div class="feature">
@@ -856,7 +1587,7 @@
           </div>
           <div class="feature-text">
             <h3>9. More Harmonious</h3>
-            <p><strong>Where human sense meets machine clarity.</strong><br>Cadium isn’t trying to replace human thinking — it’s amplifying it. It blends rational computation with intuition, helping humans and AI evolve in balance. This is the philosophy of symbiotic intelligence.</p>
+            <p><strong>Where human sense meets machine clarity.</strong><br>Cadium isn't trying to replace human thinking — it's amplifying it. It blends rational computation with intuition, helping humans and AI evolve in balance. This is the philosophy of symbiotic intelligence.</p>
           </div>
         </div>
       </div>
@@ -881,7 +1612,7 @@
       starsContainer.appendChild(star);
     }
 
-    // Email form handler (minimal)
+    // Email form handler
     const signupForm = document.getElementById('signup-form');
     signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
