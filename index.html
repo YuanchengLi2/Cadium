@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadium – A Better Version of AI</title>
-
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width
   <!-- Custom Favicon SVG -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg ' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000'/><path d='M30 70h40M30 50h40M30 30h25' stroke='%236366f1' stroke-width='8' stroke-linecap='round'/><circle cx='70' cy='30' r='8' fill='%23ec4899'/></svg>">
  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg ' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000'/><path d='M30 70h40M30 50h40M30 30h25' stroke='%236366f1' stroke-width='8' stroke-linecap='round'/><circle cx='70' cy='30' r='8' fill='%23ec4899'/></svg>">
@@ -1432,6 +1432,44 @@
       box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
     }
   </style>
+  <!-- ==========  TOP-LEFT LOGO  ========== -->
+<div class="logo-lockup" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <div class="logo-icon">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="20" fill="#000"/>
+      <path d="M30 70h40M30 50h40M30 30h25" stroke="#6366f1" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="70" cy="30" r="8" fill="#ec4899"/>
+    </svg>
+  </div>
+  <span class="logo-text">Cadium</span>
+</div>
+
+<style>
+.logo-lockup{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:999;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  transition:transform .25s ease;
+}
+.logo-lockup:hover{transform:scale(1.05)}
+.logo-icon{width:40px;height:40px}
+.logo-icon svg{width:100%;height:100%;display:block}
+.logo-text{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:800;
+  font-size:1.6rem;
+  background:linear-gradient(135deg,#fff 0%,#a5b4fc 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+@media(max-width:768px){.logo-lockup{transform:scale(.9)}}
+</style>
 </head>
 <body>
   <div class="animated-bg">
