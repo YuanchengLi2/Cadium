@@ -473,20 +473,8 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .section-title.performance {
+    .section-title.summary {
       background: linear-gradient(135deg, var(--teal) 0%, #34d399 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .section-title.how-it-works {
-      background: linear-gradient(135deg, var(--orange) 0%, #fbbf24 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .section-title.use-cases {
-      background: linear-gradient(135deg, var(--pink) 0%, var(--glow) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -573,7 +561,7 @@
       padding: 120px 20px;
     }
 
-    /* Solution Section Styles */
+    /* Core Principles Section */
     .solution-section {
       padding: 120px 20px;
       background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.03) 100%);
@@ -877,309 +865,16 @@
       }
     }
 
-    /* Performance Section Styles */
-    .performance-section {
-      padding: 120px 20px;
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.02) 0%, rgba(16, 185, 129, 0.05) 100%);
-    }
-    .performance-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    .performance-visual {
-      background: rgba(30, 30, 46, 0.4);
-      border: 2px solid rgba(16, 185, 129, 0.3);
-      border-radius: 30px;
-      padding: 50px;
-      min-height: 450px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: all 0.5s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .performance-visual:hover {
-      border-color: var(--teal);
-      box-shadow: 0 30px 80px rgba(16, 185, 129, 0.4);
-      transform: scale(1.02);
-    }
-    .performance-demo {
-      width: 100%;
-    }
-    .thread-meter {
-      background: rgba(16, 185, 129, 0.1);
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-    .thread-stat {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-    .thread-stat-label {
-      color: #94a3b8;
-    }
-    .thread-stat-value {
-      color: var(--teal);
-      font-weight: 700;
-      font-size: 1.3rem;
-      animation: numberPulse 2s ease-in-out infinite;
-    }
-    @keyframes numberPulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-    }
-    .speed-bars {
-      display: grid;
-      gap: 20px;
-    }
-    .speed-bar-item {
-      background: rgba(16, 185, 129, 0.05);
-      border-radius: 15px;
-      padding: 20px;
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-    .speed-bar-label {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-size: 0.95rem;
-      color: #cbd5e1;
-    }
-    .speed-bar-track {
-      height: 8px;
-      background: rgba(16, 185, 129, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .speed-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--teal) 0%, #34d399 100%);
-      border-radius: 10px;
-      animation: barGrow 2s ease-out forwards;
-    }
-    @keyframes barGrow {
-      from {
-        width: 0;
-      }
-    }
-    .speed-bar-item:nth-child(1) .speed-bar-fill {
-      animation-delay: 0.2s;
-    }
-    .speed-bar-item:nth-child(2) .speed-bar-fill {
-      animation-delay: 0.4s;
-    }
-    .speed-bar-item:nth-child(3) .speed-bar-fill {
-      animation-delay: 0.6s;
-    }
-    .performance-text h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 25px;
-      color: #ffffff;
-      line-height: 1.2;
-    }
-    .performance-text p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: #94a3b8;
-      margin: 0;
-    }
-
-    /* How It Works Section */
-    .how-it-works-section {
-      padding: 120px 20px;
-      background: linear-gradient(180deg, rgba(249, 115, 22, 0.02) 0%, rgba(249, 115, 22, 0.05) 100%);
-    }
-    .how-steps {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      gap: 40px;
-    }
-    .how-step {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 40px;
-      align-items: start;
-      background: rgba(30, 30, 46, 0.4);
-      border: 2px solid rgba(249, 115, 22, 0.3);
-      border-radius: 25px;
-      padding: 40px;
-      transition: all 0.5s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .how-step::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .how-step:hover::before {
-      opacity: 1;
-    }
-    .how-step:hover {
-      transform: translateX(10px);
-      border-color: var(--orange);
-      box-shadow: 0 20px 60px rgba(249, 115, 22, 0.3);
-    }
-    .step-number {
-      width: 100px;
-      height: 100px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, var(--orange) 0%, #fbbf24 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      color: white;
-      box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 1;
-    }
-    .how-step:hover .step-number {
-      transform: scale(1.1) rotate(5deg);
-    }
-    .step-content h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #fb923c;
-    }
-    .step-content p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #94a3b8;
-      margin: 0;
-    }
-
-    /* Use Cases Section */
-    .use-cases-section {
-      padding: 120px 20px;
-      background: linear-gradient(180deg, rgba(236, 72, 153, 0.02) 0%, rgba(139, 92, 246, 0.05) 100%);
-    }
-    .use-cases-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-    }
-    .use-case-card {
-      background: rgba(30, 30, 46, 0.4);
-      border: 2px solid rgba(236, 72, 153, 0.3);
-      border-radius: 25px;
-      padding: 40px;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    .use-case-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .use-case-card:hover::before {
-      opacity: 1;
-    }
-    .use-case-card:hover {
-      transform: translateY(-15px) scale(1.03);
-      border-color: var(--pink);
-      box-shadow: 0 25px 60px rgba(236, 72, 153, 0.4);
-    }
-    .use-case-icon {
-      font-size: 4rem;
-      margin-bottom: 25px;
-      display: block;
-      transition: all 0.3s ease;
-    }
-    .use-case-card:hover .use-case-icon {
-      transform: scale(1.2) rotate(-5deg);
-    }
-    .use-case-card h3 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, var(--pink) 0%, var(--glow) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .use-case-card p {
-      color: #94a3b8;
-      line-height: 1.7;
-      margin: 0 0 20px 0;
-      font-size: 1.05rem;
-    }
-    .use-case-examples {
-      padding: 20px;
-      background: rgba(236, 72, 153, 0.05);
-      border-radius: 12px;
-      font-size: 0.9rem;
-      color: #f9a8d4;
-      border-left: 3px solid var(--pink);
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.5s ease;
-    }
-    .use-case-card:hover .use-case-examples {
-      opacity: 1;
-      max-height: 300px;
-      margin-top: 15px;
-    }
-    .use-case-examples ul {
-      margin: 10px 0 0 0;
-      padding-left: 20px;
-    }
-    .use-case-examples li {
-      margin: 8px 0;
-    }
-
-    /* Summary Section Styles */
+    /* Core Values Section */
     .summary-section {
       padding: 120px 20px;
       background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
     }
-
     .summary-content {
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
     }
-
-    /* Comparison Grid Styles */
     .comparison-grid {
       background: rgba(30, 30, 46, 0.4);
       border: 2px solid rgba(16, 185, 129, 0.3);
@@ -1190,13 +885,11 @@
       backdrop-filter: blur(10px);
       transition: all 0.5s ease;
     }
-
     .comparison-grid:hover {
       border-color: var(--teal);
       box-shadow: 0 30px 80px rgba(16, 185, 129, 0.3);
       transform: translateY(-5px);
     }
-
     .comparison-header {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -1205,7 +898,6 @@
       padding-bottom: 20px;
       border-bottom: 2px solid rgba(16, 185, 129, 0.2);
     }
-
     .comparison-feature {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.2rem;
@@ -1213,7 +905,6 @@
       color: #6ee7b7;
       text-align: center;
     }
-
     .comparison-other {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.2rem;
@@ -1221,7 +912,6 @@
       color: #fca5a5;
       text-align: center;
     }
-
     .comparison-cadium {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.2rem;
@@ -1229,7 +919,6 @@
       color: #6ee7b7;
       text-align: center;
     }
-
     .comparison-row {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -1238,18 +927,15 @@
       border-bottom: 1px solid rgba(16, 185, 129, 0.1);
       transition: all 0.3s ease;
     }
-
     .comparison-row:last-child {
       border-bottom: none;
     }
-
     .comparison-row:hover {
       background: rgba(16, 185, 129, 0.05);
       border-radius: 10px;
       margin: 0 -10px;
       padding: 20px 10px;
     }
-
     .comparison-row .comparison-feature {
       font-weight: 600;
       color: #cbd5e1;
@@ -1257,7 +943,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .comparison-row .comparison-other {
       color: #94a3b8;
       display: flex;
@@ -1265,7 +950,6 @@
       justify-content: center;
       padding: 10px;
     }
-
     .comparison-row .comparison-cadium {
       color: #6ee7b7;
       font-weight: 600;
@@ -1274,15 +958,12 @@
       justify-content: center;
       padding: 10px;
     }
-
-    /* Summary Grid Styles */
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 40px;
       margin-top: 60px;
     }
-
     .summary-item {
       background: rgba(30, 30, 46, 0.4);
       border: 2px solid rgba(16, 185, 129, 0.3);
@@ -1291,20 +972,17 @@
       transition: all 0.5s ease;
       text-align: center;
     }
-
     .summary-item:hover {
       transform: translateY(-10px);
       border-color: var(--teal);
       box-shadow: 0 20px 60px rgba(16, 185, 129, 0.3);
     }
-
     .summary-icon {
       font-size: 3rem;
       margin-bottom: 20px;
       display: block;
       animation: iconFloat 3s ease-in-out infinite;
     }
-
     @keyframes iconFloat {
       0%, 100% {
         transform: translateY(0);
@@ -1313,14 +991,12 @@
         transform: translateY(-10px);
       }
     }
-
     .summary-item h3 {
       font-size: 1.4rem;
       font-weight: 700;
       margin-bottom: 15px;
       color: #6ee7b7;
     }
-
     .summary-item p {
       color: #94a3b8;
       line-height: 1.6;
@@ -1328,63 +1004,77 @@
       font-size: 1rem;
     }
 
-    /* Responsive Design */
+    /* Mobile Responsive */
     @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero-subheadline {
+        font-size: 1.2rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .feature {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .feature:nth-child(even) {
+        direction: ltr;
+      }
       .comparison-grid {
         padding: 20px;
         margin: 40px 10px;
       }
-      
       .comparison-header {
         grid-template-columns: 1fr;
         gap: 10px;
         text-align: center;
       }
-      
       .comparison-row {
         grid-template-columns: 1fr;
         gap: 10px;
         text-align: center;
       }
-      
       .comparison-row .comparison-feature {
         font-size: 1.1rem;
         margin-bottom: 10px;
       }
-      
       .comparison-row .comparison-other,
       .comparison-row .comparison-cadium {
         padding: 15px;
         border-radius: 8px;
         background: rgba(0, 0, 0, 0.2);
       }
-      
       .comparison-row:hover {
         margin: 0;
         padding: 20px 0;
       }
-      
       .summary-grid {
         grid-template-columns: 1fr;
         gap: 30px;
       }
-
-      .hero h1 {
-        font-size: 2.8rem;
-      }
-      
-      .section-title {
-        font-size: 2.5rem;
-      }
-      
       .modal-content {
         padding: 30px 20px;
         margin: 10px;
       }
-      
       .modal-body {
         height: calc(80vh - 100px);
         padding: 15px;
+      }
+      .logo-lockup {
+        transform: scale(0.8);
+        top: 15px;
+        left: 15px;
+      }
+      .pain-point {
+        padding: 30px;
+      }
+      .use-case-card {
+        padding: 30px;
+      }
+      .summary-item {
+        padding: 30px;
       }
     }
 
@@ -1465,7 +1155,7 @@
   -webkit-text-fill-color:transparent;
   background-clip:text;
 }
-@media(max-width:768px){.logo-lockup{transform:scale(.9)}}
+@media(max-width:768px){.logo-lockup{transform:scale(.8);top:15px;left:15px}}
 </style>
 </head>
 <body>
@@ -1550,73 +1240,9 @@
       </div>
     </section>
 
-        <!-- Summary Section -->
-    <section class="summary-section">
-      <h2 class="section-title summary">What is Cadium?</h2>
-      <div class="summary-content">
-        <p style="font-size: 1.3rem; color: #94a3b8; line-height: 1.8; max-width: 800px; margin: 0 auto 60px;">
-          Cadium is the next evolution of AI assistance — a thinking partner that combines multi-model intelligence, living memory, and transparent reasoning to deliver answers you can trust. It doesn't just respond; it understands, adapts, and grows with you.
-        </p>
-        
-        <!-- Comparison Grid -->
-        <div class="comparison-grid">
-          <div class="comparison-header">
-            <div class="comparison-feature">Feature</div>
-            <div class="comparison-other">Other AI</div>
-            <div class="comparison-cadium">Cadium</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Intelligence</div>
-            <div class="comparison-other">Surface-level responses</div>
-            <div class="comparison-cadium">Multi-model reasoning with depth</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Trust</div>
-            <div class="comparison-other">Black-box answers</div>
-            <div class="comparison-cadium">Verified with citations & confidence</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Adaptability</div>
-            <div class="comparison-other">Rigid, one-size-fits-all</div>
-            <div class="comparison-cadium">Learns your tone & workflow</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Memory</div>
-            <div class="comparison-other">Forgets everything</div>
-            <div class="comparison-cadium">Living memory across conversations</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Accuracy</div>
-            <div class="comparison-other">Confident but wrong</div>
-            <div class="comparison-cadium">Cross-validated precision</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Performance</div>
-            <div class="comparison-other">Freezes on long threads</div>
-            <div class="comparison-cadium">Infinite conversations, instant speed</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Flexibility</div>
-            <div class="comparison-other">Text only</div>
-            <div class="comparison-cadium">Auto-selects best artifact format</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Cost</div>
-            <div class="comparison-other">Premium model always</div>
-            <div class="comparison-cadium">Smart model selection saves money</div>
-          </div>
-        </div>
-    <!-- Solution Section (11 Principles) -->
+    <!-- Core Principles Section -->
     <section class="solution-section">
-      <h2 class="section-title solution">The 11 Principles of Cadium</h2>
+      <h2 class="section-title solution">Core Principles</h2>
       <div class="features-grid">
         <div class="feature">
           <div class="feature-visual">
@@ -1633,8 +1259,8 @@
             </div>
           </div>
           <div class="feature-text">
-            <h3>1. More Intelligent</h3>
-            <p><strong>Thinks beyond the prompt.</strong><br>Multi-model reasoning breaks problems into logical sequences and evaluates multiple perspectives for deeper insights.</p>
+            <h3>1. Truth First</h3>
+            <p>Every answer shows confidence level and citations — know exactly when to trust vs. verify.</p>
           </div>
         </div>
         <div class="feature">
@@ -1652,8 +1278,8 @@
             </div>
           </div>
           <div class="feature-text">
-            <h3>2. More Trustworthy</h3>
-            <p><strong>Truth isn't optional.</strong><br>Multi-model consensus, citations, and traceable logic paths — every answer is verified and auditable.</p>
+            <h3>2. Cost Efficient</h3>
+            <p>$25/month instead of $60/month — smart model selection saves 60-90% on API usage.</p>
           </div>
         </div>
         <div class="feature">
@@ -1668,27 +1294,8 @@
             </div>
           </div>
           <div class="feature-text">
-            <h3>3. More Adaptable</h3>
-            <p><strong>Learns your language — not the other way around.</strong><br>Molds to your tone, workflow, and purpose. Every use refines understanding until collaboration feels effortless.</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-visual">
-            <div class="ai-network">
-              <div class="ai-node context"><span class="ai-node-label">Context</span><span class="ai-node-description">Past chats, goals, tone</span></div>
-              <div class="ai-node purpose"><span class="ai-node-label">Purpose</span><span class="ai-node-description">Why you asked</span></div>
-              <div class="ai-node memory"><span class="ai-node-label">Memory</span><span class="ai-node-description">Living threads</span></div>
-              <div class="ai-node synthesis"><span class="ai-node-label">Answer</span><span class="ai-node-description">Story-aware insight</span></div>
-              <div class="data-particle" style="top: 20%; left: 12%; animation-delay: 0s; animation-duration: 3s;"></div>
-              <div class="data-particle" style="top: 25%; right: 12%; animation-delay: 0.5s; animation-duration: 3.5s;"></div>
-              <div class="data-particle" style="bottom: 25%; left: 12%; animation-delay: 1s; animation-duration: 4s;"></div>
-              <div class="data-particle" style="top: 50%; left: 30%; animation-delay: 1.5s; animation-duration: 3.2s;"></div>
-              <div class="data-particle" style="top: 50%; right: 30%; animation-delay: 2s; animation-duration: 3.8s;"></div>
-            </div>
-          </div>
-          <div class="feature-text">
-            <h3>4. More Context</h3>
-            <p><strong>Understands the story behind the question.</strong><br>Builds living memory of context — past conversations, project goals, emotional tone — to understand not just what you said, but why.</p>
+            <h3>3. Smart Selection</h3>
+            <p>Auto-routes: Math → GPT-o1, Reasoning → Claude, Research → GPT-4, Creative → Gemini.</p>
           </div>
         </div>
         <div class="feature">
@@ -1703,8 +1310,8 @@
             </div>
           </div>
           <div class="feature-text">
-            <h3>5. More Memory</h3>
-            <p><strong>Never starts from zero.</strong><br>Remembers preferences, work patterns, and corrections. Learns from feedback and anticipates your next move.</p>
+            <h3>4. Never Freezes</h3>
+            <p>Virtual scrolling + smart context management — works perfectly after 10,000+ messages.</p>
           </div>
         </div>
         <div class="feature">
@@ -1722,395 +1329,8 @@
             </div>
           </div>
           <div class="feature-text">
-            <h3>6. More Accurate</h3>
-            <p><strong>Precision, verified.</strong><br>Cross-analyzes multiple logic layers with real-time validation. Each result is correct, consistent, and explainable.</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-visual">
-            <div class="output-demo">
-              <div class="output-question">"I'm stressed — simplify this deadline"</div>
-              <div class="output-types">
-                <div class="output-type"><span class="output-icon">💫</span><h4>Empathetic Tone</h4></div>
-                <div class="output-type"><span class="output-icon">🕊️</span><h4>Calm Layout</h4></div>
-                <div class="output-type"><span class="output-icon">✨</span><h4>Clear Next Steps</h4></div>
-              </div>
-            </div>
-          </div>
-          <div class="feature-text">
-            <h3>7. More Empathetic</h3>
-            <p><strong>Feels your intention — not just your syntax.</strong><br>Reads emotion and tone behind language. Senses urgency, sensitivity, or creativity and adjusts communication accordingly.</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-visual">
-            <div class="trust-demo">
-              <div class="answer-box" style="background: rgba(99, 102, 241, 0.05); border-color: rgba(99, 102, 241, 0.2);">
-                <strong>Logic path:</strong><br>
-                1. Cross-referenced 3 models<br>
-                2. Confidence ≥ 92 %<br>
-                3. Citation verified<br>
-                4. Uncertainty flagged
-              </div>
-            </div>
-          </div>
-          <div class="feature-text">
-            <h3>8. More Transparent</h3>
-            <p><strong>Intelligence you can see through.</strong><br>Explains its process openly — why it chose a path, what data it relied on, and where uncertainty remains.</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-visual">
-            <div class="ai-network">
-              <div class="ai-node human"><span class="ai-node-label">Human</span><span class="ai-node-description">Intuition & emotion</span></div>
-              <div class="ai-node machine"><span class="ai-node-label">Machine</span><span class="ai-node-description">Logic & speed</span></div>
-              <div class="ai-node synthesis"><span class="ai-node-label">Symbiosis</span><span class="ai-node-description">Amplified clarity</span></div>
-              <div class="data-particle" style="top: 20%; left: 12%; animation-delay: 0s; animation-duration: 3s;"></div>
-              <div class="data-particle" style="top: 25%; right: 12%; animation-delay: 0.5s; animation-duration: 3.5s;"></div>
-              <div class="data-particle" style="bottom: 25%; left: 12%; animation-delay: 1s; animation-duration: 4s;"></div>
-              <div class="data-particle" style="top: 50%; left: 30%; animation-delay: 1.5s; animation-duration: 3.2s;"></div>
-              <div class="data-particle" style="top: 50%; right: 30%; animation-delay: 2s; animation-duration: 3.8s;"></div>
-            </div>
-          </div>
-          <div class="feature-text">
-            <h3>9. More Harmonious</h3>
-            <p><strong>Where human sense meets machine clarity.</strong><br>Blends rational computation with intuition, helping humans and AI evolve in balance. Symbiotic intelligence.</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-visual">
-            <div class="output-demo">
-              <div class="output-question">"Best artifact for this task?"</div>
-              <div class="output-types">
-                <div class="output-type"><span class="output-icon">🎯</span><h4>Auto-Selects Format</h4></div>
-                <div class="output-type"><span class="output-icon">💡</span><h4>Optimizes Presentation</h4></div>
-                <div class="output-type"><span class="output-icon">🚀</span><h4>Delivers Ready-to-Use</h4></div>
-              </div>
-            </div>
-          </div>
-          <div class="feature-text">
-            <h3>10. More Flexible</h3>
-            <p><strong>Chooses the best artifact automatically.</strong><br>From code to canvas to spreadsheets, Cadium picks the perfect format and presentation style for your specific need — no manual selection required.</p>
-          </div>
-        </div>
-        <div class="feature">
-          <div class="feature-visual">
-            <div class="trust-demo">
-              <div class="answer-box" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
-                <strong>Cost optimization:</strong><br>
-                • GPT-4 for complex reasoning<br>
-                • Claude for creative tasks<br>
-                • Gemini for quick answers<br>
-                • Best model for your budget
-              </div>
-            </div>
-          </div>
-          <div class="feature-text">
-            <h3>11. More Cost-Effective</h3>
-            <p><strong>Smart model selection saves money.</strong><br>Automatically routes queries to the most cost-effective model that can handle your request — premium quality without premium prices.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Performance Section -->
-    <section class="performance-section">
-      <h2 class="section-title performance">Never Freezes, Never Slows</h2>
-      <div class="performance-content">
-        <div class="performance-visual">
-          <div class="performance-demo">
-            <div class="thread-meter">
-              <div class="thread-stat">
-                <span class="thread-stat-label">Messages in Thread:</span>
-                <span class="thread-stat-value">10,000+</span>
-              </div>
-              <div class="thread-stat">
-                <span class="thread-stat-label">Response Time:</span>
-                <span class="thread-stat-value">< 2s</span>
-              </div>
-              <div class="thread-stat">
-                <span class="thread-stat-label">Memory Load:</span>
-                <span class="thread-stat-value">Optimized</span>
-              </div>
-            </div>
-            <div class="speed-bars">
-              <div class="speed-bar-item">
-                <div class="speed-bar-label">
-                  <span>Initial Load</span>
-                  <span>0.8s</span>
-                </div>
-                <div class="speed-bar-track">
-                  <div class="speed-bar-fill" style="width: 95%;"></div>
-                </div>
-              </div>
-              <div class="speed-bar-item">
-                <div class="speed-bar-label">
-                  <span>Long Thread Performance</span>
-                  <span>1.2s</span>
-                </div>
-                <div class="speed-bar-track">
-                  <div class="speed-bar-fill" style="width: 98%;"></div>
-                </div>
-              </div>
-              <div class="speed-bar-item">
-                <div class="speed-bar-label">
-                  <span>Context Retrieval</span>
-                  <span>0.5s</span>
-                </div>
-                <div class="speed-bar-track">
-                  <div class="speed-bar-fill" style="width: 100%;"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="performance-text">
-          <h3>Built for Infinite Conversations</h3>
-          <p><strong>No token limits. No slowdowns.</strong><br>Other AI chats freeze when threads get long. Cadium uses intelligent memory compression and adaptive context windows to maintain instant responsiveness — whether it's your 10th message or your 10,000th. Long-form thinking without performance penalties.<br><br><strong>Whole-prompt processing:</strong> Analyzes your entire request as one coherent unit, never fragmented. Better processing means better answers, faster.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works-section">
-      <h2 class="section-title how-it-works">How It Works</h2>
-      <div class="how-steps">
-        <div class="how-step">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h3>Multi-Model Orchestration</h3>
-            <p>Every query is processed by multiple AI models in parallel — Claude for reasoning, GPT-4 for knowledge, Gemini for creativity. Cadium synthesizes their outputs into a single, optimized answer that leverages each model's strengths.</p>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h3>Living Memory Architecture</h3>
-            <p>Your conversations aren't just logged — they're understood. Cadium builds a contextual memory graph that connects past chats, preferences, and patterns. This living memory informs every new response with deep, personalized context.</p>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h3>Real-Time Verification Layer</h3>
-            <p>Before any answer reaches you, it passes through a verification pipeline: cross-model consensus checks, factual validation, citation tracing, and confidence scoring. Only verified, trustworthy responses make it through.</p>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="step-number">4</div>
-          <div class="step-content">
-            <h3>Adaptive Response Engine</h3>
-            <p>Cadium doesn't just generate text — it adapts output to your needs. Whether you need code, visualizations, structured data, or creative content, it automatically selects the best format and adjusts its communication style to match yours.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section class="use-cases-section">
-      <h2 class="section-title use-cases">Built for Every Challenge</h2>
-      <div class="use-cases-grid">
-        <div class="use-case-card">
-          <span class="use-case-icon">💼</span>
-          <h3>Business Strategy</h3>
-          <p>From market analysis to competitive intelligence, Cadium helps you make data-driven decisions with verified insights and multi-angle reasoning.</p>
-          <div class="use-case-examples">
-            <strong>Perfect for:</strong>
-            <ul>
-              <li>Strategic planning & forecasting</li>
-              <li>Competitive analysis</li>
-              <li>Business model validation</li>
-              <li>Market research synthesis</li>
-            </ul>
-          </div>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">💻</span>
-          <h3>Software Development</h3>
-          <p>Code that works, debugs that solve, architecture that scales. Cadium understands your codebase and adapts to your development workflow.</p>
-          <div class="use-case-examples">
-            <strong>Perfect for:</strong>
-            <ul>
-              <li>Full-stack development</li>
-              <li>Code review & debugging</li>
-              <li>System architecture design</li>
-              <li>Technical documentation</li>
-            </ul>
-          </div>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">🎓</span>
-          <h3>Research & Learning</h3>
-          <p>Deep dives into complex topics with cited sources, multi-perspective analysis, and adaptive explanations that match your knowledge level.</p>
-          <div class="use-case-examples">
-            <strong>Perfect for:</strong>
-            <ul>
-              <li>Academic research</li>
-              <li>Literature reviews</li>
-              <li>Concept exploration</li>
-              <li>Study plan creation</li>
-            </ul>
-          </div>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">✍️</span>
-          <h3>Creative Writing</h3>
-          <p>From screenplays to marketing copy, Cadium maintains your voice, remembers your style guide, and helps you iterate without starting over.</p>
-          <div class="use-case-examples">
-            <strong>Perfect for:</strong>
-            <ul>
-              <li>Content creation</li>
-              <li>Brand storytelling</li>
-              <li>Script & screenplay writing</li>
-              <li>Marketing campaigns</li>
-            </ul>
-          </div>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">📊</span>
-          <h3>Data Analysis</h3>
-          <p>Turn raw data into actionable insights. Cadium processes complex datasets, identifies patterns, and presents findings in clear visualizations.</p>
-          <div class="use-case-examples">
-            <strong>Perfect for:</strong>
-            <ul>
-              <li>Statistical analysis</li>
-              <li>Trend identification</li>
-              <li>Data visualization</li>
-              <li>Report generation</li>
-            </ul>
-          </div>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">🎯</span>
-          <h3>Project Management</h3>
-          <p>Keep complex projects on track with intelligent task breakdown, risk analysis, and progress tracking that learns your team's workflow.</p>
-          <div class="use-case-examples">
-            <strong>Perfect for:</strong>
-            <ul>
-              <li>Sprint planning</li>
-              <li>Resource allocation</li>
-              <li>Risk assessment</li>
-              <li>Timeline optimization</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Values Section -->
-    <section class="summary-section">
-      <h2 class="section-title summary">All the Values of Cadium</h2>
-      <div class="summary-content">
-        <p style="font-size: 1.3rem; color: #94a3b8; line-height: 1.8; max-width: 800px; margin: 0 auto 60px;">
-          11 core values that make Cadium worth paying for — every feature serves one or more of these values.
-        </p>
-        
-        <!-- Comparison Grid -->
-        <div class="comparison-grid">
-          <div class="comparison-header">
-            <div class="comparison-feature">Value</div>
-            <div class="comparison-other">Other AI</div>
-            <div class="comparison-cadium">Cadium</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Trust & Reliability</div>
-            <div class="comparison-other">Black-box answers</div>
-            <div class="comparison-cadium">Confidence scores + citations</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Intelligence & Accuracy</div>
-            <div class="comparison-other">Single-model responses</div>
-            <div class="comparison-cadium">Multi-model ensemble reasoning</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Performance & Speed</div>
-            <div class="comparison-other">Freezes on long threads</div>
-            <div class="comparison-cadium">Virtual scrolling + smart context</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Cost Efficiency</div>
-            <div class="comparison-other">$60/month for multiple models</div>
-            <div class="comparison-cadium">$25/month for all models</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Flexibility & Versatility</div>
-            <div class="comparison-other">Text-only outputs</div>
-            <div class="comparison-cadium">Auto-selects best artifact format</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Memory & Context</div>
-            <div class="comparison-other">Forgets everything</div>
-            <div class="comparison-cadium">Living memory across conversations</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Productivity Tools</div>
-            <div class="comparison-other">Chat-only interface</div>
-            <div class="comparison-cadium">Whiteboards, canvases, workspaces</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Safety & Quality</div>
-            <div class="comparison-other">No validation</div>
-            <div class="comparison-cadium">Cross-model verification</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Future-Proof</div>
-            <div class="comparison-other">Locked to one provider</div>
-            <div class="comparison-cadium">Model-agnostic architecture</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">User Experience</div>
-            <div class="comparison-other">Complex switching</div>
-            <div class="comparison-cadium">Everything in one place</div>
-          </div>
-          
-          <div class="comparison-row">
-            <div class="comparison-feature">Transparency</div>
-            <div class="comparison-other">Opaque decisions</div>
-            <div class="comparison-cadium">Open reasoning paths</div>
-          </div>
-        </div>
-        
-        <!-- Key Benefits Grid -->
-        <div class="summary-grid">
-          <div class="summary-item">
-            <span class="summary-icon">🧠</span>
-            <h3>Intelligent</h3>
-            <p>Multi-model reasoning that thinks beyond the prompt, evaluating multiple perspectives for deeper insights.</p>
-          </div>
-          <div class="summary-item">
-            <span class="summary-icon">🔒</span>
-            <h3>Trustworthy</h3>
-            <p>Every answer verified through cross-model consensus, with citations and confidence scores you can audit.</p>
-          </div>
-          <div class="summary-item">
-            <span class="summary-icon">🔄</span>
-            <h3>Adaptable</h3>
-            <p>Learns your tone, workflow, and preferences — morphing to match how you think and work.</p>
-          </div>
-          <div class="summary-item">
-            <span class="summary-icon">💾</span>
-            <h3>Memorable</h3>
-            <p>Living memory that weaves past conversations into current context — no more starting from zero.</p>
-          </div>
-          <div class="summary-item">
-            <span class="summary-icon">⚡</span>
-            <h3>Fast</h3>
-            <p>Never freezes, never slows — optimized for infinite conversations with instant response times.</p>
-          </div>
-          <div class="summary-item">
-            <span class="summary-icon">🎯</span>
-            <h3>Accurate</h3>
-            <p>Cross-layer validation and real-time checks ensure precision you can depend on.</p>
+            <h3>5. Adapts to You</h3>
+            <p>Morphs to your tone, workflow, and purpose — every use refines understanding.</p>
           </div>
         </div>
       </div>
